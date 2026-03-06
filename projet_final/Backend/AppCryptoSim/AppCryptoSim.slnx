@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Éléments de solution/">
+    <File Path=".env" />
+  </Folder>
+  <Project Path="AuthService/AuthService.csproj" />
+  <Project Path="Gateway/Gateway.csproj" />
+  <Project Path="MarketService/MarketService.csproj" />
+  <Project Path="OrderService/OrderService.csproj" />
+  <Project Path="PortfolioService/PortfolioService.csproj" />
+</Solution>
