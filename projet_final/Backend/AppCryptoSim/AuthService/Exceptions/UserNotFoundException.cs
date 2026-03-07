@@ -1,8 +1,10 @@
-﻿namespace AuthService.Exceptions;
+﻿using CryptoSim.Shared.Exceptions;
 
-public class UserNotFoundException : Exception
+namespace AuthService.Exceptions;
+
+public class UserNotFoundException : NotFoundException
 {
-    public UserNotFoundException(string? message) : base(message)
+    public UserNotFoundException(int userId) : base($"L'utilisateur avec l'id {userId} n'a pas été trouvé.")
     {
     }
 }

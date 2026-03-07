@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using OrderService.Models;
 
-namespace OrderService.DTOs;
+namespace OrderService.Dtos;
 
 public record OrderRequest(
     [Required] string CryptoSymbol,

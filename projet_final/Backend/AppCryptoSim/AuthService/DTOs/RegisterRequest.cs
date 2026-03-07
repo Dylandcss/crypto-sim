@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AuthService.DTOs;
+namespace AuthService.Dtos;
 
 public record RegisterRequest(
     [Required][MinLength(3)] string Username,

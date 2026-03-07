@@ -1,4 +1,4 @@
-﻿using AuthService.DTOs;
+﻿using AuthService.Dtos;
 using AuthService.Models;
 
 namespace AuthService.Repositories;
@@ -10,5 +10,5 @@ public interface IAuthRepository
     Task<User?> GetUserByEmailAsync(string userEmail);
     Task<User?> GetUserByUsernameAsync(string username);
     Task<decimal> GetUserBalanceAsync(int userId);
-    Task UpdateUserBalanceAsync(int userId, decimal amount);
+    Task<bool> UpdateUserBalanceAsync(int userId, decimal amount);
 }

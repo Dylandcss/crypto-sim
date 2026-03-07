@@ -1,6 +1,6 @@
 ﻿using OrderService.Models;
 
-namespace OrderService.DTOs;
+namespace OrderService.Dtos;
 
 public record OrderResponse(
     int OrderId,

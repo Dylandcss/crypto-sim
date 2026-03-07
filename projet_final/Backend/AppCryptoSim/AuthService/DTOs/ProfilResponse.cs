@@ -1,4 +1,4 @@
-﻿namespace AuthService.DTOs;
+﻿namespace AuthService.Dtos;
 
 public record ProfilResponse(
     string Username,

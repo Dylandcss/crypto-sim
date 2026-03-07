@@ -1,17 +1,17 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using AuthService.DTOs;
+﻿using AuthService.Dtos;
 using AuthService.Services;
+using CryptoSim.Shared.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace AuthService.Controllers;
+
 
 [ApiController]
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
-    // Service d'authentification injecté via le constructeur
     private readonly IAuthManagementService _authService;
     
     public AuthController(IAuthManagementService authService)
@@ -30,21 +30,14 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> RegisterAsync([FromBody] RegisterRequest request)
     {
         var user = await _authService.RegisterAsync(request);
-        return Ok(user);
+        return CreatedAtAction(nameof(GetCurrentUser), new { id = user.Id }, new { message = "Utilisateur enregistré avec succès" });
     }
     
     [HttpGet("me")]
     [Authorize]
     public async Task<IActionResult> GetCurrentUser()
     {
-        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-        
-        if (userIdClaim == null)
-        {
-            return Unauthorized("User ID not found in token.");
-        }
-        
-        var userId = int.Parse(userIdClaim.Value);
+        var userId = User.GetUserId();
         var profil = await _authService.GetCurrentUserAsync(userId);
         
         return Ok(profil);
@@ -54,29 +47,18 @@ public class AuthController : ControllerBase
     [Authorize]
     public async Task<IActionResult> GetBalanceAsync()
     {
-        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-        if (userIdClaim == null)
-        {
-            return Unauthorized("User ID not found in token.");
-        }
-        
-        var userId = int.Parse(userIdClaim.Value);
+        var userId = User.GetUserId();
         var balance = await _authService.GetBalanceAsync(userId);
         return Ok(balance);
     }
 
     [HttpPut("balance")]
     [Authorize]
-    public async Task<IActionResult> UpdateBalanceAsync([FromBody] double balance)
+    public async Task<IActionResult> UpdateBalanceAsync([FromBody] UpdateBalanceRequest request)
     {
-        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-        if (userIdClaim == null)
-            return Unauthorized("User ID not found in token.");
-        
-        var userId = int.Parse(userIdClaim.Value);
-        var amount = Convert.ToDecimal(balance);
-
-        await _authService.UpdateBalanceAsync(userId, amount);
+        var userId = User.GetUserId();
+        await _authService.UpdateBalanceAsync(userId, request.Amount);
         return NoContent();
     }
+
 }

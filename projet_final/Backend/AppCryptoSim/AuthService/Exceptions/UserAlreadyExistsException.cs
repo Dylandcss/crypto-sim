@@ -1,8 +1,10 @@
-﻿namespace AuthService.Exceptions;
+﻿using CryptoSim.Shared.Exceptions;
 
-public class UserAlreadyExistsException : Exception
+namespace AuthService.Exceptions;
+
+public class UserAlreadyExistsException : BadRequestException
 {
-    public UserAlreadyExistsException(string? message) : base(message)
+    public UserAlreadyExistsException(string username) : base($"L'utilisateur '{username}' existe déjà.")
     {
     }
 }

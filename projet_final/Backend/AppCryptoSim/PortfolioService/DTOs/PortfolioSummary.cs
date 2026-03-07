@@ -1,4 +1,4 @@
-﻿namespace PortfolioService.DTOs
+﻿namespace PortfolioService.Dtos
 {
     public record PortfolioSummary(
      int UserId,

@@ -1,76 +1,69 @@
-﻿using System.Security.Claims;
-using AuthService.DTOs;
+﻿using AuthService.Dtos;
 using AuthService.Exceptions;
 using AuthService.Extensions;
 using AuthService.Models;
 using AuthService.Repositories;
+using CryptoSim.Shared.Enums;
+using CryptoSim.Shared.Exceptions;
+
+
 namespace AuthService.Services;
+
 
 public class AuthManagementService : IAuthManagementService
 {
     private readonly IAuthRepository _authRepository;
-    private readonly JwtService _jwtService;
+    private readonly JwtTokenService _jwtTokenService;
     
-    public AuthManagementService(IAuthRepository authRepository, JwtService jwtService)
+    public AuthManagementService(IAuthRepository authRepository, JwtTokenService jwtService)
     {
         _authRepository = authRepository;
-        _jwtService = jwtService;
+        _jwtTokenService = jwtService;
     }
     
     public async Task<User> RegisterAsync(RegisterRequest request)
-    {
-        // Validation des champs requis
-        if(string.IsNullOrWhiteSpace(request.Email))
-            throw new ArgumentException("Email is required");
-        if(string.IsNullOrWhiteSpace(request.Username))
-            throw new ArgumentException("Username is required");
-        if(string.IsNullOrWhiteSpace(request.Password))
-            throw new ArgumentException("Password is required");
-        
-        // Vérifier si l'utilisateur existe déjà
-        var existingUser = await _authRepository.GetUserByEmailAsync(request.Email);
-        if (existingUser != null)
-        {
-            throw new UserAlreadyExistsException("This user already exists.");
-        }
+    {        
+        if (await _authRepository.GetUserByEmailAsync(request.Email) != null)
+            throw new UserAlreadyExistsException(request.Email);
 
-        // Créer un nouvel utilisateur
-        var newUser = new User
+        if (await _authRepository.GetUserByUsernameAsync(request.Username) != null)
+            throw new UserAlreadyExistsException(request.Username);
+
+        var newUser = new User()
         {
             Username = request.Username,
             Email = request.Email,
-            PasswordHash = PasswordService.HashPassword(request.Password), // Hash du mot de passe
+            PasswordHash = PasswordService.HashPassword(request.Password),
+            Role = Role.User, 
+            Balance = 10_000m 
         };
 
-        // Ajouter l'utilisateur à la base de données
         var user = await _authRepository.AddUserAsync(newUser);
         return user;
     }
 
     public async Task<AuthResponse> LoginAsync(LoginRequest request)
     {
-        var user = await _authRepository.GetUserByUsernameAsync(request.Username);
+        var existingUser = await _authRepository.GetUserByUsernameAsync(request.Username);
 
-        if (user == null || !PasswordService.VerifyPassword(request.Password, user.PasswordHash))
-            throw new UnauthorizedAccessException("Invalid username or password");
+        if (existingUser is null || !PasswordService.VerifyPassword(request.Password, existingUser.PasswordHash))
+            throw new UnauthorizedException("Nom d'utilisateur ou mot de passe invalide");
 
-        var (token, expiration) = _jwtService.GenerateToken(user);
+        var (token, expiration) = _jwtTokenService.GenerateToken(existingUser);
 
-        return new AuthResponse(
+        return new AuthResponse (
             token,
-            user.Username,
-            user.Role.ToString(),
-            user.Balance,
-            expiration
+            existingUser.Username,
+            existingUser.Role.ToString(),
+            existingUser.Balance,
+            expiration * 60
         );
     }
 
     public async Task<ProfilResponse> GetCurrentUserAsync(int userId)
     {
         var user = await _authRepository.GetUserByIdAsync(userId);
-        if (user == null) throw new UserNotFoundException("User not found.");
-        var profil = user.ToProfilResponse();
-        return profil;
+        return user is null ? throw new UserNotFoundException(userId) : user.ToProfilResponse();
     }
 
     public async Task<decimal> GetBalanceAsync(int userId)

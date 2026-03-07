@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CryptoSim.Shared.Exceptions
+namespace CryptoSim.Shared.Exceptions;
+
+public class BadRequestException : ExceptionBase
 {
-    internal class BadRequestException
+    public BadRequestException(string message) : base(message, 400)
     {
     }
 }

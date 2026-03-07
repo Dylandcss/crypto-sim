@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AuthService.DTOs;
+namespace AuthService.Dtos;
 
 public record UpdateBalanceRequest(
+    
     [Required]
-    string Balance
+    decimal Amount
+
  );

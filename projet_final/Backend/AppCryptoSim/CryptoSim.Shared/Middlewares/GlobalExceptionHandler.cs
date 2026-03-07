@@ -17,36 +17,27 @@ public class GlobalExceptionHandler
         _logger = logger;
     }
 
-
     public async Task InvokeAsync(HttpContext context)
     {
-        try
-        {
-            await _next(context);
-        }
+        try { await _next(context);}
         catch (Exception ex)
         {
             _logger.LogError(ex, "Exception capturée par le middleware");
             await HandleExceptionAsync(context, ex);
-
         }
-
     }
-
 
     private static Task HandleExceptionAsync(HttpContext context, Exception ex)
     {
-        var (statusCode, message) = ex switch
-        {
-            ExceptionBase customException => (customException.StatusCode, customException.Message),
-            _ => ((int)HttpStatusCode.InternalServerError, "Une erreur interne du serveur s'est produite.")
+        var response = ex switch {
+            ExceptionBase customException => new ErrorResponse(customException.Message, customException.StatusCode),
+            _ => new ErrorResponse("Une erreur interne du serveur s'est produite.", (int) HttpStatusCode.InternalServerError, ex.Message)
         };
 
-        context.Response.StatusCode = statusCode;
-
-        return context.Response.WriteAsJsonAsync(new { message, statusCode });
-
+        context.Response.StatusCode = response.StatusCode;
+        return context.Response.WriteAsJsonAsync(response);
     }
 
+    private record ErrorResponse(string Message, int StatusCode, string Details = "");
 
 }

@@ -3,6 +3,7 @@
     <File Path=".env" />
   </Folder>
   <Project Path="AuthService/AuthService.csproj" />
+  <Project Path="CryptoSim.Shared/CryptoSim.Shared.csproj" Id="fbd4865e-7c95-438d-a6f1-d29c8003f106" />
   <Project Path="Gateway/Gateway.csproj" />
   <Project Path="MarketService/MarketService.csproj" />
   <Project Path="OrderService/OrderService.csproj" />
