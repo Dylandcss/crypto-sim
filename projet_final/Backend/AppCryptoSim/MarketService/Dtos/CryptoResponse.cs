@@ -1,6 +1,6 @@
 namespace MarketService.Dtos;
 
-public record CryptoResponse(
+public record CryptoResponse (
     int Id,
     string Symbol,
     string Name,

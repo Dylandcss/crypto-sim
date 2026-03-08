@@ -1,4 +1,5 @@
-﻿using MarketService.Dtos;
+﻿using CryptoSim.Shared.Exceptions;
+using MarketService.Dtos;
 using MarketService.Extensions;
 using MarketService.Repositories.Interfaces;
 using MarketService.Services.Interfaces;
@@ -32,22 +33,18 @@ public class CryptosService : ICryptosService
         return result?.ToDto();
     }
 
-    public async Task<CryptoResponse> UpdatePriceAsync(int id, PriceUpdate priceUpdate)
+    public async Task<CryptoResponse> UpdatePriceAsync(int id,  decimal newPrice)
     {
 
         var crypto = await _cryptosRepository.GetCryptoByIdAsync(id);
 
-        if (crypto is null) throw new ArgumentException("Update prix crypto impossible: la crypto avec l'id {id} est introuvable");
+        if (crypto is null) throw new NotFoundException($"Crypto avec l'id {id} introuvable.");
 
+        await _cryptosRepository.UpdatePriceAsync(id, newPrice);
 
-        crypto.Symbol = priceUpdate.Symbol;
-        crypto.LastUpdated = priceUpdate.UpdatedAt;
-        crypto.CurrentPrice = priceUpdate.Price;
-        crypto.Name = priceUpdate.Name;
+        crypto.CurrentPrice = newPrice;
+        crypto.LastUpdated = DateTime.UtcNow;
 
-        
-        
-        await (_cryptosRepository.UpdatePriceAsync(crypto));
         return crypto.ToDto();
     }
 }

@@ -1,15 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace MarketService.Models;
 
+
+[Index(nameof(CryptoSymbol))]
+[Index(nameof(RecordedAt))]
 public class PriceHistory
 {
     [Key]
     public int Id { get; set; }
 
     [Required]
-    [MaxLength(10)]
+    [StringLength(10)]
     public string CryptoSymbol { get; set; } = string.Empty;
 
     [Required]

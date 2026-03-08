@@ -1,6 +1,6 @@
 namespace MarketService.Dtos;
 
-public record PriceUpdate(
+public record PriceUpdate (
     string Symbol,
     string Name,
     decimal Price,

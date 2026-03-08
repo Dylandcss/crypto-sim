@@ -1,5 +1,5 @@
 ﻿using MarketService.Dtos;
-using MarketService.Models;
+
 
 namespace MarketService.Services.Interfaces;
 
@@ -11,5 +11,5 @@ public interface ICryptosService
 
     public Task<List<CryptoResponse>> GetAllCryptosAsync();
 
-    public Task<CryptoResponse> UpdatePriceAsync(int id, PriceUpdate crypto);
+    public Task<CryptoResponse> UpdatePriceAsync(int id, decimal newPrice);
 }

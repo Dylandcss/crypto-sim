@@ -29,5 +29,25 @@ public static class CryptoMapper
         );
     }
 
+    public static PriceUpdate ToDto(this CryptoResponse crypto, decimal price)
+    {
+        return new PriceUpdate(
+            Symbol: crypto.Symbol,
+            Name: crypto.Name,
+            Price: price,
+            UpdatedAt: DateTime.UtcNow
+        );
+    }
+
+
+    public static PriceHistoryResponse ToDto(this PriceHistory history)
+    {
+        return new PriceHistoryResponse(
+            CryptoSymbol: history.CryptoSymbol,
+            Price: history.Price,
+            RecordedAt: history.RecordedAt
+        );
+    }
+
 
 }

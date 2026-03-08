@@ -14,24 +14,33 @@ public class CryptosRepository : ICryptosRepository
         _context = context;
     }
 
+    public async Task<bool> IsCryptoExistsAsync(string symbol)
+    {
+        return await _context.Cryptos.AnyAsync(x => x.Symbol == symbol);
+    }
+
     public async Task<List<Crypto>> GetAllCryptosAsync()
     {
         return await _context.Cryptos.ToListAsync();
     }
 
-    public Task<Crypto?> GetCryptoByIdAsync(int id)
+    public async Task<Crypto?> GetCryptoByIdAsync(int id)
     {
-        return _context.Cryptos.FirstOrDefaultAsync(crypto => crypto.Id == id);
+        return await _context.Cryptos.FindAsync(id);
     }
 
-    public Task<Crypto?> GetCryptoBySymbolAsync(string symbol)
+    public async Task<Crypto?> GetCryptoBySymbolAsync(string symbol)
     {
-        return _context.Cryptos.FirstOrDefaultAsync(crypto => crypto.Symbol == symbol);
+        return await _context.Cryptos.FirstOrDefaultAsync(crypto => crypto.Symbol == symbol);
     }
 
-    public async Task UpdatePriceAsync(Crypto crypto)
+    public async Task UpdatePriceAsync(int cryptoId, decimal newPrice)
     {
-        _context.Cryptos.Update(crypto);
-        await _context.SaveChangesAsync();
+        await _context.Cryptos
+        .Where(c => c.Id == cryptoId)
+        .ExecuteUpdateAsync(s => s
+            .SetProperty(c => c.CurrentPrice, newPrice)
+            .SetProperty(c => c.LastUpdated, DateTime.UtcNow)
+        );
     }
 }

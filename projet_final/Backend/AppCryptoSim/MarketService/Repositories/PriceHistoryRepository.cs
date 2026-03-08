@@ -24,7 +24,12 @@ public class PriceHistoryRepository : IPriceHistoryRepository
     public Task<List<PriceHistory>> GetPriceHistoryAsync(string symbol, int limit = 50, int skip = 0)
     {
 
-        return _context.PriceHistory.Skip(skip).Take(limit).ToListAsync();
+        return _context.PriceHistory
+            .Where(priceHistory => priceHistory.CryptoSymbol == symbol)
+            .OrderByDescending(priceHistory => priceHistory.RecordedAt)
+            .Skip(skip)
+            .Take(limit)
+            .ToListAsync();
     }
 
 

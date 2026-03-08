@@ -1,6 +1,8 @@
 ﻿using MarketService.Models;
 
+
 namespace MarketService.Repositories.Interfaces;
+
 
 public interface ICryptosRepository
 {
@@ -11,6 +13,8 @@ public interface ICryptosRepository
 
     public Task<List<Crypto>> GetAllCryptosAsync();
     
-    public Task UpdatePriceAsync(Crypto crypto);
+    public Task UpdatePriceAsync(int cryptoId, decimal newPrice);
+
+    Task<bool> IsCryptoExistsAsync(string symbol);
 
 }

@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Middlewares\" />
   </ItemGroup>
@@ -23,6 +22,10 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CryptoSim.Shared\CryptoSim.Shared.csproj" />
   </ItemGroup>
 
 </Project>
