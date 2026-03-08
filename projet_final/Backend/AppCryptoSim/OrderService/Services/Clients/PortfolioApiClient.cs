@@ -1,0 +1,25 @@
+﻿using CryptoSim.Shared.Clients;
+using CryptoSim.Shared.Constants;
+using OrderService.Dtos.Clients;
+
+namespace OrderService.Services.Clients;
+
+public class PortfolioApiClient : BaseApiClient
+{
+
+    public PortfolioApiClient(HttpClient httpClient, ILogger<PortfolioApiClient> logger) : base(httpClient, logger) { }
+
+    public async Task<decimal> GetHoldingQuantityAsync(string token, string symbol)
+    {
+        // On récupère l'objet Holding (qui contient la Quantity)
+        var holding = await GetAsync<PortfolioApiHoldingResponseDto>($"api/portfolio/holdings/{symbol}", token);
+        return holding?.Quantity ?? 0;
+    }
+
+    public async Task<bool> UpdateHoldingAsync(string token, string symbol, decimal quantity, decimal price)
+    {
+        var request = new UpdatePortfolioHoldingRequestDto(symbol, quantity, price);
+        return await PostAsync<bool, UpdatePortfolioHoldingRequestDto>("api/portfolio/holdings", request, token);
+    }
+
+}

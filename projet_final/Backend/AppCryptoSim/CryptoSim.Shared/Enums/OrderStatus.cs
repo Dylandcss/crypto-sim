@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CryptoSim.Shared.Enums;
+﻿namespace CryptoSim.Shared.Enums;
 
 public enum OrderStatus
 {
