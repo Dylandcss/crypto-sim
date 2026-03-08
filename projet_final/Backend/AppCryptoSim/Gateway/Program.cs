@@ -1,57 +1,29 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using DotNetEnv;
+using CryptoSim.Shared.Constants;
+using CryptoSim.Shared.Extensions;
 
-Env.Load("../.env");
 var builder = WebApplication.CreateBuilder(args);
-builder.Configuration.AddEnvironmentVariables();
 
 
-// Charger le fichier .env situé à la racine de la solution
+builder.AddMicroserviceCore(EnvConstants.GatewayUrl)
+       .AddFrontendCors();
 
 
-// Accéder aux variables comme si elles étaient dans appsettings.json
+var authServiceURI = new Uri(builder.Configuration[EnvConstants.AuthServiceUrl]!);
+var marketServiceURI = new Uri(builder.Configuration[EnvConstants.MarketServiceUrl]!);
+var portfolioServiceURI = new Uri(builder.Configuration[EnvConstants.PortfolioServiceUrl]!);
+var orderServiceURI = new Uri(builder.Configuration[EnvConstants.OrderServiceUrl]!);
 
-//var secretKey = builder.Configuration["JWT_SECRET"]
-                //?? throw new InvalidOperationException("JWT_SECRET manquant.");
 
-string issuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
-string audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE");
-string secret = Environment.GetEnvironmentVariable("JWT_SECRET");
-var secretKey = Encoding.UTF8.GetBytes(secret);
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidIssuer = issuer,
-            ValidateAudience = true,
-            ValidAudience = audience,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(secretKey),
-            ValidateLifetime = true
-        };
-    });
-
-// Config des HttpClient
-builder.Services.AddHttpClient("AuthClient", client => client.BaseAddress = new Uri("http://localhost:5001"));
-
-builder.Services.AddHttpClient("MarketClient", client => client.BaseAddress = new Uri("http://localhost:5002"));
-
-builder.Services.AddHttpClient("OrderClient", client => client.BaseAddress = new Uri("http://localhost:5003"));
-
-builder.Services.AddHttpClient("PortfolioClient", client => client.BaseAddress = new Uri("http://localhost:5003"));
-
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddHttpClient("AuthClient", client => client.BaseAddress = authServiceURI);
+builder.Services.AddHttpClient("MarketClient", client => client.BaseAddress = marketServiceURI);
+builder.Services.AddHttpClient("PortfolioClient", client => client.BaseAddress = portfolioServiceURI);
+builder.Services.AddHttpClient("OrderClient", client => client.BaseAddress = orderServiceURI);
 
 
 var app = builder.Build();
 
-
+app.UseGlobalExceptionHandler();
+app.UseFrontendCors();
 app.UseAuthentication();
 app.UseAuthorization();
 

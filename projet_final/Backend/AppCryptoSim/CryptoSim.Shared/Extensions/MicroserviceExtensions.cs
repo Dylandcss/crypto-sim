@@ -1,4 +1,5 @@
-﻿using DotNetEnv;
+﻿using CryptoSim.Shared.Constants;
+using DotNetEnv;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -36,11 +37,12 @@ public static class MicroserviceExtensions
     /// <summary>
     /// Configure CORS pour autoriser le Frontend (React).
     /// </summary>
-    public static WebApplicationBuilder AddFrontendCors(this WebApplicationBuilder builder, string frontendUrl)
+    public static WebApplicationBuilder AddFrontendCors(this WebApplicationBuilder builder)
     {
+        var frontendUrl = builder.Configuration[EnvConstants.FrontendUrl] ?? "http://localhost:5005";
         builder.Services.AddCors(options =>
         {
-            options.AddPolicy("AllowReactApp", policy =>
+            options.AddPolicy(EnvConstants.CorsPolicyName, policy =>
             {
                 policy.WithOrigins(frontendUrl)
                       .AllowAnyHeader()
@@ -49,6 +51,11 @@ public static class MicroserviceExtensions
             });
         });
         return builder;
+    }
+
+    public static IApplicationBuilder UseFrontendCors(this IApplicationBuilder app)
+    {
+        return app.UseCors(EnvConstants.CorsPolicyName);
     }
 
     /// <summary>
