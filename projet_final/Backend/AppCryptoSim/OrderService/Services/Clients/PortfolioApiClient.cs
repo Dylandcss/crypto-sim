@@ -7,7 +7,7 @@ namespace OrderService.Services.Clients;
 public class PortfolioApiClient : BaseApiClient
 {
 
-    public PortfolioApiClient(HttpClient httpClient, ILogger<PortfolioApiClient> logger) : base(httpClient, logger) { }
+    public PortfolioApiClient(HttpClient httpClient, ILogger<PortfolioApiClient> logger, IConfiguration config) : base(httpClient, logger, config[EnvConstants.PortfolioServiceUrl]!) { }
 
     public async Task<decimal> GetHoldingQuantityAsync(string token, string symbol)
     {

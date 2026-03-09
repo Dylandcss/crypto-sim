@@ -1,12 +1,13 @@
 ﻿using CryptoSim.Shared.Clients;
-using OrderService.Dtos;
+using CryptoSim.Shared.Constants;
+using OrderService.Dtos.Clients;
 
 namespace OrderService.Services.Clients;
 
 public class MarketApiClient : BaseApiClient
 {
     
-    public MarketApiClient(HttpClient httpClient, ILogger logger) : base(httpClient, logger) { }
+    public MarketApiClient(HttpClient httpClient, ILogger logger, IConfiguration config) : base(httpClient, logger, config[EnvConstants.MarketServiceUrl]!) { }
 
 
     public async Task<decimal> GetCryptoPriceAsync(string symbol, string token)

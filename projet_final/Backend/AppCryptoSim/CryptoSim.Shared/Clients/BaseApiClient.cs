@@ -9,12 +9,14 @@ namespace CryptoSim.Shared.Clients;
 public abstract class BaseApiClient
 {
     protected readonly HttpClient _httpClient;
-    protected readonly ILogger _logger;
+    protected readonly ILogger _logger;   
 
-    protected BaseApiClient(HttpClient httpClient, ILogger logger)
+    protected BaseApiClient(HttpClient httpClient, ILogger logger, string baseAddress)
     {
+        httpClient.BaseAddress = new Uri(baseAddress);
         _httpClient = httpClient;
         _logger = logger;
+        
     }
 
     protected async Task<TResponse?> GetAsync<TResponse>(string endpoint, string? token = null)

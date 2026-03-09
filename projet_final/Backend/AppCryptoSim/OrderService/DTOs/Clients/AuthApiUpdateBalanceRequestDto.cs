@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OrderService.Dtos;
+namespace OrderService.Dtos.Clients;
 
 public record AuthApiUpdateBalanceRequestDto
 (

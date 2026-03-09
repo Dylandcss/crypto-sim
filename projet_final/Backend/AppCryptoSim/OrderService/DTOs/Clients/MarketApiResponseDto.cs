@@ -1,4 +1,4 @@
-﻿namespace OrderService.Dtos;
+﻿namespace OrderService.Dtos.Clients;
 
 public record MarketApiResponseDto
 (

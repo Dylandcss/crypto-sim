@@ -1,6 +1,6 @@
-﻿namespace OrderService.Dtos;
+﻿namespace OrderService.Dtos.Clients;
 
-public record AuthBalanceResponseDto
+public record AuthApiResponseDto
 (
     decimal Balance
 );

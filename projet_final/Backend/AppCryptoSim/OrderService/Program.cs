@@ -10,23 +10,20 @@ using OrderService.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddMicroserviceCore(EnvConstants.OrderServiceUrl)
-       .AddMysqlDatabase<OrderDbContext>(EnvConstants.OrderDb);
+builder
+    .AddMicroserviceCore(EnvConstants.OrderServiceUrl)
+    .AddMysqlDatabase<OrderDbContext>(EnvConstants.OrderDb);
 
 
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddScoped<IOrderService, OrderManagementService>();
+builder.Services
+    .AddScoped<IOrderRepository, OrderRepository>()
+    .AddScoped<IOrderService, OrderManagementService>();
 
 
+builder.Services.AddHttpClient<AuthApiClient>();
+builder.Services.AddHttpClient<MarketApiClient>();
+builder.Services.AddHttpClient<PortfolioApiClient>();
 
-builder.Services.AddHttpClient<AuthApiClient>(client =>
-    client.BaseAddress = new Uri(builder.Configuration[EnvConstants.AuthServiceUrl]!));
-
-builder.Services.AddHttpClient<MarketApiClient>(client =>
-    client.BaseAddress = new Uri(builder.Configuration[EnvConstants.MarketServiceUrl]!));
-
-builder.Services.AddHttpClient<PortfolioApiClient>(client =>
-    client.BaseAddress = new Uri(builder.Configuration[EnvConstants.PortfolioServiceUrl]!));
 
 var app = builder.Build();
 

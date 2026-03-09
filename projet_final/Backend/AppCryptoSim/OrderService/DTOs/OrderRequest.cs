@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using OrderService.Models;
+using CryptoSim.Shared.Enums;
+
 
 namespace OrderService.Dtos;
 

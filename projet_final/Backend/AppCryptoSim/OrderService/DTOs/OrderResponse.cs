@@ -1,6 +1,8 @@
-﻿using OrderService.Models;
+﻿using CryptoSim.Shared.Enums;
+
 
 namespace OrderService.Dtos;
+
 
 public record OrderResponse(
     int OrderId,

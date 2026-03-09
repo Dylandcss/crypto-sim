@@ -1,11 +1,12 @@
 ﻿using CryptoSim.Shared.Clients;
-using OrderService.Dtos;
+using CryptoSim.Shared.Constants;
+using OrderService.Dtos.Clients;
 
 namespace OrderService.Services.Clients;
 
 public class AuthApiClient : BaseApiClient
 {
-    public AuthApiClient(HttpClient httpClient, ILogger logger) : base(httpClient, logger) { }
+    public AuthApiClient(HttpClient httpClient, ILogger logger, IConfiguration config) : base(httpClient, logger, config[EnvConstants.AuthServiceUrl]!) { }
 
 
 
