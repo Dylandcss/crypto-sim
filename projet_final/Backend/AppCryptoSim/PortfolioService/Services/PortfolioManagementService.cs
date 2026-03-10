@@ -33,9 +33,12 @@ public class PortfolioManagementService : IPortfolioManagementService
         decimal totalCurrentValue = 0;
         var balance = await _authApiClient.GetUserBalance(token);
 
+        var marketCryptoPrices = await _marketApiClient.GetCryptosPricesAsync(token);
+
         foreach (var holding in holdings)
         {
-            var currentPrice = await _marketApiClient.GetCryptoPriceAsync(holding.CryptoSymbol, token);
+            var currentPrice = marketCryptoPrices.FirstOrDefault(c => c.Symbol == holding.CryptoSymbol)?.CurrentPrice ?? 0m;
+            
             var currentValue = currentPrice * holding.Quantity;
             var invested = holding.AverageBuyPrice * holding.Quantity;
             var gainLoss = currentValue - invested;
@@ -78,9 +81,11 @@ public class PortfolioManagementService : IPortfolioManagementService
         var holdings = await _repository.GetUserHoldingsAsync(userId);
         var result = new List<HoldingDetail>();
 
+        var marketCryptoPrices = await _marketApiClient.GetCryptosPricesAsync(token);
+
         foreach (var holding in holdings)
         {
-            var price = await _marketApiClient.GetCryptoPriceAsync(holding.CryptoSymbol, token);
+            var price = marketCryptoPrices.FirstOrDefault(c => c.Symbol == holding.CryptoSymbol)?.CurrentPrice ?? 0m;
 
             var currentValue = price * holding.Quantity;
             var gainLoss = (price - holding.AverageBuyPrice) * holding.Quantity;

@@ -15,4 +15,10 @@ public class MarketApiClient : BaseApiClient
         var cryptoResponseDto = await GetAsync<MarketApiResponseDto>($"api/market/cryptos/{symbol}", token);
         return cryptoResponseDto?.CurrentPrice ?? 0;
     }
+
+    public async Task<List<MarketApiResponseDto>> GetCryptosPricesAsync(string token)
+    {
+        var cryptosResponse = await GetAsync<List<MarketApiResponseDto>>("api/market/cryptos", token);
+        return cryptosResponse ?? [];
+    }
 }
