@@ -11,13 +11,16 @@ public class PortfolioManagementService : IPortfolioManagementService
 {
     private readonly IPortfolioRepository _repository;
     private readonly MarketApiClient _marketApiClient;
+    private readonly AuthApiClient _authApiClient;
 
     public PortfolioManagementService(
         IPortfolioRepository repository,
-        MarketApiClient marketApiClient)
+        MarketApiClient marketApiClient,
+        AuthApiClient authApiClient)
     {
         _repository = repository;
         _marketApiClient = marketApiClient;
+        _authApiClient = authApiClient;
     }
 
     public async Task<PortfolioSummary> GetPortfolioSummaryAsync(int userId, string token)
@@ -28,13 +31,13 @@ public class PortfolioManagementService : IPortfolioManagementService
 
         decimal totalInvested = 0;
         decimal totalCurrentValue = 0;
+        var balance = await _authApiClient.GetUserBalance(token);
 
         foreach (var holding in holdings)
         {
             var currentPrice = await _marketApiClient.GetCryptoPriceAsync(holding.CryptoSymbol, token);
             var currentValue = currentPrice * holding.Quantity;
             var invested = holding.AverageBuyPrice * holding.Quantity;
-
             var gainLoss = currentValue - invested;
             var gainLossPercent = holding.AverageBuyPrice == 0
                 ? 0
@@ -57,13 +60,11 @@ public class PortfolioManagementService : IPortfolioManagementService
 
         var totalGainLoss = totalCurrentValue - totalInvested;
 
-        var totalGainLossPercent = totalInvested == 0
-            ? 0
-            : (totalGainLoss / totalInvested) * 100;
+        var totalGainLossPercent = totalInvested == 0 ? 0 : (totalGainLoss / totalInvested) * 100;
 
         return new PortfolioSummary(
             userId,
-            0,
+            balance,
             totalInvested,
             totalCurrentValue,
             totalGainLoss,
