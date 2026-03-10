@@ -16,7 +16,7 @@ public class GatewayController : ControllerBase
     
     [HttpGet("/api/auth/me")]
     [Authorize]
-    public async Task<IActionResult> GetCurrentUser([FromBody] object body)
+    public async Task<IActionResult> GetCurrentUser()
     {
         var client = CreateClient("AuthClient", addAuthTokenToHeader: true);
         var response = await client.GetAsync("/api/auth/me");
@@ -27,10 +27,21 @@ public class GatewayController : ControllerBase
     
     [HttpGet("/api/auth/balance")]
     [Authorize]
-    public async Task<IActionResult> GetBalanceAsync([FromBody] object body)
+    public async Task<IActionResult> GetBalanceAsync()
     {
         var client = CreateClient("AuthClient", addAuthTokenToHeader: true);
         var response = await client.GetAsync("/api/auth/balance");
+        var content = await response.Content.ReadAsStringAsync();
+
+        return StatusCode((int)response.StatusCode, content);
+    }
+    
+    [HttpPut("/api/auth/balance")]
+    [Authorize]
+    public async Task<IActionResult> UpdateBalanceAsync([FromBody] object request)
+    {
+        var client = CreateClient("AuthClient", addAuthTokenToHeader: true);
+        var response = await client.PutAsJsonAsync("/api/auth/balance", request);
         var content = await response.Content.ReadAsStringAsync();
 
         return StatusCode((int)response.StatusCode, content);
@@ -195,17 +206,6 @@ public class GatewayController : ControllerBase
         return Content(content, "application/json", System.Text.Encoding.UTF8);
     }
     
-    [HttpPost("/api/portfolio/holdings")]
-    [Authorize]
-    public async Task<ActionResult> UpdatePortfolioAfterTrade([FromBody] object dto)
-    {
-        var client = CreateClient("PortfolioClient", addAuthTokenToHeader: true);
-        var response = await client.PostAsJsonAsync("/api/portfolio/holdings", dto);
-        var content = await response.Content.ReadAsStringAsync();
-
-        return StatusCode((int)response.StatusCode, content);
-    }
-
     private HttpClient CreateClient(string clientName, bool addAuthTokenToHeader)
     {
         var client = _httpClientFactory.CreateClient(clientName);
