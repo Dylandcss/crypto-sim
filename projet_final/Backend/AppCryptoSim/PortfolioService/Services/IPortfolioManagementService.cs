@@ -20,7 +20,7 @@ public interface IPortfolioManagementService
 
     // Performance globale
     Task<PortfolioPerformanceDto> GetPerformanceAsync(int userId, string token);
-
+    
     // Mise à jour du portefeuille après exécution d'un trade
     Task UpdatePortfolioAfterTradeAsync(
         int userId,

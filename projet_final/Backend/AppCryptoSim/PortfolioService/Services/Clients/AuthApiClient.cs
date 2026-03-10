@@ -7,7 +7,7 @@ namespace PortfolioService.Services.Clients;
 public class AuthApiClient : BaseApiClient
 {
     public AuthApiClient(HttpClient httpClient, ILogger<AuthApiClient> logger, IConfiguration config) 
-        : base(httpClient, logger, config[EnvConstants.MarketServiceUrl]!) 
+        : base(httpClient, logger, config[EnvConstants.AuthServiceUrl]!) 
     { }
 
     public async Task<decimal> GetUserBalance(string token)

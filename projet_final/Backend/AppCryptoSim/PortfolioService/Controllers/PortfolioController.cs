@@ -83,4 +83,13 @@ public class PortfolioController : ControllerBase
             var performance = await _portfolioService.GetPerformanceAsync(userId, token);
             return Ok(performance);
         }
+
+        [HttpPost("holdings")]
+        public async Task<ActionResult> UpdatePortfolioAfterTrade([FromBody] UpdatePortfolioDto dto)
+        {
+            var userId = User.GetUserId();
+
+            await _portfolioService.UpdatePortfolioAfterTradeAsync(userId, dto.CryptoSymbol, dto.Type, dto.Quantity, dto.Price);
+            return Ok();
+        }
 }
