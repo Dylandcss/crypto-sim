@@ -45,6 +45,19 @@ public class PortfolioController : ControllerBase
             var holdings = await _portfolioService.GetHoldingsAsync(userId, token);
             return Ok(holdings);
         }
+        
+        /// <summary>
+        /// Récupère le détail d'un actif spécifique détenu par l'utilisateur
+        /// </summary>
+        [HttpGet("holdings/{symbol}")]
+        public async Task<ActionResult<List<HoldingDetail>>> GetHolding(string symbol)
+        {
+            var userId = User.GetUserId();
+            var token = HttpContext.GetBearerToken();
+
+            var holding = await _portfolioService.GetHoldingAsync(userId, symbol, token);
+            return Ok(holding);
+        }
 
         /// <summary>
         /// Récupère l'historique des transactions de l'utilisateur

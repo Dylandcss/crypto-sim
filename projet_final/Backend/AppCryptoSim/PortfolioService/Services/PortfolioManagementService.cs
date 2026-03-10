@@ -1,4 +1,5 @@
 ﻿using CryptoSim.Shared.Enums;
+using CryptoSim.Shared.Exceptions;
 using PortfolioService.Services.Clients;
 using PortfolioService.Dtos;
 using PortfolioService.Models;
@@ -100,6 +101,21 @@ public class PortfolioManagementService : IPortfolioManagementService
         }
 
         return result;
+    }
+
+    public async Task<HoldingDetail?> GetHoldingAsync(int userId, string symbol, string token)
+    {
+        var holding = await _repository.GetHoldingAsync(userId, symbol);
+        if (holding == null) throw new NotFoundException("Holding not found");
+        
+        var price = await _marketApiClient.GetCryptoPriceAsync(holding.CryptoSymbol, token);
+        var currentValue = price * holding.Quantity;
+        var gainLoss = (price - holding.AverageBuyPrice) * holding.Quantity;
+        var gainLossPercent = holding.AverageBuyPrice == 0
+            ? 0
+            : ((price - holding.AverageBuyPrice) / holding.AverageBuyPrice) * 100;
+        
+        return new HoldingDetail(holding.CryptoSymbol, holding.CryptoSymbol, holding.Quantity, holding.AverageBuyPrice, price, currentValue, gainLoss, gainLossPercent);
     }
 
     public async Task<List<Transaction>> GetTransactionsAsync(int userId)

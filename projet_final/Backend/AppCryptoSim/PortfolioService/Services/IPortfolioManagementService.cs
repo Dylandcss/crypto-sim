@@ -11,6 +11,9 @@ public interface IPortfolioManagementService
 
     // Liste des holdings
     Task<List<HoldingDetail>> GetHoldingsAsync(int userId, string token);
+    
+    // Détail d'un holding spécifique
+    Task<HoldingDetail?> GetHoldingAsync(int userId, string cryptoSymbol, string token);
 
     // Historique des transactions
     Task<List<Transaction>> GetTransactionsAsync(int userId);
