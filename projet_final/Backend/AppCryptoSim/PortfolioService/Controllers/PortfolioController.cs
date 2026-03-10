@@ -89,7 +89,7 @@ public class PortfolioController : ControllerBase
         {
             var userId = User.GetUserId();
 
-            await _portfolioService.UpdatePortfolioAfterTradeAsync(userId, dto.CryptoSymbol, dto.Type, dto.Quantity, dto.Price);
+            await _portfolioService.UpdatePortfolioAfterTradeAsync(userId, dto.CryptoSymbol, dto.Type, dto.Quantity, dto.PriceAtTime);
             return Ok();
         }
 }

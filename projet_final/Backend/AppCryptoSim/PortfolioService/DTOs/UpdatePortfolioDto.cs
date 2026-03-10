@@ -4,7 +4,7 @@ namespace PortfolioService.Dtos;
 
 public record UpdatePortfolioDto(
     string CryptoSymbol,
-    OrderType Type,
     decimal Quantity,
-    decimal Price
+    decimal PriceAtTime,
+    OrderType Type
     );
