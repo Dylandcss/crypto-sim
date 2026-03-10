@@ -7,7 +7,7 @@ namespace OrderService.Services.Clients;
 public class MarketApiClient : BaseApiClient
 {
     
-    public MarketApiClient(HttpClient httpClient, ILogger logger, IConfiguration config) : base(httpClient, logger, config[EnvConstants.MarketServiceUrl]!) { }
+    public MarketApiClient(HttpClient httpClient, ILogger<MarketApiClient> logger, IConfiguration config) : base(httpClient, logger, config[EnvConstants.MarketServiceUrl]!) { }
 
 
     public async Task<decimal> GetCryptoPriceAsync(string symbol, string token)

@@ -31,7 +31,7 @@ public class OrderManagementService : IOrderService
     public async Task<OrderResponse> AddOrderAsync(int userId, OrderRequest request, string token)
     {
         // Prix actuel
-        decimal price = await _marketClient.GetCryptoPriceAsync(token, request.CryptoSymbol);
+        decimal price = await _marketClient.GetCryptoPriceAsync(request.CryptoSymbol, token);
         if (price <= 0) throw new BadRequestException("Prix indisponible.");
 
         decimal total = request.Quantity * price;
@@ -62,7 +62,7 @@ public class OrderManagementService : IOrderService
 
                 try
                 {
-                    await _portfolioClient.UpdateHoldingAsync(token, request.CryptoSymbol, request.Quantity, price);
+                    await _portfolioClient.UpdateHoldingAsync(token, request.CryptoSymbol, request.Quantity, price, OrderType.Buy);
                 }
                 catch
                 {
@@ -77,7 +77,7 @@ public class OrderManagementService : IOrderService
                 var stock = await _portfolioClient.GetHoldingQuantityAsync(token, request.CryptoSymbol);
                 if (stock < request.Quantity) throw new BadRequestException("Quantité insuffisante.");
 
-                await _portfolioClient.UpdateHoldingAsync(token, request.CryptoSymbol, -request.Quantity, price);
+                await _portfolioClient.UpdateHoldingAsync(token, request.CryptoSymbol, request.Quantity, price, OrderType.Sell);
                 await _authClient.UpdateUserBalance(total, token);
             }
 
@@ -103,4 +103,18 @@ public class OrderManagementService : IOrderService
         if (order == null || order.UserId != userId) throw new NotFoundException("Commande introuvable.");
         return order.ToDto();
     }
+
+    public async Task<bool> DeleteOrderAsync(int orderId)
+    {
+        var order = await _repository.GetOrderByIdAsync(orderId);
+        if (order is null) throw new NotFoundException($"Commande {orderId} introuvable.");
+
+        if (order.Status != OrderStatus.Pending) throw new BadRequestException($"La commande {orderId} ne peut pas être supprimée : elle n'est pas en attente.");
+
+
+        await _repository.DeleteOrderAsync(order.Id);
+        return true;
+    }
+
+
 }

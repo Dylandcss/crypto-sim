@@ -9,4 +9,6 @@ public interface IOrderService
     Task<List<OrderResponse>> GetUserOrdersAsync(int userId);
 
     Task<OrderResponse> GetOrderByIdAsync(int orderId, int userId);
+
+    Task<bool> DeleteOrderAsync(int orderId);
 }

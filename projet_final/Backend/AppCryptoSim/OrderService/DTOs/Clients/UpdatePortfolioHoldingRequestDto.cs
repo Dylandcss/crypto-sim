@@ -1,8 +1,11 @@
-﻿namespace OrderService.Dtos.Clients;
+﻿using CryptoSim.Shared.Enums;
+
+namespace OrderService.Dtos.Clients;
 
 
-public record UpdatePortfolioHoldingRequestDto(
+public record UpdatePortfolioHoldingRequestDto (
     string CryptoSymbol,
     decimal Quantity,      
-    decimal PriceAtTime 
+    decimal PriceAtTime,
+    OrderType type
 );

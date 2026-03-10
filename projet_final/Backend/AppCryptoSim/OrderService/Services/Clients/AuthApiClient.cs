@@ -6,7 +6,7 @@ namespace OrderService.Services.Clients;
 
 public class AuthApiClient : BaseApiClient
 {
-    public AuthApiClient(HttpClient httpClient, ILogger logger, IConfiguration config) : base(httpClient, logger, config[EnvConstants.AuthServiceUrl]!) { }
+    public AuthApiClient(HttpClient httpClient, ILogger<AuthApiClient> logger, IConfiguration config) : base(httpClient, logger, config[EnvConstants.AuthServiceUrl]!) { }
 
 
 

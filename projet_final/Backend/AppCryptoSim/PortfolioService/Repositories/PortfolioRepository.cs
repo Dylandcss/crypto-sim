@@ -15,9 +15,7 @@ public class PortfolioRepository : IPortfolioRepository
 
     public async Task<List<Holding>> GetUserHoldingsAsync(int userId)
     {
-        return await _context.Holdings
-            .Where(h => h.UserId == userId)
-            .ToListAsync();
+        return await _context.Holdings.Where(h => h.Id == userId).ToListAsync();
     }
 
     public async Task<Holding?> GetHoldingAsync(int userId, string cryptoSymbol)

@@ -49,7 +49,7 @@ public class AuthController : ControllerBase
     {
         var userId = User.GetUserId();
         var balance = await _authService.GetBalanceAsync(userId);
-        return Ok(balance);
+        return Ok(new { Balance= balance});
     }
 
     [HttpPut("balance")]

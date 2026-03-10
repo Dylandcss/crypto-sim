@@ -7,7 +7,7 @@ namespace MarketService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class MarketController : ControllerBase
     {
         private readonly ICryptosService _cryptosService;
@@ -41,12 +41,18 @@ namespace MarketService.Controllers
         [HttpGet("history/{symbol}")]
         public async Task<IActionResult> GetCryptoPriceHistoryAsync(string symbol, [FromQuery] int limit = 50)
         {
-            if(limit <= 0) throw new ArgumentOutOfRangeException("La valeur de limit doit être superieure à 0");
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(limit);
             var result = await _priceHistoryService.GetPriceHistoryListAsync(symbol, limit);                  
             return Ok(result);
         }
 
-
+        // GET /api/market/snapshot
+        [HttpGet("snapshot")]
+        public async Task<IActionResult> GetCryptoSnapshot(DateTime date)
+        {
+            var result = await _priceHistoryService.GetPriceHistorySnapshotAsync(date);
+            return Ok(result);
+        }
 
     }
 }

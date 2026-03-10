@@ -32,5 +32,10 @@ public class PriceHistoryRepository : IPriceHistoryRepository
             .ToListAsync();
     }
 
-
+    public Task<List<PriceHistory>> GetPriceHistorySnapshotAsync(DateTime date)
+    {
+        return _context.PriceHistory
+             .Where(priceHistory => priceHistory.RecordedAt == date)             
+             .ToListAsync();
+    }
 }

@@ -20,13 +20,13 @@ public class PriceHistoryService : IPriceHistoryService
         _cryptosRepository = cryptosRepository;
     }
 
-    public async Task<List<PriceHistoryResponse>> GetPriceHistoryListAsync(string symbol, int limit = 50)
+    public async Task<List<PriceHistoryResponse>> GetPriceHistoryListAsync(string symbol, int limit = 50, int skip = 0)
     {
         var cryptoExists = await _cryptosRepository.IsCryptoExistsAsync(symbol);
 
         if (!cryptoExists) throw new NotFoundException($"La cryptomonnaie '{symbol}' est introuvable.");
 
-        var historyList = await _historyRepository.GetPriceHistoryAsync(symbol, limit);
+        var historyList = await _historyRepository.GetPriceHistoryAsync(symbol, limit, skip);
 
         return historyList.Select(priceHistory => priceHistory.ToDto()).ToList();
     }
@@ -43,4 +43,8 @@ public class PriceHistoryService : IPriceHistoryService
         await _historyRepository.AddPriceHistoryAsync(history);
     }
 
+    public async Task<List<PriceHistory>> GetPriceHistorySnapshotAsync(DateTime date)
+    {
+        return await _historyRepository.GetPriceHistorySnapshotAsync(date);
+    }
 }

@@ -8,7 +8,7 @@ namespace OrderService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize] // Sécurise tout le contrôleur
+[Authorize]
 public class OrdersController : ControllerBase
 {
     private readonly IOrderService _orderService;
@@ -40,5 +40,13 @@ public class OrdersController : ControllerBase
     {
         var userId = User.GetUserId();
         return Ok(await _orderService.GetOrderByIdAsync(id, userId));
+    }
+
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteOrderById(int id)
+    {
+        await _orderService.DeleteOrderAsync(id);
+        return NoContent();
     }
 }

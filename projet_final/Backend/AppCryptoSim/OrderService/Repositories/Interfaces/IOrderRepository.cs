@@ -13,7 +13,8 @@ public interface IOrderRepository
 
     Task<Order?> GetOrderByIdAsync(int orderId);
 
-
     Task UpdateOrderStatusAsync(int orderId, OrderStatus newStatus, DateTime? executedAt = null);
+
+    Task DeleteOrderAsync(int orderId);
 
 }

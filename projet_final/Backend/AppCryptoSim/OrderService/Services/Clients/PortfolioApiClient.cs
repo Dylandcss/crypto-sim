@@ -1,5 +1,6 @@
 ﻿using CryptoSim.Shared.Clients;
 using CryptoSim.Shared.Constants;
+using CryptoSim.Shared.Enums;
 using OrderService.Dtos.Clients;
 
 namespace OrderService.Services.Clients;
@@ -16,9 +17,9 @@ public class PortfolioApiClient : BaseApiClient
         return holding?.Quantity ?? 0;
     }
 
-    public async Task<bool> UpdateHoldingAsync(string token, string symbol, decimal quantity, decimal price)
+    public async Task<bool> UpdateHoldingAsync(string token, string symbol, decimal quantity, decimal price, OrderType orderType)
     {
-        var request = new UpdatePortfolioHoldingRequestDto(symbol, quantity, price);
+        var request = new UpdatePortfolioHoldingRequestDto(symbol, quantity, price, orderType);
         return await PostAsync<bool, UpdatePortfolioHoldingRequestDto>("api/portfolio/holdings", request, token);
     }
 
