@@ -16,210 +16,119 @@ public class GatewayController : ControllerBase
     
     [HttpGet("/api/auth/me")]
     [Authorize]
-    public async Task<IActionResult> GetCurrentUser()
-    {
-        var client = CreateClient("AuthClient", addAuthTokenToHeader: true);
-        var response = await client.GetAsync("/api/auth/me");
-        var content = await response.Content.ReadAsStringAsync();
-
-        return StatusCode((int)response.StatusCode, content);
-    }
+    public Task<IActionResult> GetCurrentUser() 
+        => ForwardRequestAsync("AuthClient", "/api/auth/me", HttpMethod.Get);
     
     [HttpGet("/api/auth/balance")]
     [Authorize]
-    public async Task<IActionResult> GetBalanceAsync()
-    {
-        var client = CreateClient("AuthClient", addAuthTokenToHeader: true);
-        var response = await client.GetAsync("/api/auth/balance");
-        var content = await response.Content.ReadAsStringAsync();
-
-        return StatusCode((int)response.StatusCode, content);
-    }
+    public Task<IActionResult> GetBalanceAsync() 
+        => ForwardRequestAsync("AuthClient", "/api/auth/balance", HttpMethod.Get);
     
     [HttpPut("/api/auth/balance")]
     [Authorize]
-    public async Task<IActionResult> UpdateBalanceAsync([FromBody] object request)
-    {
-        var client = CreateClient("AuthClient", addAuthTokenToHeader: true);
-        var response = await client.PutAsJsonAsync("/api/auth/balance", request);
-        var content = await response.Content.ReadAsStringAsync();
-
-        return StatusCode((int)response.StatusCode, content);
-    }
+    public Task<IActionResult> UpdateBalanceAsync([FromBody] object request) 
+        => ForwardRequestAsync("AuthClient", "/api/auth/balance", HttpMethod.Put, request);
     
     [HttpPost("/api/auth/register")]
-    public async Task<IActionResult> Register([FromBody] object body)
-    {
-        var client = CreateClient("AuthClient", addAuthTokenToHeader: true);
-        var response = await client.PostAsJsonAsync("/api/auth/register", body);
-        var content = await response.Content.ReadAsStringAsync();
-
-        return StatusCode((int)response.StatusCode, content);
-    }
+    public Task<IActionResult> Register([FromBody] object body) 
+        => ForwardRequestAsync("AuthClient", "/api/auth/register", HttpMethod.Post, body);
 
     [HttpPost("/api/auth/login")]
-    public async Task<IActionResult> Login([FromBody] object body)
-    {
-        var client = CreateClient("AuthClient", addAuthTokenToHeader: false);
-        var response = await client.PostAsJsonAsync("/api/auth/login", body);
-        var content = await response.Content.ReadAsStringAsync();
-
-        return StatusCode((int)response.StatusCode, content);
-    }
+    public Task<IActionResult> Login([FromBody] object body) 
+        => ForwardRequestAsync("AuthClient", "/api/auth/login", HttpMethod.Post, body, addAuthToken: false);
 
     [HttpGet("/api/market/cryptos")]
-    public async Task<IActionResult> GetCryptos()
-    {
-        var client = CreateClient("MarketClient", addAuthTokenToHeader: true);
-        var response = await client.GetAsync("/api/market/cryptos");
-        var content = await response.Content.ReadAsStringAsync();
-
-        return Content(content, "application/json", System.Text.Encoding.UTF8);
-    }
+    public Task<IActionResult> GetCryptos() 
+        => ForwardRequestAsync("MarketClient", "/api/market/cryptos", HttpMethod.Get);
     
     [HttpGet("/api/market/cryptos/{symbol}")]
-    public async Task<IActionResult> GetCryptoBySymbolAsync(string symbol) 
-    {
-        var client = CreateClient("MarketClient", addAuthTokenToHeader: true);
-        var response = await client.GetAsync($"/api/market/cryptos/{symbol}");
-        var content = await response.Content.ReadAsStringAsync();
-
-        return Content(content, "application/json", System.Text.Encoding.UTF8);
-    }
+    public Task<IActionResult> GetCryptoBySymbolAsync(string symbol) 
+        => ForwardRequestAsync("MarketClient", $"/api/market/cryptos/{symbol}", HttpMethod.Get);
     
     [HttpGet("/api/market/history/{symbol}")]
-    public async Task<IActionResult> GetCryptoPriceHistoryAsync(string symbol, [FromQuery] int limit = 50)
-    {
-        var client = CreateClient("MarketClient", addAuthTokenToHeader: true);
-        var response = await client.GetAsync($"/api/market/history/{symbol}?limit={limit}");
-        var content = await response.Content.ReadAsStringAsync();
-
-        return Content(content, "application/json", System.Text.Encoding.UTF8);
-    }
+    public Task<IActionResult> GetCryptoPriceHistoryAsync(string symbol, [FromQuery] int limit = 50) 
+        => ForwardRequestAsync("MarketClient", $"/api/market/history/{symbol}?limit={limit}", HttpMethod.Get);
     
     [HttpGet("/api/market/snapshot")]
-    public async Task<IActionResult> GetCryptoSnapshot(DateTime date)
-    {
-        var client = CreateClient("MarketClient", addAuthTokenToHeader: true);
-        var response = await client.GetAsync($"/api/market/snapshot?date={date:O}");
-        var content = await response.Content.ReadAsStringAsync();
-
-        return Content(content, "application/json", System.Text.Encoding.UTF8);
-    }
+    public Task<IActionResult> GetCryptoSnapshot(DateTime date) 
+        => ForwardRequestAsync("MarketClient", $"/api/market/snapshot?date={date:O}", HttpMethod.Get);
     
     [HttpPost("/api/orders")]
     [Authorize]
-    public async Task<IActionResult> CreateOrder([FromBody] object request)
-    {        
-        var client = CreateClient("OrderClient", addAuthTokenToHeader: true);
-        var response = await client.PostAsJsonAsync("/api/orders", request);
-        var content = await response.Content.ReadAsStringAsync();
-
-        return StatusCode((int)response.StatusCode, content);
-    }
+    public Task<IActionResult> CreateOrder([FromBody] object request) 
+        => ForwardRequestAsync("OrderClient", "/api/orders", HttpMethod.Post, request);
     
     [HttpGet("/api/orders")]
     [Authorize]
-    public async Task<IActionResult> GetUserOrders()
-    {
-        var client = CreateClient("OrderClient", addAuthTokenToHeader: true);
-        var response = await client.GetAsync("/api/orders");
-        var content = await response.Content.ReadAsStringAsync();
-
-        return Content(content, "application/json", System.Text.Encoding.UTF8);
-    }
+    public Task<IActionResult> GetUserOrders() 
+        => ForwardRequestAsync("OrderClient", "/api/orders", HttpMethod.Get);
     
     [HttpGet("/api/orders/{id:int}")]
     [Authorize]
-    public async Task<IActionResult> GetOrderById(int id)
-    {
-        var client = CreateClient("OrderClient", addAuthTokenToHeader: true);
-        var response = await client.GetAsync($"/api/orders/{id}");
-        var content = await response.Content.ReadAsStringAsync();
-
-        return Content(content, "application/json", System.Text.Encoding.UTF8);
-    }
+    public Task<IActionResult> GetOrderById(int id) 
+        => ForwardRequestAsync("OrderClient", $"/api/orders/{id}", HttpMethod.Get);
     
     [HttpDelete("/api/orders/{id:int}")]
     [Authorize]
-    public async Task<IActionResult> DeleteOrderById(int id)
-    {
-        var client = CreateClient("OrderClient", addAuthTokenToHeader: true);
-        var response = await client.DeleteAsync($"/api/orders/{id}");
-        var content = await response.Content.ReadAsStringAsync();
-
-        return StatusCode((int)response.StatusCode, content);
-    }
+    public Task<IActionResult> DeleteOrderById(int id) 
+        => ForwardRequestAsync("OrderClient", $"/api/orders/{id}", HttpMethod.Delete);
     
     [HttpGet("/api/portfolio")]
     [Authorize]
-    public async Task<IActionResult> GetPortfolioSummary()
-    {
-        var client = CreateClient("PortfolioClient", addAuthTokenToHeader: true);
-        var response = await client.GetAsync("/api/portfolio");
-        var content = await response.Content.ReadAsStringAsync();
-
-        return Content(content, "application/json", System.Text.Encoding.UTF8);
-    }
+    public Task<IActionResult> GetPortfolioSummary() 
+        => ForwardRequestAsync("PortfolioClient", "/api/portfolio", HttpMethod.Get);
     
     [HttpGet("/api/portfolio/holdings")]
     [Authorize]
-    public async Task<ActionResult<List<object>>> GetHoldings()
-    {
-        var client = CreateClient("PortfolioClient", addAuthTokenToHeader: true);
-        var response = await client.GetAsync("/api/portfolio/holdings");
-        var content = await response.Content.ReadAsStringAsync();
-
-        return Content(content, "application/json", System.Text.Encoding.UTF8);
-    }
+    public Task<IActionResult> GetHoldings() 
+        => ForwardRequestAsync("PortfolioClient", "/api/portfolio/holdings", HttpMethod.Get);
     
     [HttpGet("/api/portfolio/holdings/{symbol}")]
     [Authorize]
-    public async Task<ActionResult<List<object>>> GetHolding(string symbol)
-    {
-        var client = CreateClient("PortfolioClient", addAuthTokenToHeader: true);
-        var response = await client.GetAsync($"/api/portfolio/holdings/{symbol}");
-        var content = await response.Content.ReadAsStringAsync();
-
-        return Content(content, "application/json", System.Text.Encoding.UTF8);
-    }
+    public Task<IActionResult> GetHolding(string symbol) 
+        => ForwardRequestAsync("PortfolioClient", $"/api/portfolio/holdings/{symbol}", HttpMethod.Get);
     
     [HttpGet("/api/portfolio/transactions")]
     [Authorize]
-    public async Task<ActionResult<List<object>>> GetTransactions()
-    {
-        var client = CreateClient("PortfolioClient", addAuthTokenToHeader: true);
-        var response = await client.GetAsync("/api/portfolio/transactions");
-        var content = await response.Content.ReadAsStringAsync();
-
-        return Content(content, "application/json", System.Text.Encoding.UTF8);
-    }
+    public Task<IActionResult> GetTransactions() 
+        => ForwardRequestAsync("PortfolioClient", "/api/portfolio/transactions", HttpMethod.Get);
     
     [HttpGet("/api/portfolio/performance")]
     [Authorize]
-    public async Task<ActionResult<object>> GetPerformance()
-    {
-        var client = CreateClient("PortfolioClient", addAuthTokenToHeader: true);
-        var response = await client.GetAsync("/api/portfolio/performance");
-        var content = await response.Content.ReadAsStringAsync();
+    public Task<IActionResult> GetPerformance() 
+        => ForwardRequestAsync("PortfolioClient", "/api/portfolio/performance", HttpMethod.Get);
 
-        return Content(content, "application/json", System.Text.Encoding.UTF8);
-    }
-    
-    private HttpClient CreateClient(string clientName, bool addAuthTokenToHeader)
+
+    private async Task<IActionResult> ForwardRequestAsync(string clientName, string path, HttpMethod method, object? bodyData = null, bool addAuthToken = true)
     {
         var client = _httpClientFactory.CreateClient(clientName);
+        using var request = new HttpRequestMessage(method, path);
 
-        if (addAuthTokenToHeader)
+        if (bodyData != null)
+        {
+            request.Content = JsonContent.Create(bodyData);
+        }
+
+        if (addAuthToken)
         {
             var authHeader = HttpContext.Request.Headers.Authorization.FirstOrDefault();
-            if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Bearer "))
+
+            if (!string.IsNullOrWhiteSpace(authHeader) &&
+                authHeader.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
             {
                 var token = authHeader["Bearer ".Length..].Trim();
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
         }
 
-        return client;
+        var response = await client.SendAsync(request);
+        var content = await response.Content.ReadAsStringAsync();
+
+        return new ContentResult
+        {
+            StatusCode = (int) response.StatusCode,
+            Content = content,
+            ContentType = "application/json"
+        };
     }
 }
