@@ -18,6 +18,7 @@ builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
 builder.Services.AddScoped<IPortfolioManagementService, PortfolioManagementService>();
 
 builder.Services.AddHttpClient<MarketApiClient>();
+builder.Services.AddHttpClient<AuthApiClient>();
 
 var app = builder.Build();
 

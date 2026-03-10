@@ -85,9 +85,7 @@ public class PortfolioManagementService : IPortfolioManagementService
             var currentValue = price * holding.Quantity;
             var gainLoss = (price - holding.AverageBuyPrice) * holding.Quantity;
 
-            var gainLossPercent = holding.AverageBuyPrice == 0
-                ? 0
-                : ((price - holding.AverageBuyPrice) / holding.AverageBuyPrice) * 100;
+            var gainLossPercent = holding.AverageBuyPrice == 0 ? 0 : ((price - holding.AverageBuyPrice) / holding.AverageBuyPrice) * 100;
 
             result.Add(new HoldingDetail(
                 holding.CryptoSymbol,
