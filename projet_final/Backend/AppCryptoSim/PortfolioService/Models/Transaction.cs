@@ -1,4 +1,4 @@
-﻿using OrderService.Models;
+﻿using CryptoSim.Shared.Enums;
 
 namespace PortfolioService.Models
 {
