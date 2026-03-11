@@ -10,5 +10,5 @@ public interface IOrderService
 
     Task<OrderResponse> GetOrderByIdAsync(int orderId, int userId);
 
-    Task<bool> DeleteOrderAsync(int orderId);
+    Task<bool> DeleteOrderAsync(int orderId, int userId);
 }

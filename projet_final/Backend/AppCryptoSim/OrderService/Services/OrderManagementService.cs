@@ -104,13 +104,15 @@ public class OrderManagementService : IOrderService
         return order.ToDto();
     }
 
-    public async Task<bool> DeleteOrderAsync(int orderId)
+    public async Task<bool> DeleteOrderAsync(int orderId, int userId)
     {
         var order = await _repository.GetOrderByIdAsync(orderId);
         if (order is null) throw new NotFoundException($"Commande {orderId} introuvable.");
 
-        if (order.Status != OrderStatus.Pending) throw new BadRequestException($"La commande {orderId} ne peut pas être supprimée : elle n'est pas en attente.");
+        if (order.UserId != userId) 
+            throw new ForbiddenException("Vous n'êtes pas autorisé à supprimer cette commande.");
 
+        if (order.Status != OrderStatus.Pending) throw new BadRequestException($"La commande {orderId} ne peut pas être supprimée : elle n'est pas en attente.");
 
         await _repository.DeleteOrderAsync(order.Id);
         return true;

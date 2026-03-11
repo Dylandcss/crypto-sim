@@ -46,7 +46,8 @@ public class OrdersController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteOrderById(int id)
     {
-        await _orderService.DeleteOrderAsync(id);
+        var userId = User.GetUserId();
+        await _orderService.DeleteOrderAsync(id, userId);
         return NoContent();
     }
 }
