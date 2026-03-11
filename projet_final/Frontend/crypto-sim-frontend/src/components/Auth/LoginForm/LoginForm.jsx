@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './LoginForm.Module.css'
-import { login } from '../../services/authService'
+import { login } from '../../../services/authService'
 import { useLocation } from 'react-router-dom'
 
 function LoginForm({ onLogin }) {

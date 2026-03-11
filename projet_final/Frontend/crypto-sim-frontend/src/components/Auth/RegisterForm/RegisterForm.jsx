@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './RegisterForm.Module.css'
-import { register } from '../../services/authService'
+import { register } from '../../../services/authService'
 import { useNavigate } from 'react-router-dom'
 
 function RegisterForm() {

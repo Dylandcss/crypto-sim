@@ -1,4 +1,4 @@
-import RegisterForm from '../../components/RegisterForm/RegisterForm'
+import RegisterForm from '../../components/Auth/RegisterForm/RegisterForm'
 import './RegisterPage.Module.css'
 
 function RegisterPage() {
