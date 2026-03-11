@@ -9,6 +9,7 @@ public interface IPortfolioRepository
     Task<Holding?> GetHoldingAsync(int userId, string cryptoSymbol);
     Task AddHoldingAsync(Holding holding);
     Task UpdateHoldingAsync(Holding holding);
+    Task DeleteHoldingAsync(Holding holding);
 
     // TRANSACTIONS
     Task<List<Transaction>> GetUserTransactionsAsync(int userId);

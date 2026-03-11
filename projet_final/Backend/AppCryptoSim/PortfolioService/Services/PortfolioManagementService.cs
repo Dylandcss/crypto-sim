@@ -26,19 +26,30 @@ public class PortfolioManagementService : IPortfolioManagementService
     public async Task<PortfolioSummary> GetPortfolioSummaryAsync(int userId, string token)
     {
         var holdings = await _repository.GetUserHoldingsAsync(userId);
+        var transactions = await _repository.GetUserTransactionsAsync(userId);
 
         var holdingDetails = new List<HoldingDetail>();
 
-        decimal totalInvested = 0;
-        decimal totalCurrentValue = 0;
         var balance = await _authApiClient.GetUserBalance(token);
-
         var marketCryptoPrices = await _marketApiClient.GetCryptosPricesAsync(token);
+
+        // Calcul basé sur les transactions
+        decimal totalBought = transactions
+            .Where(t => t.Type == OrderType.Buy)
+            .Sum(t => t.Total);
+
+        decimal totalSold = transactions
+            .Where(t => t.Type == OrderType.Sell)
+            .Sum(t => t.Total);
+
+        // Valeur actuelle des holdings encore détenus
+        decimal totalCurrentValue = 0;
+        decimal unrealizedGainLoss = 0;
 
         foreach (var holding in holdings)
         {
             var currentPrice = marketCryptoPrices.FirstOrDefault(c => c.Symbol == holding.CryptoSymbol)?.CurrentPrice ?? 0m;
-            
+
             var currentValue = currentPrice * holding.Quantity;
             var invested = holding.AverageBuyPrice * holding.Quantity;
             var gainLoss = currentValue - invested;
@@ -57,13 +68,20 @@ public class PortfolioManagementService : IPortfolioManagementService
                 gainLossPercent
             ));
 
-            totalInvested += invested;
             totalCurrentValue += currentValue;
+            unrealizedGainLoss += gainLoss;
         }
 
-        var totalGainLoss = totalCurrentValue - totalInvested;
+        // TotalInvested = tout ce qui a été acheté au total (basé sur les transactions)
+        decimal totalInvested = totalBought;
 
-        var totalGainLossPercent = totalInvested == 0 ? 0 : (totalGainLoss / totalInvested) * 100;
+        // Gains réalisés = total des ventes - coût d'acquisition des cryptos vendues
+        decimal realizedGainLoss = totalSold - (totalBought - holdings.Sum(h => h.AverageBuyPrice * h.Quantity));
+
+        // Gain/Perte total = réalisé + non réalisé
+        decimal totalGainLoss = realizedGainLoss + unrealizedGainLoss;
+
+        decimal totalGainLossPercent = totalInvested == 0 ? 0 : (totalGainLoss / totalInvested) * 100;
 
         return new PortfolioSummary(
             userId,
@@ -122,9 +140,18 @@ public class PortfolioManagementService : IPortfolioManagementService
         return new HoldingDetail(holding.CryptoSymbol, holding.CryptoSymbol, holding.Quantity, holding.AverageBuyPrice, price, currentValue, gainLoss, gainLossPercent);
     }
 
-    public async Task<List<Transaction>> GetTransactionsAsync(int userId)
+    public async Task<List<TransactionDto>> GetTransactionsAsync(int userId)
     {
-        return await _repository.GetUserTransactionsAsync(userId);
+        var transactions = await _repository.GetUserTransactionsAsync(userId);
+        return transactions.Select(t => new TransactionDto(
+            t.Id,
+            t.CryptoSymbol,
+            t.Type,
+            t.Quantity,
+            t.PriceAtTime,
+            t.Total,
+            t.ExecutedAt
+        )).ToList();
     }
 
     public async Task<PortfolioPerformanceDto> GetPerformanceAsync(int userId, string token)
@@ -147,7 +174,7 @@ public class PortfolioManagementService : IPortfolioManagementService
         decimal price)
     {
         var holding = await _repository.GetHoldingAsync(userId, symbol);
-
+        
         if (type == OrderType.Buy)
         {
             if (holding == null)
@@ -185,12 +212,13 @@ public class PortfolioManagementService : IPortfolioManagementService
 
             if (holding.Quantity == 0)
             {
-                holding.AverageBuyPrice = 0;
+                await _repository.DeleteHoldingAsync(holding);
             }
-
-            holding.UpdatedAt = DateTime.UtcNow;
-
-            await _repository.UpdateHoldingAsync(holding);
+            else
+            {
+                holding.UpdatedAt = DateTime.UtcNow;
+                await _repository.UpdateHoldingAsync(holding);
+            }
         }
 
         var transaction = new Transaction()
