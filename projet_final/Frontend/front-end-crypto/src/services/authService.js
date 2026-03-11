@@ -1,15 +1,18 @@
 // src/services/authService.js
-export const login = async (email, password) => {
-  // Simulation d'une réponse serveur
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (email === "test@test.com" && password === "123456") {
-        resolve({ token: "FAKE_JWT_TOKEN" });
-      } else {
-        reject(new Error("Login failed"));
-      }
-    }, 500); // Simule délai réseau
+export const login = async (username, password) => {
+  const response = await fetch("http://localhost:5000/api/auth/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ username, password })
   });
+
+  if (!response.ok) {
+    throw new Error("Login failed");
+  }
+
+  return response.json();
 };
 
 //fetch et url du back

@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import "./LoginForm.css";
+import React, { use, useState } from "react";
+import "./LoginForm.module.css";
 import { login } from "../../services/authService";
 
 function LoginForm({ onLogin }) {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await login(email, password);
+      const data = await login(username, password);
       localStorage.setItem("token", data.token);
       onLogin(); // notifie le parent que l'utilisateur est connecté
     } catch (err) {
-      alert("Email ou mot de passe incorrect !");
+      alert("Nom d'utilisateur ou mot de passe incorrect !");
     }
   };
 
@@ -21,10 +21,10 @@ function LoginForm({ onLogin }) {
     <form className="login-form" onSubmit={handleSubmit}>
       <h2>Connexion</h2>
       <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        type="text"
+        placeholder="Nom d'utilisateur"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
         required
       />
       <input

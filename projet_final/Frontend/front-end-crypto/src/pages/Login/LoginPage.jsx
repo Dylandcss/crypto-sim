@@ -1,8 +1,13 @@
 import React from "react";
 import "./LoginPage.css";
-import LoginForm from "./LoginForm";
+import LoginForm from "../../components/LoginForm/LoginForm";
 
-function LoginPage({ onLogin }) {
+function LoginPage() {
+
+  function onLogin() {
+    console.log("Utilisateur connecté !");
+  }
+
   return (
     <div className="login-page">
       <div className="login-card">
