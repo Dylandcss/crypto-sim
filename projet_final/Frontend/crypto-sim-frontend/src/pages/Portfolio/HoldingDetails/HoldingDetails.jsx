@@ -1,27 +1,13 @@
-import { getHoldingDetails } from '../../services/portfolioService'
-import { useState, useEffect } from 'react'
+import { getHoldingDetails } from '../../../services/portfolioService'
 import { useParams } from 'react-router-dom'
-import './HoldingDetails.Module.css'
+import useFetch from '../../../hooks/useFetch'
 
 function HoldingDetails() {
   const { symbol } = useParams()
-  const [holdingDetails, setHoldingDetails] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    const fetchHoldingDetails = async () => {
-      try {
-        const data = await getHoldingDetails(symbol)
-        setHoldingDetails(data)
-      } catch (err) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchHoldingDetails()
-  }, [])
+  const { data: holdingDetails, loading, error } = useFetch(
+    () => getHoldingDetails(symbol),
+    [symbol]
+  )
 
   return (
     <div>

@@ -1,25 +1,8 @@
 import { getTransactionsHistory } from '../../../services/portfolioService'
-import { useState, useEffect } from 'react'
-import './TransactionHistory.Module.css'
+import useFetch from '../../../hooks/useFetch'
 
 function TransactionHistory() {
-  const [transactionHistory, setTransactionHistory] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    const fetchTransactionHistory = async () => {
-      try {
-        const data = await getTransactionsHistory()
-        setTransactionHistory(data)
-      } catch (err) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchTransactionHistory()
-  }, [])
+  const { data: transactionHistory, loading, error } = useFetch(getTransactionsHistory)
 
   return (
     <div>
@@ -39,7 +22,7 @@ function TransactionHistory() {
             </tr>
           </thead>
           <tbody>
-            {transactionHistory.map((tx) => (
+            {(transactionHistory ?? []).map((tx) => (
               <tr key={tx.id}>
                 <td>{tx.cryptoSymbol}</td>
                 <td>{tx.quantity}</td>

@@ -1,25 +1,8 @@
 import { getPerformanceData } from '../../../services/portfolioService'
-import { useState, useEffect } from 'react'
-import './PerformanceCard.Module.css'
+import useFetch from '../../../hooks/useFetch'
 
 function PerformanceCard() {
-  const [performanceData, setPerformanceData] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    const fetchPerformanceData = async () => {
-      try {
-        const data = await getPerformanceData()
-        setPerformanceData(data)
-      } catch (err) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchPerformanceData()
-  }, [])
+  const { data: performanceData, loading, error } = useFetch(getPerformanceData)
 
   return (
     <div className="performance-card">

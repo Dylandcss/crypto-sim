@@ -1,14 +1,15 @@
-const BASE_URL = 'http://localhost:5000'
-const token = localStorage.getItem('token')
+import { BASE_URL } from './api'
 
-export const getPortfolioSummary = async () => {
-  const response = await fetch(`${BASE_URL}/api/portfolio`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-  })
+const getToken = () => localStorage.getItem('token')
+
+const handleResponse = async (response) => {
+  if (response.status === 401) {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    sessionStorage.setItem('sessionExpired', 'true')
+    window.location.href = '/'
+    throw new Error('Session expirée. Veuillez vous reconnecter.')
+  }
 
   if (!response.ok) {
     const res = await response.json()
@@ -18,70 +19,24 @@ export const getPortfolioSummary = async () => {
   return response.json()
 }
 
-export const getHoldings = async () => {
-  const response = await fetch(`${BASE_URL}/api/portfolio/holdings`, {
-    method: 'GET',
+const authFetch = async (endpoint, options = {}) => {
+  const response = await fetch(`${BASE_URL}${endpoint}`, {
+    ...options,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${getToken()}`,
+      ...options.headers,
     },
   })
-
-  if (!response.ok) {
-    const res = await response.json()
-    throw new Error(res.message)
-  }
-
-  return response.json()
+  return handleResponse(response)
 }
 
-export const getHoldingDetails = async (symbol) => {
-  const response = await fetch(`${BASE_URL}/api/portfolio/holdings/${symbol}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-  })
+export const getPortfolioSummary = () => authFetch('/api/portfolio', { method: 'GET' })
 
-  if (!response.ok) {
-    const res = await response.json()
-    throw new Error(res.message)
-  }
+export const getHoldings = () => authFetch('/api/portfolio/holdings', { method: 'GET' })
 
-  return response.json()
-}
+export const getHoldingDetails = (symbol) => authFetch(`/api/portfolio/holdings/${symbol}`, { method: 'GET' })
 
-export const getTransactionsHistory = async () => {
-  const response = await fetch(`${BASE_URL}/api/portfolio/transactions`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-  })
+export const getTransactionsHistory = () => authFetch('/api/portfolio/transactions', { method: 'GET' })
 
-  if (!response.ok) {
-    const res = await response.json()
-    throw new Error(res.message)
-  }
-
-  return response.json()
-}
-
-export const getPerformanceData = async () => {
-  const response = await fetch(`${BASE_URL}/api/portfolio/performance`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-  })
-
-  if (!response.ok) {
-    const res = await response.json()
-    throw new Error(res.message)
-  }
-
-  return response.json()
-}
+export const getPerformanceData = () => authFetch('/api/portfolio/performance', { method: 'GET' })

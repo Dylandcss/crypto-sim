@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import './RegisterForm.Module.css'
+import { useState } from 'react'
+import styles from './RegisterForm.module.css'
 import { register } from '../../../services/authService'
 import { useNavigate } from 'react-router-dom'
 
@@ -25,8 +25,8 @@ function RegisterForm() {
 
   return (
     <>
-      {error && <div className="register-error">{error}</div>}
-      <form className="register-form" onSubmit={handleSubmit}>
+      {error && <div className={styles['register-error']}>{error}</div>}
+      <form className={styles['register-form']} onSubmit={handleSubmit}>
         <h2>Inscription</h2>
         <input
           type="text"

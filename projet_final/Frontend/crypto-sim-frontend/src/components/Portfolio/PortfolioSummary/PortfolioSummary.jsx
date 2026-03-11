@@ -1,28 +1,12 @@
 import { getPortfolioSummary } from '../../../services/portfolioService'
-import { useState, useEffect } from 'react'
-import './PortfolioSummary.Module.css'
+import useFetch from '../../../hooks/useFetch'
 
 function PortfolioSummary() {
-  const [summary, setSummary] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    const fetchSummary = async () => {
-      try {
-        const data = await getPortfolioSummary()
-        setSummary(data)
-      } catch (err) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchSummary()
-  }, [])
+  const { data: summary, loading, error } = useFetch(getPortfolioSummary)
 
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error: {error}</div>
+
   return (
     <div className="portfolio-summary">
       <h2>Portfolio Summary</h2>

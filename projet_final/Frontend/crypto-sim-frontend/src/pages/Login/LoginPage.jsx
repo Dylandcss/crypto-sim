@@ -1,21 +1,21 @@
-import React from 'react'
-import './LoginPage.Module.css'
+import styles from './LoginPage.module.css'
 import LoginForm from '../../components/Auth/LoginForm/LoginForm'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 
 function LoginPage() {
-  const navigate = useNavigate()
+  const { isAuthenticated } = useAuth()
 
-  function onLogin() {
-    navigate('/market')
+  if (isAuthenticated) {
+    return <Navigate to="/market" replace />
   }
 
   return (
-    <div className="login-page">
-      <div className="login-card">
+    <div className={styles['login-page']}>
+      <div className={styles['login-card']}>
         <h1>CryptoSim</h1>
-        <LoginForm onLogin={onLogin} />
-        <Link to="/register" className="register-link">
+        <LoginForm />
+        <Link to="/register" className={styles['register-link']}>
           Vous n'avez pas de compte? Inscrivez-vous ici.
         </Link>
       </div>

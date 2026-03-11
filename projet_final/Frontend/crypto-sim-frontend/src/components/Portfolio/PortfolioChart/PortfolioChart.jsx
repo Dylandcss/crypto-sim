@@ -1,8 +1,9 @@
 import { getHoldings } from '../../../services/portfolioService'
-import { useState, useEffect, useMemo } from 'react'
-import './PortfolioChart.Module.css'
+import { useMemo } from 'react'
+import styles from './PortfolioChart.module.css'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
+import useFetch from '../../../hooks/useFetch'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -51,31 +52,15 @@ const chartOptions = {
 }
 
 function PortfolioChart() {
-  const [holdings, setHoldings] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    const fetchHoldings = async () => {
-      try {
-        const data = await getHoldings()
-        setHoldings(data)
-      } catch (err) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchHoldings()
-  }, [])
+  const { data: holdings, loading, error } = useFetch(getHoldings)
 
   const chartData = useMemo(
     () => ({
-      labels: holdings.map((h) => h.symbol),
+      labels: (holdings ?? []).map((h) => h.symbol),
       datasets: [
         {
-          data: holdings.map((h) => h.currentValue),
-          backgroundColor: COLORS.slice(0, holdings.length),
+          data: (holdings ?? []).map((h) => h.currentValue),
+          backgroundColor: COLORS.slice(0, (holdings ?? []).length),
           borderColor: '#1e293b',
           borderWidth: 3,
           hoverOffset: 8,
@@ -87,35 +72,35 @@ function PortfolioChart() {
 
   if (loading) {
     return (
-      <div className="portfolio-chart">
-        <h2 className="portfolio-chart__title">Répartition du portfolio</h2>
-        <p className="portfolio-chart__message">Loading chart…</p>
+      <div className={styles['portfolio-chart']}>
+        <h2 className={styles['portfolio-chart__title']}>Répartition du portfolio</h2>
+        <p className={styles['portfolio-chart__message']}>Loading chart…</p>
       </div>
     )
   }
 
   if (error) {
     return (
-      <div className="portfolio-chart">
-        <h2 className="portfolio-chart__title">Répartition du portfolio</h2>
-        <p className="portfolio-chart__error">Error: {error}</p>
+      <div className={styles['portfolio-chart']}>
+        <h2 className={styles['portfolio-chart__title']}>Répartition du portfolio</h2>
+        <p className={styles['portfolio-chart__error']}>Error: {error}</p>
       </div>
     )
   }
 
-  if (holdings.length === 0) {
+  if (!holdings || holdings.length === 0) {
     return (
-      <div className="portfolio-chart">
-        <h2 className="portfolio-chart__title">Répartition du portfolio</h2>
-        <p className="portfolio-chart__message">No holdings to display.</p>
+      <div className={styles['portfolio-chart']}>
+        <h2 className={styles['portfolio-chart__title']}>Répartition du portfolio</h2>
+        <p className={styles['portfolio-chart__message']}>No holdings to display.</p>
       </div>
     )
   }
 
   return (
-    <div className="portfolio-chart">
-      <h2 className="portfolio-chart__title">Répartition du portfolio</h2>
-      <div className="portfolio-chart__container">
+    <div className={styles['portfolio-chart']}>
+      <h2 className={styles['portfolio-chart__title']}>Répartition du portfolio</h2>
+      <div className={styles['portfolio-chart__container']}>
         <Doughnut data={chartData} options={chartOptions} />
       </div>
     </div>

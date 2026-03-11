@@ -1,26 +1,9 @@
 import { getHoldings } from '../../../services/portfolioService'
-import { useState, useEffect } from 'react'
-import './HoldingsList.Module.css'
 import { Link } from 'react-router-dom'
+import useFetch from '../../../hooks/useFetch'
 
 function HoldingsList() {
-  const [holdings, setHoldings] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    const fetchHoldings = async () => {
-      try {
-        const data = await getHoldings()
-        setHoldings(data)
-      } catch (err) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchHoldings()
-  }, [])
+  const { data: holdings, loading, error } = useFetch(getHoldings)
 
   return (
     <div>
@@ -42,7 +25,7 @@ function HoldingsList() {
             </tr>
           </thead>
           <tbody>
-            {holdings.map((holding) => (
+            {(holdings ?? []).map((holding) => (
               <tr key={holding.symbol}>
                 <td>{holding.symbol}</td>
                 <td>{holding.quantity}</td>

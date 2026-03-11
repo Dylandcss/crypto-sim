@@ -1,6 +1,4 @@
-// src/services/authService.js
-
-const BASE_URL = 'http://localhost:5000'
+import { BASE_URL } from './api'
 
 export const login = async (username, password) => {
   const response = await fetch(`${BASE_URL}/api/auth/login`, {

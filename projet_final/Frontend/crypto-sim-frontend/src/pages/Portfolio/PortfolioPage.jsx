@@ -3,7 +3,6 @@ import PortfolioChart from '../../components/Portfolio/PortfolioChart/PortfolioC
 import PortfolioSummary from '../../components/Portfolio/PortfolioSummary/PortfolioSummary'
 import TransactionHistory from '../../components/Portfolio/TransactionHistory/TransactionHistory'
 import PerformanceCard from '../../components/Portfolio/PerformanceCard/PerformanceCard'
-import './PortfolioPage.Module.css'
 
 function PortfolioPage() {
   return (
