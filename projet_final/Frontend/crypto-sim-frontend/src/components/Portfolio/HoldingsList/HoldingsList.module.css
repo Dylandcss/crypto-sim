@@ -1,0 +1,52 @@
+.error {
+  color: var(--light-red);
+}
+
+.holdings-list {
+  background: var(--widget-bg);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 24px var(--shadow);
+  border: 2px solid var(--light-gray);
+}
+
+.holdings-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.holdings-table th,
+.holdings-table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.holdings-table-header {
+  background-color: var(--shadow);
+}
+
+.holdings-table-row:nth-child(even) {
+  background-color: var(--sidebar-bg);
+}
+
+.holdings-table-row:nth-child(odd):hover {
+  background-color: var(--sidebar-active-item);
+}
+
+.holdings-table-row {
+  border-bottom: 1px solid var(--shadow);
+}
+
+.loss {
+  color: var(--light-red);
+}
+
+.gain {
+  color: var(--light-green);
+}
+
+.loading {
+  color: #94a3b8;
+  font-size: 0.95rem;
+}

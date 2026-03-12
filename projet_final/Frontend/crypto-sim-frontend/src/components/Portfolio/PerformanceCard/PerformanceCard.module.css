@@ -1,29 +1,28 @@
-.portfolio-chart {
+.performance-card {
   background: var(--widget-bg);
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 4px 24px var(--shadow);
   border: 2px solid var(--light-gray);
-  max-width: 500px;
 }
 
-.portfolio-chart__title {
+.performance-card__title {
   font-size: 1.25rem;
   font-weight: 600;
   color: #f1f5f9;
   letter-spacing: -0.01em;
 }
 
-.portfolio-chart__container {
-  position: relative;
-  height: 300px;
-}
-
-.portfolio-chart__message {
+.performance-card__message {
   color: #94a3b8;
   font-size: 0.95rem;
 }
 
-.portfolio-chart__error {
+.performance-card__gain {
+  color: var(--light-green);
+}
+
+.performance-card__loss,
+.performance-card__error {
   color: var(--light-red);
 }

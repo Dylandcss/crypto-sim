@@ -12,19 +12,15 @@ function Sidebar() {
       <nav className={styles['sidebar-nav']}>
         <NavLink
           to="/market"
-          className={({ isActive }) =>
-            `${styles['sidebar-link']} ${isActive ? styles.active : ''}`
-          }
+          className={({ isActive }) => `${styles['sidebar-link']} ${isActive ? styles.active : ''}`}
         >
-          Market
+          Marché
         </NavLink>
         <NavLink
           to="/portfolio"
-          className={({ isActive }) =>
-            `${styles['sidebar-link']} ${isActive ? styles.active : ''}`
-          }
+          className={({ isActive }) => `${styles['sidebar-link']} ${isActive ? styles.active : ''}`}
         >
-          Portfolio
+          Portefeuille
         </NavLink>
       </nav>
     </aside>

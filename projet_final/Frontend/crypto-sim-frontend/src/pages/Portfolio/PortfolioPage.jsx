@@ -3,16 +3,18 @@ import PortfolioChart from '../../components/Portfolio/PortfolioChart/PortfolioC
 import PortfolioSummary from '../../components/Portfolio/PortfolioSummary/PortfolioSummary'
 import TransactionHistory from '../../components/Portfolio/TransactionHistory/TransactionHistory'
 import PerformanceCard from '../../components/Portfolio/PerformanceCard/PerformanceCard'
+import styles from './PortfolioPage.module.css'
 
 function PortfolioPage() {
   return (
-    <div className="portfolio-page">
-      <h1>Portfolio Page</h1>
-      <PortfolioSummary />
+    <div className={styles['portfolio-page']}>
+      <div className={styles['portfolio-page__flex']}>
+        <PortfolioSummary />
+        <PerformanceCard />
+        <PortfolioChart />
+      </div>
       <HoldingsList />
       <TransactionHistory />
-      <PortfolioChart />
-      <PerformanceCard />
     </div>
   )
 }
