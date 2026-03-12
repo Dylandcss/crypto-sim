@@ -36,6 +36,12 @@ public class PortfolioRepository : IPortfolioRepository
         await _context.SaveChangesAsync();
     }
 
+    public async Task DeleteHoldingAsync(Holding holding)
+    {
+        _context.Holdings.Remove(holding);
+        await _context.SaveChangesAsync();
+    }
+
     public async Task<List<Transaction>> GetUserTransactionsAsync(int userId)
     {
         return await _context.Transactions

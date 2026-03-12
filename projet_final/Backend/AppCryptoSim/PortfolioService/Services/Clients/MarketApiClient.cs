@@ -10,15 +10,18 @@ public class MarketApiClient : BaseApiClient
         : base(httpClient, logger, config[EnvConstants.MarketServiceUrl]!) 
     { }
 
-    public async Task<decimal> GetCryptoPriceAsync(string symbol, string token)
+    public async Task<MarketApiResponseDto> GetCryptoAsync(string symbol, string token)
     {
         var cryptoResponseDto = await GetAsync<MarketApiResponseDto>($"api/market/cryptos/{symbol}", token);
-        return cryptoResponseDto?.CurrentPrice ?? 0;
+        if (cryptoResponseDto != null)
+            return new MarketApiResponseDto(cryptoResponseDto.Symbol, cryptoResponseDto.Name,
+                cryptoResponseDto.CurrentPrice);
+        return new MarketApiResponseDto(symbol, "Unknown", 0m);
     }
-
-    public async Task<List<MarketApiResponseDto>> GetCryptosPricesAsync(string token)
+    
+    public async Task<List<MarketApiResponseDto>> GetCryptosAsync(string token)
     {
         var cryptosResponse = await GetAsync<List<MarketApiResponseDto>>("api/market/cryptos", token);
-        return cryptosResponse ?? [];
+        return cryptosResponse ?? new List<MarketApiResponseDto>();
     }
 }
