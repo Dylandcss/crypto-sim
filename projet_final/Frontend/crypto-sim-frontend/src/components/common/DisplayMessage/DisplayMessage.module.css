@@ -1,0 +1,57 @@
+.messageBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  box-shadow: 0 2px 8px var(--shadow);
+
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.text {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 0 0 1rem;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  color: inherit;
+}
+
+.closeBtn:hover {
+  opacity: 1;
+}
+
+.info {
+  background-color: var(--light-blue);
+}
+
+.success {
+  background-color: var(--light-green);
+}
+
+.warning {
+  background-color: var(--light-orange);
+}
+
+.error {
+  background-color: var(--light-red);
+}

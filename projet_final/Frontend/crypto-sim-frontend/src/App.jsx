@@ -11,6 +11,7 @@ function App() {
     <Routes>
       {/* Routes publiques */}
       <Route path="/" element={<LoginPage />} />
+      <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
 
       {/* ici on va mettre les routes protégées !!!! */}

@@ -3,11 +3,14 @@ import styles from './LoginForm.module.css'
 import { login } from '../../../services/authService'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../context/AuthContext'
+import DisplayMessage from '../../common/DisplayMessage/DisplayMessage'
+import Loader from '../../common/Loader/Loader'
 
 function LoginForm() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
   const message = location.state?.message || ''
@@ -23,19 +26,22 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+    setLoading(true)
     try {
       const data = await login(username, password)
       loginUser(data)
       navigate('/market')
     } catch (error) {
       setError(error.message)
+    } finally {
+      setLoading(false)
     }
   }
 
   return (
     <>
-      {error && <div className={styles['login-error']}>{error}</div>}
-      {message && <div className={styles['register-message']}>{message}</div>}
+      {error && <DisplayMessage type="error" message={error} onClose={() => setError('')} />}
+      {message && <DisplayMessage type="success" message={message} />}
       <form className={styles['login-form']} onSubmit={handleSubmit}>
         <h2>Connexion</h2>
         <input
@@ -52,7 +58,11 @@ function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Se connecter</button>
+        {loading ? (
+          <Loader message="" />
+        ) : (
+          <button type="submit">Se connecter</button>
+        )}
       </form>
     </>
   )
