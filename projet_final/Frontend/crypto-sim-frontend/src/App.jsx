@@ -5,6 +5,7 @@ import MarketPage from './pages/Market/MarketPage.jsx'
 import PortfolioPage from './pages/Portfolio/PortfolioPage.jsx'
 import HoldingDetails from './pages/Portfolio/HoldingDetails/HoldingDetails.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
+import ProfilPage from './pages/Profil/ProfilPage.jsx'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route element={<ProtectedRoute />}>
         <Route path="/market" element={<MarketPage />} />
         <Route path="/portfolio" element={<PortfolioPage />} />
+        <Route path="/profil" element={<ProfilPage />} />
         <Route path="/portfolio/holdings/:symbol" element={<HoldingDetails />} />
       </Route>
     </Routes>
