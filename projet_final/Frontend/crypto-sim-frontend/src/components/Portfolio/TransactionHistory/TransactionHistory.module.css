@@ -1,0 +1,44 @@
+.transactionHistory {
+  padding: 20px;
+  background: var(--widget-bg);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 24px var(--shadow);
+  border: 2px solid var(--light-gray);
+}
+
+.transactionTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transactionTableHeader {
+  background-color: var(--shadow);
+}
+
+.transactionTableHeaderRow {
+  font-weight: bold;
+}
+
+.transactionTableBody tr:nth-child(even) {
+  background-color: var(--sidebar-bg);
+}
+
+.transactionRow:hover {
+  background-color: var(--sidebar-active-item);
+}
+
+.transactionTable th,
+.transactionTable td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.Buy {
+  color: var(--light-green);
+}
+
+.Sell {
+  color: var(--light-red);
+}

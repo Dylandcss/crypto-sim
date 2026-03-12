@@ -27,7 +27,7 @@ const chartOptions = {
       position: 'right',
       labels: {
         color: '#e2e8f0',
-        font: { size: 13, weight: '500' },
+        font: { family: "'VCR_OSD', 'Pixelify Sans', sans-serif", size: 13, weight: '500' },
         padding: 16,
         usePointStyle: true,
         pointStyleWidth: 12,
@@ -40,6 +40,8 @@ const chartOptions = {
       borderColor: '#334155',
       borderWidth: 1,
       padding: 12,
+      titleFont: { family: "'VCR_OSD', 'Pixelify Sans', sans-serif" },
+      bodyFont: { family: "'VCR_OSD', 'Pixelify Sans', sans-serif" },
       callbacks: {
         label: (ctx) => {
           const total = ctx.dataset.data.reduce((a, b) => a + b, 0)

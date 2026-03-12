@@ -1,35 +1,36 @@
-.portfolio-chart {
+.performance-card {
   background: var(--widget-bg);
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 4px 24px var(--shadow);
   border: 2px solid var(--light-gray);
-  max-width: 500px;
 }
 
-.portfolio-chart__title {
-  margin: 0 0 20px;
+.performance-card__title {
   font-size: 1.25rem;
   font-weight: 600;
   color: #f1f5f9;
   letter-spacing: -0.01em;
 }
 
-.portfolio-chart__container {
-  position: relative;
-  height: 300px;
-}
-
-.portfolio-chart__message {
+.performance-card__message {
   color: #94a3b8;
   font-size: 0.95rem;
   text-align: center;
   padding: 48px 0;
 }
 
-.portfolio-chart__error {
+.performance-card__error {
   color: #f87171;
   font-size: 0.95rem;
   text-align: center;
   padding: 48px 0;
+}
+
+.performance-card__gain {
+  color: var(--light-green);
+}
+
+.performance-card__loss {
+  color: var(--light-red);
 }

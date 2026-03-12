@@ -1,18 +1,19 @@
 import { getTransactionsHistory } from '../../../services/portfolioService'
 import useFetch from '../../../hooks/useFetch'
+import styles from './TransactionHistory.module.css'
 
 function TransactionHistory() {
   const { data: transactionHistory, loading, error } = useFetch(getTransactionsHistory)
 
   return (
-    <div>
+    <div className={styles['transactionHistory']}>
       <h2>Historique des transactions</h2>
       {loading && <p>Chargement...</p>}
       {error && <p>Erreur: {error}</p>}
       {!loading && !error && (
-        <table>
-          <thead>
-            <tr>
+        <table className={styles['transactionTable']}>
+          <thead className={styles['transactionTableHeader']}>
+            <tr className={styles['transactionTableHeaderRow']}>
               <th>Crypto</th>
               <th>Quantité</th>
               <th>Type</th>
@@ -21,14 +22,16 @@ function TransactionHistory() {
               <th>Exécuté le</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className={styles['transactionTableBody']}>
             {(transactionHistory ?? []).map((tx) => (
-              <tr key={tx.id}>
+              <tr key={tx.id} className={styles['transactionRow']}>
                 <td>{tx.cryptoSymbol}</td>
                 <td>{tx.quantity}</td>
-                <td>{tx.type}</td>
-                <td>${tx.priceAtTime.toFixed(2)}</td>
-                <td>${tx.total.toFixed(2)}</td>
+                <td className={tx.type === 'Buy' ? styles['Buy'] : styles['Sell']}>
+                  {tx.type == 'Buy' ? 'Achat' : 'Vente'}
+                </td>
+                <td>${tx.priceAtTime}</td>
+                <td>${tx.total}</td>
                 <td>{new Date(tx.executedAt).toLocaleString()}</td>
               </tr>
             ))}
