@@ -31,7 +31,8 @@ public class PortfolioManagementService : IPortfolioManagementService
         var holdingDetails = new List<HoldingDetail>();
 
         var balance = await _authApiClient.GetUserBalance(token);
-        var marketCryptoPrices = await _marketApiClient.GetCryptosPricesAsync(token);
+        var cryptos = await _marketApiClient.GetCryptosAsync(token);
+        
 
         // Calcul basé sur les transactions
         decimal totalBought = transactions
@@ -48,7 +49,7 @@ public class PortfolioManagementService : IPortfolioManagementService
 
         foreach (var holding in holdings)
         {
-            var currentPrice = marketCryptoPrices.FirstOrDefault(c => c.Symbol == holding.CryptoSymbol)?.CurrentPrice ?? 0m;
+            var currentPrice = cryptos.FirstOrDefault(c => c.Symbol == holding.CryptoSymbol)?.CurrentPrice ?? 0m;
 
             var currentValue = currentPrice * holding.Quantity;
             var invested = holding.AverageBuyPrice * holding.Quantity;
@@ -99,12 +100,12 @@ public class PortfolioManagementService : IPortfolioManagementService
         var holdings = await _repository.GetUserHoldingsAsync(userId);
         var result = new List<HoldingDetail>();
 
-        var marketCryptoPrices = await _marketApiClient.GetCryptosPricesAsync(token);
+        var cryptos = await _marketApiClient.GetCryptosAsync(token);
 
         foreach (var holding in holdings)
         {
-            var price = marketCryptoPrices.FirstOrDefault(c => c.Symbol == holding.CryptoSymbol)?.CurrentPrice ?? 0m;
-
+            var price = cryptos.FirstOrDefault(c => c.Symbol == holding.CryptoSymbol)?.CurrentPrice ?? 0m;
+            var name = cryptos.FirstOrDefault(c => c.Symbol == holding.CryptoSymbol)?.Name ?? holding.CryptoSymbol;
             var currentValue = price * holding.Quantity;
             var gainLoss = (price - holding.AverageBuyPrice) * holding.Quantity;
 
@@ -112,7 +113,7 @@ public class PortfolioManagementService : IPortfolioManagementService
 
             result.Add(new HoldingDetail(
                 holding.CryptoSymbol,
-                holding.CryptoSymbol,
+                name,
                 holding.Quantity,
                 holding.AverageBuyPrice,
                 price,
@@ -130,14 +131,14 @@ public class PortfolioManagementService : IPortfolioManagementService
         var holding = await _repository.GetHoldingAsync(userId, symbol);
         if (holding == null) throw new NotFoundException("Holding not found");
         
-        var price = await _marketApiClient.GetCryptoPriceAsync(holding.CryptoSymbol, token);
+        var (_, name, price) = await _marketApiClient.GetCryptoAsync(holding.CryptoSymbol, token);
         var currentValue = price * holding.Quantity;
         var gainLoss = (price - holding.AverageBuyPrice) * holding.Quantity;
         var gainLossPercent = holding.AverageBuyPrice == 0
             ? 0
             : ((price - holding.AverageBuyPrice) / holding.AverageBuyPrice) * 100;
         
-        return new HoldingDetail(holding.CryptoSymbol, holding.CryptoSymbol, holding.Quantity, holding.AverageBuyPrice, price, currentValue, gainLoss, gainLossPercent);
+        return new HoldingDetail(holding.CryptoSymbol, name, holding.Quantity, holding.AverageBuyPrice, price, currentValue, gainLoss, gainLossPercent);
     }
 
     public async Task<List<TransactionDto>> GetTransactionsAsync(int userId)
