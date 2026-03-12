@@ -9,13 +9,13 @@ function PortfolioSummary() {
 
   return (
     <div className="portfolio-summary">
-      <h2>Portfolio Summary</h2>
-      <p>Cash Balance : ${summary.cashBalance}</p>
-      <p>Total invested : ${summary.totalInvested}</p>
-      <p>Current Value: ${summary.totalCurrentValue}</p>
-      <p>Total Gain/Loss: ${summary.totalGainLoss}</p>
-      <p>Percent Gain/Loss: {summary.totalGainLossPercent.toFixed(2)}%</p>
-      <p>Number of Assets: {summary.holdings.length}</p>
+      <h2>Résumé du portefeuille</h2>
+      <p>Argent disponible : ${summary.cashBalance}</p>
+      <p>Total investi : ${summary.totalInvested}</p>
+      <p>Valeur actuelle: ${summary.totalCurrentValue}</p>
+      <p>Total Gain/Perte: ${summary.totalGainLoss}</p>
+      <p>Pourcentage Gain/Perte: {summary.totalGainLossPercent.toFixed(2)}%</p>
+      <p>Nombre d'actifs: {summary.holdings.length}</p>
     </div>
   )
 }

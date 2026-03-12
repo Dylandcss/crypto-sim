@@ -7,8 +7,10 @@ function PerformanceCard() {
   return (
     <div className="performance-card">
       <h2 className="performance-card__title">Performance du portfolio</h2>
-      {loading && <p className="performance-card__message">Loading performance data…</p>}
-      {error && <p className="performance-card__error">Error: {error}</p>}
+      {loading && (
+        <p className="performance-card__message">Chargement des données de performance…</p>
+      )}
+      {error && <p className="performance-card__error">Erreur: {error}</p>}
       {!loading && !error && performanceData && (
         <div className="performance-card__data">
           <p>Total investi : ${performanceData.totalInvested}</p>

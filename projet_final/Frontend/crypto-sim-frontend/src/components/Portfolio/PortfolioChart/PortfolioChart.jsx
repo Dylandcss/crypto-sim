@@ -74,7 +74,7 @@ function PortfolioChart() {
     return (
       <div className={styles['portfolio-chart']}>
         <h2 className={styles['portfolio-chart__title']}>Répartition du portfolio</h2>
-        <p className={styles['portfolio-chart__message']}>Loading chart…</p>
+        <p className={styles['portfolio-chart__message']}>Chargement du graphique…</p>
       </div>
     )
   }
@@ -83,7 +83,7 @@ function PortfolioChart() {
     return (
       <div className={styles['portfolio-chart']}>
         <h2 className={styles['portfolio-chart__title']}>Répartition du portfolio</h2>
-        <p className={styles['portfolio-chart__error']}>Error: {error}</p>
+        <p className={styles['portfolio-chart__error']}>Erreur: {error}</p>
       </div>
     )
   }
@@ -92,7 +92,7 @@ function PortfolioChart() {
     return (
       <div className={styles['portfolio-chart']}>
         <h2 className={styles['portfolio-chart__title']}>Répartition du portfolio</h2>
-        <p className={styles['portfolio-chart__message']}>No holdings to display.</p>
+        <p className={styles['portfolio-chart__message']}>Aucun actif à afficher.</p>
       </div>
     )
   }

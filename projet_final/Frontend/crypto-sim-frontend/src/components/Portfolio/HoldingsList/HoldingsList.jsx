@@ -7,20 +7,20 @@ function HoldingsList() {
 
   return (
     <div>
-      <h2>Holdings List</h2>
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
+      <h2>Liste des actifs</h2>
+      {loading && <p>Chargement...</p>}
+      {error && <p>Erreur: {error}</p>}
       {!loading && !error && (
         <table>
           <thead>
             <tr>
-              <th>Symbol</th>
-              <th>Quantity</th>
-              <th>Average Buy Price</th>
-              <th>Current Price</th>
-              <th>Total Value</th>
-              <th>Gain/Loss</th>
-              <th>Gain/Loss Percent</th>
+              <th>Crypto</th>
+              <th>Quantité</th>
+              <th>Prix d'achat moyen</th>
+              <th>Prix actuel</th>
+              <th>Valeur totale</th>
+              <th>Gain/Perte</th>
+              <th>Pourcentage de gain/perte</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -35,7 +35,7 @@ function HoldingsList() {
                 <td>${holding.gainLoss}</td>
                 <td>{holding.gainLossPercent.toFixed(2)}%</td>
                 <td>
-                  <Link to={`/portfolio/holdings/${holding.symbol}`}>View Details</Link>
+                  <Link to={`/portfolio/holdings/${holding.symbol}`}>Voir les détails</Link>
                 </td>
               </tr>
             ))}

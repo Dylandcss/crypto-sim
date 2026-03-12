@@ -6,19 +6,19 @@ function TransactionHistory() {
 
   return (
     <div>
-      <h2>Transaction History</h2>
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
+      <h2>Historique des transactions</h2>
+      {loading && <p>Chargement...</p>}
+      {error && <p>Erreur: {error}</p>}
       {!loading && !error && (
         <table>
           <thead>
             <tr>
-              <th>Symbol</th>
-              <th>Quantity</th>
+              <th>Crypto</th>
+              <th>Quantité</th>
               <th>Type</th>
-              <th>Price at Time</th>
+              <th>Prix au moment de l'exécution</th>
               <th>Total</th>
-              <th>Executed At</th>
+              <th>Exécuté le</th>
             </tr>
           </thead>
           <tbody>
