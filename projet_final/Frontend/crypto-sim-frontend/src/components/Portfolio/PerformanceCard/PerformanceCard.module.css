@@ -16,21 +16,13 @@
 .performance-card__message {
   color: #94a3b8;
   font-size: 0.95rem;
-  text-align: center;
-  padding: 48px 0;
-}
-
-.performance-card__error {
-  color: #f87171;
-  font-size: 0.95rem;
-  text-align: center;
-  padding: 48px 0;
 }
 
 .performance-card__gain {
   color: var(--light-green);
 }
 
-.performance-card__loss {
+.performance-card__loss,
+.performance-card__error {
   color: var(--light-red);
 }

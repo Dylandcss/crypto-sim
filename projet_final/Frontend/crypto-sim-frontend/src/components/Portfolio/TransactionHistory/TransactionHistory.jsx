@@ -8,8 +8,10 @@ function TransactionHistory() {
   return (
     <div className={styles['transactionHistory']}>
       <h2>Historique des transactions</h2>
-      {loading && <p>Chargement...</p>}
-      {error && <p>Erreur: {error}</p>}
+      {loading && (
+        <p className={styles['loading']}>Chargement de l'historique des transactions...</p>
+      )}
+      {error && <p className={styles['error']}>Erreur: {error}</p>}
       {!loading && !error && (
         <table className={styles['transactionTable']}>
           <thead className={styles['transactionTableHeader']}>

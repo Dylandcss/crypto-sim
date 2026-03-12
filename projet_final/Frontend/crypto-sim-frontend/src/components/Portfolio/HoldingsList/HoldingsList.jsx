@@ -9,7 +9,7 @@ function HoldingsList() {
   return (
     <div className={styles['holdings-list']}>
       <h2>Liste des actifs</h2>
-      {loading && <p>Chargement...</p>}
+      {loading && <p className={styles['loading']}>Chargement de la liste des actifs...</p>}
       {error && <p className={styles['error']}>Erreur: {error}</p>}
       {!loading && !error && (
         <table className={styles['holdings-table']}>
