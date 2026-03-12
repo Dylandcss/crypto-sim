@@ -3,6 +3,5 @@
 public record MarketApiResponseDto
 (
     string Symbol,
-    string Name,
     decimal CurrentPrice
 );

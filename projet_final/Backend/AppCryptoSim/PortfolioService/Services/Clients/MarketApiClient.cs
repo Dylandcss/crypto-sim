@@ -1,6 +1,6 @@
 ﻿using CryptoSim.Shared.Clients;
 using CryptoSim.Shared.Constants;
-using OrderService.Dtos.Clients;
+using PortfolioService.Dtos.Clients;
 
 namespace PortfolioService.Services.Clients;
 
