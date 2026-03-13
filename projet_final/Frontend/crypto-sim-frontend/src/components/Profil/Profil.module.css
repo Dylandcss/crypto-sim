@@ -1,0 +1,44 @@
+.profil-page {
+  height: 80vh;
+  display: grid;
+  place-items: center;
+  background: var(--main-bg);
+}
+
+.profil-info {
+  background: var(--widget-bg);
+  border-radius: var(--radius-lg);
+  padding: 40px 50px;
+  width: 600px;
+  box-shadow: var(--shadow-lg);
+  border: var(--border-thick);
+  text-align: left;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column; /* label au-dessus de la value */
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  background-color: var(--main-bg);
+  border: var(--border-thick);
+}
+
+/* label plus visible */
+.label {
+  font-weight: bold;
+  font-size: var(--font-size-sm);
+  color: var(--light-blue);
+  margin-bottom: var(--spacing-xs); /* espace avec la valeur */
+  text-transform: uppercase; /* optionnel : label en majuscule */
+}
+
+/* valeur */
+.value {
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
+}

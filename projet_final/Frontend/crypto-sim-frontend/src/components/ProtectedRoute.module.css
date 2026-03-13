@@ -13,5 +13,5 @@
 
 .app-content {
   flex: 1;
-  padding: 24px 28px;
+  padding: var(--spacing-lg) var(--spacing-lg);
 }

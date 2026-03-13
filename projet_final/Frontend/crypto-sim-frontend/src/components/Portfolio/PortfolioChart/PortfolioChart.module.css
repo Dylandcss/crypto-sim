@@ -1,16 +1,16 @@
 .portfolio-chart {
   background: var(--widget-bg);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 4px 24px var(--shadow);
-  border: 2px solid var(--light-gray);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-lg);
+  border: var(--border-thick);
   max-width: 500px;
 }
 
 .portfolio-chart__title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #f1f5f9;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
   letter-spacing: -0.01em;
 }
 
@@ -20,8 +20,8 @@
 }
 
 .portfolio-chart__message {
-  color: #94a3b8;
-  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
 }
 
 .portfolio-chart__error {

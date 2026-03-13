@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@microsoft/signalr": "^10.0.0",
+    "@nsmr/pixelart-react": "^2.0.0",
     "chart.js": "^4.4.3",
     "react": "^19.2.0",
     "react-chartjs-2": "^5.3.1",

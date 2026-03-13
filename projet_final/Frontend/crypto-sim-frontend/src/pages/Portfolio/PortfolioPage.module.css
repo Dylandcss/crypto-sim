@@ -1,12 +1,12 @@
 .portfolio-page {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--spacing-lg);
 }
 
 .portfolio-page__flex {
   display: flex;
-  gap: 24px;
+  gap: var(--spacing-lg);
   flex-wrap: wrap;
   justify-content: space-between;
 }

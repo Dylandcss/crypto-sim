@@ -2,30 +2,36 @@ import { useState } from 'react'
 import styles from './RegisterForm.module.css'
 import { register } from '../../../services/authService'
 import { useNavigate } from 'react-router-dom'
+import DisplayMessage from '../../common/DisplayMessage/DisplayMessage'
+import Loader from '../../common/Loader/Loader'
 
 function RegisterForm() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+    setLoading(true)
     try {
       await register(username, email, password)
-      navigate('/', {
+      navigate('/login', {
         state: { message: 'Inscription réussie, veuillez vous connecter.' },
       })
     } catch (error) {
       setError(error.message)
+    } finally {
+      setLoading(false)
     }
   }
 
   return (
     <>
-      {error && <div className={styles['register-error']}>{error}</div>}
+      {error && <DisplayMessage type="error" message={error} onClose={() => setError('')} />}
       <form className={styles['register-form']} onSubmit={handleSubmit}>
         <h2>Inscription</h2>
         <input
@@ -49,7 +55,11 @@ function RegisterForm() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">S'inscrire</button>
+        {loading ? (
+          <Loader message="" />
+        ) : (
+          <button type="submit">S'inscrire</button>
+        )}
       </form>
     </>
   )

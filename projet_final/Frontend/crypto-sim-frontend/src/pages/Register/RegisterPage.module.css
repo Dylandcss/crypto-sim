@@ -7,17 +7,17 @@
 
 .register-card {
   background: var(--widget-bg);
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   padding: 50px;
   width: 460px;
-  box-shadow: 0 8px 32px var(--shadow);
+  box-shadow: var(--shadow-lg);
   text-align: center;
-  border: 1px solid var(--sidebar-active-item);
+  border: var(--border-thick);
 }
 
 .register-card h1 {
   margin-bottom: 30px;
   color: var(--light-blue);
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
 }

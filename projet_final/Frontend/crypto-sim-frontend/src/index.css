@@ -1,7 +1,4 @@
-@font-face {
-    font-family: 'VCR_OSD';
-    src: local('VCR_OSD'), url('./assets/VCR_OSD_MONO_1.001.ttf') format('truetype');
-}
+@import url('./styles/variables.css');
 
 * {
     margin: 0;
@@ -10,33 +7,19 @@
 }
 
 :root {
-    font-family: 'VCR_OSD', 'Pixelify Sans', system-ui, Avenir, Helvetica, Arial, sans-serif;
-    font-size: 18px;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
     line-height: 1.5;
-    font-weight: 400;
+    font-weight: var(--font-weight-regular);
 
     color-scheme: dark;
-    color: rgba(255, 255, 255, 0.87);
+    color: var(--text-primary);
     background-color: var(--main-bg);
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    --sidebar-bg: #191434;
-    --main-bg: #181B24;
-    --widget-bg: #2E2F3B;
-    --sidebar-active-item: #3D3D63;
-    --light-blue: #79ABDE;
-    --mid-green: #3EBB7C;
-    --light-orange: #FA942B;
-    --light-red: #B16361;
-    --light-green: #6ECD85;
-    --light-purple: #9B59B6;
-    --light-yellow: #F1C40F;
-    --light-gray: #9798A5;
-    --shadow: #060817;
 }
 
 a {
