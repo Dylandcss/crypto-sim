@@ -2,11 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 1rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-  box-shadow: 0 2px 8px var(--shadow);
-
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  margin: var(--spacing-md) 0;
+  box-shadow: var(--shadow-sm);
 }
 
 .content {
@@ -14,25 +13,25 @@
 }
 
 .title {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.1rem;
-  font-weight: 600;
+  margin: 0 0 var(--spacing-sm) 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
 }
 
 .text {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: var(--font-size-sm);
   line-height: 1.5;
 }
 
 .closeBtn {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: var(--font-size-xl);
   cursor: pointer;
-  padding: 0 0 0 1rem;
+  padding: 0 0 0 var(--spacing-md);
   opacity: 0.6;
-  transition: opacity 0.2s;
+  transition: opacity var(--transition-fast);
   color: inherit;
 }
 

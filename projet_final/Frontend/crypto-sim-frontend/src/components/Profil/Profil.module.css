@@ -7,38 +7,38 @@
 
 .profil-info {
   background: var(--widget-bg);
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   padding: 40px 50px;
   width: 600px;
-  box-shadow: 0 8px 32px var(--shadow);
-  border: 1px solid var(--sidebar-active-item);
+  box-shadow: var(--shadow-lg);
+  border: var(--border-thick);
   text-align: left;
 
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: var(--spacing-md);
 }
 
 .info-row {
   display: flex;
   flex-direction: column; /* label au-dessus de la value */
-  padding: 12px 15px;
-  border-radius: 10px;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
   background-color: var(--main-bg);
-  border: 1px solid var(--sidebar-active-item);
+  border: var(--border-thick);
 }
 
 /* label plus visible */
 .label {
   font-weight: bold;
-  font-size: 0.9rem;
-  color: #79abde;
-  margin-bottom: 4px; /* espace avec la valeur */
+  font-size: var(--font-size-sm);
+  color: var(--light-blue);
+  margin-bottom: var(--spacing-xs); /* espace avec la valeur */
   text-transform: uppercase; /* optionnel : label en majuscule */
 }
 
 /* valeur */
 .value {
-  font-size: 1.1rem;
-  color: var(--text-color);
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
 }

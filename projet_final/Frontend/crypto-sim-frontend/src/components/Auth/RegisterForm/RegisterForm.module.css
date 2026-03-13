@@ -6,14 +6,14 @@
 
 .register-form input {
   padding: 14px;
-  border-radius: 12px;
-  border: 1px solid var(--sidebar-active-item);
+  border-radius: var(--radius-lg);
+  border: var(--border-thick);
   outline: none;
   background: var(--main-bg);
-  color: #fff;
-  font-size: 1rem;
+  color: var(--text-primary);
+  font-size: var(--font-size-md);
   font-family: inherit;
-  transition: 0.3s;
+  transition: var(--transition-normal);
 }
 
 .register-form input::placeholder {
@@ -22,20 +22,20 @@
 
 .register-form input:focus {
   border-color: var(--light-blue);
-  box-shadow: 0 0 8px var(--shadow);
+  box-shadow: var(--shadow-md);
 }
 
 .register-form button {
   padding: 14px;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   background: var(--light-blue);
   color: var(--main-bg);
-  font-weight: bold;
-  font-size: 1rem;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-md);
   font-family: inherit;
   cursor: pointer;
-  transition: 0.3s;
+  transition: var(--transition-normal);
   margin-top: 20px;
 }
 
@@ -46,12 +46,12 @@
 }
 
 .register-form h2 {
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .register-error {
   background: var(--light-red);
-  color: #fff;
+  color: var(--text-primary);
   padding: 10px;
   text-align: center;
   border-radius: 15px;

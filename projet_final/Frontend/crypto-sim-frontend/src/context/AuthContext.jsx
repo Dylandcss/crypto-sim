@@ -25,10 +25,7 @@ export function AuthProvider({ children }) {
     setIsLoading(false)
   }, [])
 
-  /**
-   * Appelé après un login réussi.
-   * @param {object} data : reponse du backend 
-   */
+  // On enregistre les infos après un login OK
   const loginUser = (data) => {
     const userData = {
       username: data.username,
