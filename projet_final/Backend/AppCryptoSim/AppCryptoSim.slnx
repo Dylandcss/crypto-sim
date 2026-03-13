@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Éléments de solution/">
     <File Path=".env" />
+    <File Path="compose.yaml" />
   </Folder>
   <Project Path="AuthService/AuthService.csproj" />
   <Project Path="CryptoSim.Shared/CryptoSim.Shared.csproj" Id="fbd4865e-7c95-438d-a6f1-d29c8003f106" />

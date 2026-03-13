@@ -1,0 +1,109 @@
+﻿services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: formation
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pformation"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  efmigrator:
+    build:
+      context: .
+      dockerfile: Dockerfile.migrator
+    env_file:
+      - .env.docker
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  authservice:
+    build:
+      context: .
+      dockerfile: AuthService/Dockerfile
+    env_file:
+      - .env.docker
+    environment:
+      ASPNETCORE_URLS: http://0.0.0.0:5001
+    expose:
+      - "5001"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      efmigrator:
+        condition: service_completed_successfully
+
+  marketservice:
+    build:
+      context: .
+      dockerfile: MarketService/Dockerfile
+    env_file:
+      - .env.docker
+    environment:
+      ASPNETCORE_URLS: http://0.0.0.0:5002
+    expose:
+      - "5002"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      efmigrator:
+        condition: service_completed_successfully
+
+  portfolioservice:
+    build:
+      context: .
+      dockerfile: PortfolioService/Dockerfile
+    env_file:
+      - .env.docker
+    environment:
+      ASPNETCORE_URLS: http://0.0.0.0:5003
+    expose:
+      - "5003"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      efmigrator:
+        condition: service_completed_successfully
+
+  orderservice:
+    build:
+      context: .
+      dockerfile: OrderService/Dockerfile
+    env_file:
+      - .env.docker
+    environment:
+      ASPNETCORE_URLS: http://0.0.0.0:5004
+    expose:
+      - "5004"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      efmigrator:
+        condition: service_completed_successfully
+
+  gateway:
+    build:
+      context: .
+      dockerfile: Gateway/Dockerfile
+    env_file:
+      - .env.docker
+    environment:
+      ASPNETCORE_URLS: http://0.0.0.0:5000
+    ports:
+      - "5000:5000"
+    depends_on:
+      authservice:
+        condition: service_started
+      marketservice:
+        condition: service_started
+      orderservice:
+        condition: service_started
+      portfolioservice:
+        condition: service_started
+
+volumes:
+  mysql_data: {}

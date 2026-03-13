@@ -1,0 +1,18 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0
+
+# On installe les outils UNE SEULE FOIS lors du build
+RUN apt-get update && apt-get install -y default-mysql-client \
+    && dotnet tool install --global dotnet-ef
+
+# On configure le PATH pour que 'dotnet-ef' soit reconnu
+ENV PATH="$PATH:/root/.dotnet/tools"
+
+WORKDIR /src
+# On copie les fichiers de projet pour pouvoir compiler les migrations
+COPY . .
+
+# On rend le script de démarrage exécutable (on va le créer juste après)
+COPY migrate.sh /migrate.sh
+RUN chmod +x /migrate.sh
+
+ENTRYPOINT ["/bin/bash", "/migrate.sh"]
