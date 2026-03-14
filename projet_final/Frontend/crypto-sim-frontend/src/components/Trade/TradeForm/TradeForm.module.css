@@ -1,0 +1,159 @@
+.tradeForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.balanceInfo {
+  padding: var(--spacing-sm);
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-md);
+}
+
+.infoLine {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-sm);
+  margin-bottom: 4px;
+}
+
+.infoLine:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  color: var(--text-primary);
+}
+
+.value {
+  color: var(--text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.inputGroup label {
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputWrapper input {
+  width: 100%;
+  background: var(--main-bg);
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  padding-right: 60px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-lg);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.inputWrapper input:focus {
+  border-color: var(--light-blue);
+}
+
+.symbolSuffix {
+  position: absolute;
+  right: 16px;
+  color: var(--text-muted);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+  pointer-events: none;
+}
+
+.summary {
+  padding: var(--spacing-md);
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.summaryLine {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: var(--font-size-sm);
+}
+
+.summaryLine:last-child {
+  margin-bottom: 0;
+}
+
+.totalValue {
+  color: var(--light-blue);
+  font-size: var(--font-size-md);
+}
+
+.messageBox {
+  margin-top: var(--spacing-sm);
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
+.tradeButton {
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: var(--border-thick);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: var(--shadow-retro);
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.tradeButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.tradeButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.tradeButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.buyButton {
+  background: var(--light-green);
+  color: #0d2c16;
+}
+
+.sellButton {
+  background: var(--light-red);
+  color: #3b0d0d;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}

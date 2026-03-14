@@ -33,7 +33,10 @@
 }
 
 .sidebar-link {
-  padding: 10px var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 12px var(--spacing-md);
   border-radius: var(--radius-md);
   color: var(--text-muted);
   text-decoration: none;
@@ -51,3 +54,4 @@
   color: var(--text-primary);
   background: var(--sidebar-active-item);
 }
+

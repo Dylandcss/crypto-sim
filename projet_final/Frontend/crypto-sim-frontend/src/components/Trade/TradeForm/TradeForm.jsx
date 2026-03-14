@@ -1,0 +1,130 @@
+import { useState, useEffect } from 'react';
+import { useAuth } from '../../../context/AuthContext';
+import { getHoldingDetails } from '../../../services/portfolioService';
+import { placeOrder } from '../../../services/orderService';
+import { formatPrice, formatBalance } from '../../../utils/formatters';
+import Loader from '../../common/Loader/Loader';
+import DisplayMessage from '../../common/DisplayMessage/DisplayMessage';
+import styles from './TradeForm.module.css';
+
+const TradeForm = ({ symbol, currentPrice }) => {
+  const { user, refreshUser } = useAuth();
+  const [quantity, setQuantity] = useState('');
+  const [holding, setHolding] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState(null);
+
+  useEffect(() => {
+    fetchHolding();
+  }, [symbol]);
+
+  const fetchHolding = async () => {
+    try {
+      const data = await getHoldingDetails(symbol);
+      setHolding(data);
+    } catch (err) {
+      setHolding({ quantity: 0 });
+    }
+  };
+
+  const handleTrade = async (type) => {
+    if (!quantity || isNaN(quantity) || quantity <= 0) {
+      setMessage({ type: 'error', text: 'Veuillez saisir une quantité valide.' });
+      return;
+    }
+
+    const totalCost = quantity * currentPrice;
+    if (type === 'Buy' && totalCost > user.balance) {
+      setMessage({ type: 'error', text: 'Solde insuffisant.' });
+      return;
+    }
+
+    if (type === 'Sell' && (!holding || quantity > holding.quantity)) {
+      setMessage({ type: 'error', text: 'Quantité insuffisante dans votre portefeuille.' });
+      return;
+    }
+
+    setIsSubmitting(true);
+    setMessage(null);
+
+    try {
+      await placeOrder(symbol, parseFloat(quantity), type);
+      setMessage({ type: 'success', text: `Ordre de ${type === 'Buy' ? 'achat' : 'vente'} réussi !` });
+      setQuantity('');
+      await Promise.all([refreshUser(), fetchHolding()]);
+    } catch (err) {
+      setMessage({ type: 'error', text: err.message });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const total = quantity ? parseFloat(quantity) * currentPrice : 0;
+
+  return (
+    <div className={styles.tradeForm}>
+      <div className={styles.balanceInfo}>
+        <div className={styles.infoLine}>
+          <span className={styles.label}>Solde:</span>
+          <span className={styles.value}>{formatBalance(user?.balance)}</span>
+        </div>
+        <div className={styles.infoLine}>
+          <span className={styles.label}>Détenu:</span>
+          <span className={styles.value}>{holding?.quantity ?? 0} {symbol}</span>
+        </div>
+      </div>
+
+      <div className={styles.inputGroup}>
+        <label htmlFor="quantity">Quantité à trader</label>
+        <div className={styles.inputWrapper}>
+          <input
+            id="quantity"
+            type="number"
+            step="any"
+            placeholder="0.00"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+            disabled={isSubmitting}
+          />
+          <span className={styles.symbolSuffix}>{symbol}</span>
+        </div>
+      </div>
+
+      <div className={styles.summary}>
+        <div className={styles.summaryLine}>
+          <span>Prix unitaire:</span>
+          <span>{formatPrice(currentPrice)}</span>
+        </div>
+        <div className={styles.summaryLine}>
+          <span>Total:</span>
+          <strong className={styles.totalValue}>{formatPrice(total)}</strong>
+        </div>
+      </div>
+
+      {message && (
+        <div className={styles.messageBox}>
+          <DisplayMessage type={message.type} message={message.text} />
+        </div>
+      )}
+
+      <div className={styles.actions}>
+        <button
+          className={`${styles.tradeButton} ${styles.sellButton}`}
+          onClick={() => handleTrade('Sell')}
+          disabled={isSubmitting || !quantity || !holding || (holding.quantity ?? 0) <= 0}
+        >
+          {isSubmitting ? '...' : 'Vendre'}
+        </button>
+        <button
+          className={`${styles.tradeButton} ${styles.buyButton}`}
+          onClick={() => handleTrade('Buy')}
+          disabled={isSubmitting || !quantity}
+        >
+          {isSubmitting ? '...' : 'Acheter'}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default TradeForm;

@@ -50,7 +50,7 @@
 
 .mainLayout {
   display: grid;
-  grid-template-columns: 1fr 350px;
+  grid-template-columns: 2fr 1fr;
   gap: var(--spacing-lg);
   align-items: start;
 }
@@ -81,3 +81,20 @@
 .backButton:hover {
   transform: translateY(-2px);
 }
+
+.tradeFormWrapper {
+  background: var(--widget-bg);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-retro);
+}
+
+.tradeHeading {
+  margin-bottom: 1.5rem;
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+

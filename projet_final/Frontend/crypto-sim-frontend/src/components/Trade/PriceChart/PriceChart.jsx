@@ -73,7 +73,7 @@ const PriceChart = ({ symbol, data, currentPrice, priceDirection }) => {
   return (
     <div className={styles.chartContainer}>
       <div className={styles.chartHeader}>
-        <div className={styles.title}>{symbol} / USD</div>
+        <div className={styles.title}>{symbol}</div>
         <div className={`${styles.currentPrice} ${styles[priceDirection]}`}>
           {formatPrice(currentPrice)}
         </div>

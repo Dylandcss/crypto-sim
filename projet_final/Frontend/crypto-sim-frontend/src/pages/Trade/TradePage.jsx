@@ -8,6 +8,7 @@ import useSignalR from '../../hooks/useSignalR';
 import { ChevronLeft } from '@nsmr/pixelart-react';
 import styles from './TradePage.module.css';
 import { getCoinIcon } from '../../utils/coinIcons';
+import TradeForm from '../../components/Trade/TradeForm/TradeForm';
 
 const TradePage = () => {
   const { symbol } = useParams();
@@ -61,14 +62,13 @@ const TradePage = () => {
         <button className={styles.backButton} onClick={() => navigate('/market')}>
           <ChevronLeft size={20} /> Retour
         </button>
-        
+
         <div className={styles.cryptoHeader}>
           {coinIcon && (
             <img src={coinIcon} alt={symbol} className={styles.coinIcon} />
           )}
           <div className={styles.titleGroup}>
             <h1 className={styles.cryptoName}>{crypto.name}</h1>
-            <span className={styles.symbolBadge}>{symbol}</span>
           </div>
         </div>
       </div>
@@ -81,15 +81,9 @@ const TradePage = () => {
           priceDirection={priceDirection}
         />
 
-        <div style={{
-          background: 'var(--widget-bg)',
-          padding: 'var(--spacing-lg)',
-          borderRadius: 'var(--radius-lg)',
-          border: 'var(--border-thick)',
-          boxShadow: 'var(--shadow-retro)',
-        }}>
-          <h3 style={{ marginBottom: '1rem' }}>Passer un ordre</h3>
-          <p style={{ color: 'var(--text-muted)' }}>Formulaire de trade à venir…</p>
+        <div className={styles.tradeFormWrapper}>
+          <h3 className={styles.tradeHeading}>Passer un ordre</h3>
+          <TradeForm symbol={symbol} currentPrice={crypto.currentPrice} />
         </div>
       </div>
     </div>

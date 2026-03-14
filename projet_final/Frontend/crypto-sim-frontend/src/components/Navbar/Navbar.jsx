@@ -7,6 +7,7 @@ import moneyBagIcon from '../../assets/images/moneybag_icon.png'
 const PAGE_NAMES = {
   '/market': 'Market',
   '/portfolio': 'Portfolio',
+  '/profil': 'Profil',
 }
 
 function Navbar() {

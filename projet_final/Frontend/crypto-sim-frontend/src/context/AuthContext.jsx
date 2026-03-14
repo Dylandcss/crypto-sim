@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getProfile } from '../services/authService';
 
 const AuthContext = createContext(null);
 
@@ -55,9 +56,26 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('user');
   };
 
+  const refreshUser = async () => {
+    try {
+      const data = await getProfile();
+      if (data) {
+        const userData = {
+          username: data.username,
+          role: data.role,
+          balance: data.balance,
+        };
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+      }
+    } catch {
+      // Échec silencieux — le solde affiché restera celui du localStorage
+    }
+  };
+
   return (
     <AuthContext.Provider
-      value={{ token, user, isAuthenticated: !!token, isLoading, loginUser, logoutUser }}
+      value={{ token, user, isAuthenticated: !!token, isLoading, loginUser, logoutUser, refreshUser }}
     >
       {children}
     </AuthContext.Provider>
