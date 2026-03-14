@@ -7,6 +7,7 @@ import DisplayMessage from '../../components/common/DisplayMessage/DisplayMessag
 import useSignalR from '../../hooks/useSignalR';
 import { ChevronLeft } from '@nsmr/pixelart-react';
 import styles from './TradePage.module.css';
+import { getCoinIcon } from '../../utils/coinIcons';
 
 const TradePage = () => {
   const { symbol } = useParams();
@@ -17,6 +18,7 @@ const TradePage = () => {
   const [error, setError] = useState(null);
   const [priceDirection, setPriceDirection] = useState('neutral');
   const prevPriceRef = useRef(0);
+  const coinIcon = getCoinIcon(symbol);
 
   useEffect(() => {
     setIsLoading(true);
@@ -55,9 +57,21 @@ const TradePage = () => {
 
   return (
     <div className={styles.tradePage}>
-      <button className={styles.backButton} onClick={() => navigate('/market')}>
-        <ChevronLeft size={20} /> Retour
-      </button>
+      <div className={styles.header}>
+        <button className={styles.backButton} onClick={() => navigate('/market')}>
+          <ChevronLeft size={20} /> Retour
+        </button>
+        
+        <div className={styles.cryptoHeader}>
+          {coinIcon && (
+            <img src={coinIcon} alt={symbol} className={styles.coinIcon} />
+          )}
+          <div className={styles.titleGroup}>
+            <h1 className={styles.cryptoName}>{crypto.name}</h1>
+            <span className={styles.symbolBadge}>{symbol}</span>
+          </div>
+        </div>
+      </div>
 
       <div className={styles.mainLayout}>
         <PriceChart

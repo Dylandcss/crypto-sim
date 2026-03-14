@@ -22,10 +22,15 @@ const getColorFromSymbol = (symbol) => {
   return PALETTE[hash % PALETTE.length];
 };
 
+import { getCoinIcon } from '../../../utils/coinIcons';
+
 const MarketItem = ({ crypto }) => {
   const navigate = useNavigate();
   const prevPriceRef = useRef(crypto.currentPrice);
   const [priceDirection, setPriceDirection] = useState('neutral');
+  const [imageError, setImageError] = useState(false);
+
+  const coinImageUrl = getCoinIcon(crypto.symbol);
 
   useEffect(() => {
     const prevPrice = prevPriceRef.current;
@@ -38,10 +43,22 @@ const MarketItem = ({ crypto }) => {
     <div className={styles.itemContainer} onClick={() => navigate(`/trade/${crypto.symbol}`)}>
       <div className={styles.cardHeader}>
         <div
-          className={styles.iconContainer}
-          style={{ backgroundColor: getColorFromSymbol(crypto.symbol) }}
+          className={`${styles.iconContainer} ${(!coinImageUrl || imageError) ? styles.fallback : ''}`}
+          style={{ 
+            backgroundColor: (!coinImageUrl || imageError) ? getColorFromSymbol(crypto.symbol) : 'transparent',
+            borderColor: (!coinImageUrl || imageError) ? '#181B24' : 'transparent'
+          }}
         >
-          {crypto.symbol.charAt(0).toUpperCase()}
+          {coinImageUrl && !imageError ? (
+            <img 
+              src={coinImageUrl} 
+              alt={crypto.symbol} 
+              className={styles.coinImage}
+              onError={() => setImageError(true)}
+            />
+          ) : (
+            crypto.symbol.charAt(0).toUpperCase()
+          )}
         </div>
         <div className={styles.infoGroup}>
           <span className={styles.name}>{crypto.name}</span>

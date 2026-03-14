@@ -35,6 +35,18 @@ export default function MarketPage() {
       c.symbol.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const renderContent = () => {
+    if (isLoading) {
+      return <Loader message="Chargement des actifs en cours..." />;
+    }
+
+    if (error || signalRError) {
+      return <DisplayMessage type="error" message={error || signalRError} />;
+    }
+
+    return <MarketGrid cryptos={filteredCryptos} />;
+  };
+
   return (
     <div style={{ paddingBlock: '2rem' }}>
       <div className={styles.marketHeader}>
@@ -52,15 +64,7 @@ export default function MarketPage() {
         </div>
       </div>
 
-      {(error || signalRError) && (
-        <DisplayMessage type="error" message={error || signalRError} />
-      )}
-
-      {isLoading ? (
-        <Loader message="Chargement des actifs en cours..." />
-      ) : (
-        <MarketGrid cryptos={filteredCryptos} />
-      )}
+      {renderContent()}
     </div>
   );
 }
