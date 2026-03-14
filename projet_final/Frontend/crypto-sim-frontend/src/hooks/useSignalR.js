@@ -17,10 +17,14 @@ export default function useSignalR(onPriceUpdate) {
   });
 
   useEffect(() => {
+    // En StrictMode (dev), React monte/démonte deux fois chaque composant.
+    // Ce flag permet d'ignorer les états du premier cycle interrompu.
+    let isCancelled = false;
+
     const connection = createSignalRConnection(
       (updates) => callbackRef.current?.(updates),
       (err) => {
-        if (err) {
+        if (err && !isCancelled) {
           setIsLive(false);
           setError('Connexion perdue, reconnexion en cours...');
         }
@@ -30,15 +34,21 @@ export default function useSignalR(onPriceUpdate) {
     connection
       .start()
       .then(() => {
-        setIsLive(true);
-        setError(null);
+        if (!isCancelled) {
+          setIsLive(true);
+          setError(null);
+        }
       })
       .catch(() => {
-        setError('Impossible de se connecter au flux de prix en temps réel.');
+        if (!isCancelled) {
+          setError('Impossible de se connecter au flux de prix en temps réel.');
+        }
       });
 
     return () => {
-      connection.stop();
+      isCancelled = true;
+      // .stop() peut lever une erreur si appelé pendant la négociation (StrictMode) — on l'ignore
+      connection.stop().catch(() => {});
       setIsLive(false);
     };
   }, []);

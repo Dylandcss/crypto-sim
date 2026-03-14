@@ -1,7 +1,7 @@
-import { BASE_URL } from './api'
+import { BASE_URL, safeFetch } from './api'
 
 export const login = async (username, password) => {
-  const response = await fetch(`${BASE_URL}/api/auth/login`, {
+  const response = await safeFetch(`${BASE_URL}/api/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ export const login = async (username, password) => {
 }
 
 export const register = async (username, email, password) => {
-  const response = await fetch(`${BASE_URL}/api/auth/register`, {
+  const response = await safeFetch(`${BASE_URL}/api/auth/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export const getProfile = async () => {
   const token = localStorage.getItem('token')
   if (!token) return null
 
-  const response = await fetch(`${BASE_URL}/api/auth/me`, {
+  const response = await safeFetch(`${BASE_URL}/api/auth/me`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

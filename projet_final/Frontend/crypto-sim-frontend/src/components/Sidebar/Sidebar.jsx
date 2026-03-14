@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { Store, Wallet, User } from '@nsmr/pixelart-react'
+import { Store, Wallet, User, Clock } from '@nsmr/pixelart-react'
 import styles from './Sidebar.module.css'
 import logo from '../../assets/images/logo.png'
 
@@ -28,6 +28,14 @@ function Sidebar() {
           <span>Portefeuille</span>
         </NavLink>
         <NavLink
+          to="/history"
+          className={({ isActive }) => `${styles['sidebar-link']} ${isActive ? styles.active : ''}`}
+        >
+          <Clock size={20} />
+          <span>Historique</span>
+        </NavLink>
+
+        <NavLink
           to="/profil"
           className={({ isActive }) => `${styles['sidebar-link']} ${isActive ? styles.active : ''}`}
         >
@@ -38,5 +46,6 @@ function Sidebar() {
     </aside>
   )
 }
+
 
 export default Sidebar

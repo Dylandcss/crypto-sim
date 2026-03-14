@@ -4,6 +4,39 @@
   gap: var(--spacing-lg);
 }
 
+.orderTypeToggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  background: var(--sidebar-bg);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  border: var(--border-thick);
+}
+
+.toggleButton {
+  padding: 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.toggleButton:hover {
+  color: var(--text-primary);
+}
+
+.toggleActive {
+  background: var(--light-blue);
+  color: #0d1117 !important;
+  box-shadow: var(--shadow-retro);
+}
+
 .balanceInfo {
   padding: var(--spacing-sm);
   border: 2px dashed var(--border-color);

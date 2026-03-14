@@ -9,13 +9,25 @@ import styles from './TradeForm.module.css';
 
 const TradeForm = ({ symbol, currentPrice }) => {
   const { user, refreshUser } = useAuth();
+  const [orderMode, setOrderMode] = useState('market'); // 'market' | 'limit'
   const [quantity, setQuantity] = useState('');
+  const [limitPrice, setLimitPrice] = useState('');
   const [holding, setHolding] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
     fetchHolding();
+  }, [symbol]);
+
+  // Rafraîchit le solde et les cryptos détenus toutes les 15s
+  // pour refléter l'exécution éventuelle d'un ordre limite côté serveur
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refreshUser();
+      fetchHolding();
+    }, 15000);
+    return () => clearInterval(interval);
   }, [symbol]);
 
   const fetchHolding = async () => {
@@ -33,25 +45,43 @@ const TradeForm = ({ symbol, currentPrice }) => {
       return;
     }
 
-    const totalCost = quantity * currentPrice;
-    if (type === 'Buy' && totalCost > user.balance) {
-      setMessage({ type: 'error', text: 'Solde insuffisant.' });
-      return;
-    }
+    const lp = orderMode === 'limit' ? parseFloat(limitPrice) : null;
 
-    if (type === 'Sell' && (!holding || quantity > holding.quantity)) {
-      setMessage({ type: 'error', text: 'Quantité insuffisante dans votre portefeuille.' });
-      return;
+    if (orderMode === 'limit') {
+      if (!limitPrice || isNaN(limitPrice) || lp <= 0) {
+        setMessage({ type: 'error', text: 'Veuillez saisir un prix limite valide.' });
+        return;
+      }
+    } else {
+      const totalCost = quantity * currentPrice;
+      if (type === 'Buy' && totalCost > user.balance) {
+        setMessage({ type: 'error', text: 'Solde insuffisant.' });
+        return;
+      }
+      if (type === 'Sell' && (!holding || quantity > holding.quantity)) {
+        setMessage({ type: 'error', text: 'Quantité insuffisante dans votre portefeuille.' });
+        return;
+      }
     }
 
     setIsSubmitting(true);
     setMessage(null);
 
     try {
-      await placeOrder(symbol, parseFloat(quantity), type);
-      setMessage({ type: 'success', text: `Ordre de ${type === 'Buy' ? 'achat' : 'vente'} réussi !` });
+      await placeOrder(symbol, parseFloat(quantity), type, lp);
+
+      if (orderMode === 'limit') {
+        setMessage({
+          type: 'success',
+          text: `Ordre limite enregistré. Il s'exécutera quand le prix atteindra ${formatPrice(lp)}.`,
+        });
+      } else {
+        setMessage({ type: 'success', text: `Ordre de ${type === 'Buy' ? 'achat' : 'vente'} réussi !` });
+        await Promise.all([refreshUser(), fetchHolding()]);
+      }
+
       setQuantity('');
-      await Promise.all([refreshUser(), fetchHolding()]);
+      setLimitPrice('');
     } catch (err) {
       setMessage({ type: 'error', text: err.message });
     } finally {
@@ -59,10 +89,27 @@ const TradeForm = ({ symbol, currentPrice }) => {
     }
   };
 
-  const total = quantity ? parseFloat(quantity) * currentPrice : 0;
+  const effectivePrice = orderMode === 'limit' && limitPrice ? parseFloat(limitPrice) : currentPrice;
+  const total = quantity ? parseFloat(quantity) * effectivePrice : 0;
 
   return (
     <div className={styles.tradeForm}>
+      {/* Toggle marché / limite */}
+      <div className={styles.orderTypeToggle}>
+        <button
+          className={`${styles.toggleButton} ${orderMode === 'market' ? styles.toggleActive : ''}`}
+          onClick={() => setOrderMode('market')}
+        >
+          Au marché
+        </button>
+        <button
+          className={`${styles.toggleButton} ${orderMode === 'limit' ? styles.toggleActive : ''}`}
+          onClick={() => setOrderMode('limit')}
+        >
+          Ordre limite
+        </button>
+      </div>
+
       <div className={styles.balanceInfo}>
         <div className={styles.infoLine}>
           <span className={styles.label}>Solde:</span>
@@ -90,13 +137,31 @@ const TradeForm = ({ symbol, currentPrice }) => {
         </div>
       </div>
 
+      {orderMode === 'limit' && (
+        <div className={styles.inputGroup}>
+          <label htmlFor="limitPrice">Prix cible</label>
+          <div className={styles.inputWrapper}>
+            <input
+              id="limitPrice"
+              type="number"
+              step="any"
+              placeholder="0.00"
+              value={limitPrice}
+              onChange={(e) => setLimitPrice(e.target.value)}
+              disabled={isSubmitting}
+            />
+            <span className={styles.symbolSuffix}>USD</span>
+          </div>
+        </div>
+      )}
+
       <div className={styles.summary}>
         <div className={styles.summaryLine}>
-          <span>Prix unitaire:</span>
-          <span>{formatPrice(currentPrice)}</span>
+          <span>Prix {orderMode === 'limit' ? 'cible' : 'unitaire'}:</span>
+          <span>{formatPrice(effectivePrice)}</span>
         </div>
         <div className={styles.summaryLine}>
-          <span>Total:</span>
+          <span>Total estimé:</span>
           <strong className={styles.totalValue}>{formatPrice(total)}</strong>
         </div>
       </div>
@@ -111,7 +176,7 @@ const TradeForm = ({ symbol, currentPrice }) => {
         <button
           className={`${styles.tradeButton} ${styles.sellButton}`}
           onClick={() => handleTrade('Sell')}
-          disabled={isSubmitting || !quantity || !holding || (holding.quantity ?? 0) <= 0}
+          disabled={isSubmitting || !quantity || (orderMode === 'market' && (!holding || (holding.quantity ?? 0) <= 0))}
         >
           {isSubmitting ? '...' : 'Vendre'}
         </button>

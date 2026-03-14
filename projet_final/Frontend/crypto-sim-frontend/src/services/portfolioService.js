@@ -1,4 +1,4 @@
-import { BASE_URL } from './api';
+import { BASE_URL, safeFetch } from './api';
 
 const getToken = () => localStorage.getItem('token');
 
@@ -21,7 +21,7 @@ const handleResponse = async (response) => {
 };
 
 const authFetch = (endpoint, options = {}) =>
-  fetch(`${BASE_URL}${endpoint}`, {
+  safeFetch(`${BASE_URL}${endpoint}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',

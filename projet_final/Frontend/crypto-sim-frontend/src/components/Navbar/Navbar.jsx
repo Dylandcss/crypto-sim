@@ -7,6 +7,7 @@ import moneyBagIcon from '../../assets/images/moneybag_icon.png'
 const PAGE_NAMES = {
   '/market': 'Market',
   '/portfolio': 'Portfolio',
+  '/history': 'Historique',
   '/profil': 'Profil',
 }
 
@@ -15,7 +16,12 @@ function Navbar() {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const pageName = PAGE_NAMES[location.pathname] || 'CryptoSim'
+  const tradeMatch = location.pathname.match(/^\/trade\/(.+)$/)
+  const holdingMatch = location.pathname.match(/^\/portfolio\/holdings\/(.+)$/)
+  const pageName = PAGE_NAMES[location.pathname]
+    || (tradeMatch ? `Trade — ${tradeMatch[1]}` : null)
+    || (holdingMatch ? `${holdingMatch[1]}` : null)
+    || 'CryptoSim'
 
   const handleLogout = () => {
     logoutUser()
