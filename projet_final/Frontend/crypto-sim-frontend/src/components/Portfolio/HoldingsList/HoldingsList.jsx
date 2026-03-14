@@ -59,7 +59,7 @@ function HoldingsList() {
                   {holding.gainLossPercent.toFixed(2)}%
                 </td>
                 <td>
-                  <Link to={`/portfolio/holdings/${holding.symbol}`} className={styles.btnDetails}>Voir les détails</Link>
+                  <Link to={`/portfolio/holdings/${holding.symbol}`} className={styles.btnDetails}>Détails</Link>
                 </td>
               </tr>
             );

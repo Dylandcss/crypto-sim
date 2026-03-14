@@ -1,35 +1,19 @@
-.container {
-  height: calc(100vh - 120px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: var(--spacing-md);
-  box-sizing: border-box;
-}
-
 .profileCard {
   background: var(--widget-bg);
   border: var(--border-thick);
-  border-radius: var(--radius-lg);
-  width: 100%;
+  border-radius: var(--radius-md);
+  max-width: 600px;
   box-shadow: var(--shadow-retro);
-  animation: slideIn 0.5s ease-out;
-  padding: 2rem;
+  animation: fadeIn 0.5s ease-out;
+  padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .headerSection {
@@ -49,14 +33,14 @@
   justify-content: center;
   align-items: center;
   color: var(--light-blue);
-  box-shadow: 4px 4px 0px var(--border-color);
+  box-shadow: var(--shadow-retro);
   flex-shrink: 0;
 }
 
 .userSection {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--spacing-xs);
   text-align: left;
 }
 
@@ -70,7 +54,7 @@
 .metaGrid {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--spacing-xs);
 }
 
 .metaItem {
@@ -95,8 +79,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
-  padding-left: 4px;
+  gap: var(--spacing-xs);
+  padding-left: var(--spacing-xs);
 }
 
 .balanceHeader {
@@ -107,7 +91,7 @@
 }
 
 .balanceLabel {
-  font-size: 0.75rem;
+  font-size: var(--font-size-sm);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -118,20 +102,4 @@
   color: var(--light-blue);
   line-height: 1;
   font-weight: var(--font-weight-bold);
-}
-
-
-@media (max-width: 600px) {
-  .profileCard {
-    max-width: 90%;
-    padding: 1.5rem;
-  }
-
-  .username {
-    font-size: 1.6rem;
-  }
-
-  .balanceValue {
-    font-size: 1.8rem;
-  }
 }

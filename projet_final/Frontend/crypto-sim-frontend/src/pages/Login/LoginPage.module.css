@@ -11,7 +11,7 @@
 .login-card {
   background-color: var(--sidebar-bg);
   padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   border: var(--border-thick);
   box-shadow: var(--shadow-retro);
   width: 100%;
@@ -27,7 +27,7 @@
 }
 
 .register-link {
-  margin-top: 20px;
+  margin-top: var(--spacing-md);
   color: var(--light-gray);
   font-size: var(--font-size-sm);
   text-decoration: none;

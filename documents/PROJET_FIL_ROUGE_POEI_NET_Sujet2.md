@@ -1,9 +1,9 @@
-# TP — Plateforme de Trading Crypto Virtuel
+# TP - Plateforme de Trading Crypto Virtuel
 ## Architecture Microservices · ASP.NET Core 8 · Blazor
 
 ## 1. Contexte et Objectifs
 
-Vous allez concevoir et développer **CryptoSim** — une plateforme de trading de cryptomonnaies fictives en environnement simulé. L'objectif est de mettre en pratique l'architecture microservices dans un contexte réaliste : chaque service est indépendant, possède sa propre base de données, et communique via HTTP REST ou SignalR.
+Vous allez concevoir et développer **CryptoSim** - une plateforme de trading de cryptomonnaies fictives en environnement simulé. L'objectif est de mettre en pratique l'architecture microservices dans un contexte réaliste : chaque service est indépendant, possède sa propre base de données, et communique via HTTP REST ou SignalR.
 
 L'application doit permettre de :
 
@@ -32,7 +32,7 @@ L'application doit permettre de :
 | `MarketService` | 5002 | Génération des prix, historique des cours | MySql (`market_db`) |
 | `PortfolioService` | 5003 | Portefeuille, transactions, performance | MySql (`portfolio_db`) |
 | `OrderService` | 5004 | Passage et suivi des ordres d'achat/vente | MySql (`orders_db`) |
-| `Blazor Frontend` | 5000 | Interface utilisateur | — |
+| `Blazor Frontend` | 5000 | Interface utilisateur | - |
 
 ### 2.2 Schéma de communication
 
@@ -122,7 +122,7 @@ Classes attendues par service (liste non exhaustive) :
 > Produisez le MLD complet de chaque base de données.
 > Rappel : **pas de clé étrangère entre les bases de différents services**.
 
-**AuthService — `users_db` :**
+**AuthService - `users_db` :**
 ```
 Users(Id PK, Username VARCHAR(50) UNIQUE NOT NULL, PasswordHash TEXT NOT NULL,
       Email VARCHAR(255) UNIQUE NOT NULL, Role VARCHAR(20) NOT NULL DEFAULT 'User',
@@ -131,7 +131,7 @@ Users(Id PK, Username VARCHAR(50) UNIQUE NOT NULL, PasswordHash TEXT NOT NULL,
 
 > Chaque nouvel utilisateur reçoit un **solde virtuel de départ de 10 000 $** pour trader.
 
-**MarketService — `market_db` :**
+**MarketService - `market_db` :**
 ```
 Cryptos(Id PK, Symbol VARCHAR(10) UNIQUE NOT NULL, Name VARCHAR(100) NOT NULL,
         CurrentPrice DECIMAL(18,8) NOT NULL, LastUpdated DATETIME NOT NULL)
@@ -140,7 +140,7 @@ PriceHistory(Id PK, CryptoSymbol VARCHAR(10) NOT NULL, Price DECIMAL(18,8) NOT N
              RecordedAt DATETIME NOT NULL)
 ```
 
-**PortfolioService — `portfolio_db` :**
+**PortfolioService - `portfolio_db` :**
 ```
 Holdings(Id PK, UserId INT NOT NULL, CryptoSymbol VARCHAR(10) NOT NULL,
          Quantity DECIMAL(18,8) NOT NULL, AverageBuyPrice DECIMAL(18,8) NOT NULL,
@@ -152,7 +152,7 @@ Transactions(Id PK, UserId INT NOT NULL, CryptoSymbol VARCHAR(10) NOT NULL,
              ExecutedAt DATETIME NOT NULL)
 ```
 
-**OrderService — `orders_db` :**
+**OrderService - `orders_db` :**
 ```
 Orders(Id PK, UserId INT NOT NULL, CryptoSymbol VARCHAR(10) NOT NULL,
        Type VARCHAR(10) NOT NULL, Quantity DECIMAL(18,8) NOT NULL,
@@ -501,10 +501,10 @@ public record PortfolioSummary(
 
 ### 10.1 Documentation (Bonus)
 
-- **Diagramme de classes UML** — un par service, avec attributs et méthodes principales
-- **MLD complet** — un par base de données, avec types SQL et contraintes
-- **Diagramme d'architecture** — vue globale des services et de leurs interactions
-- **Documentation API** — export Swagger JSON ou Markdown des endpoints
+- **Diagramme de classes UML** - un par service, avec attributs et méthodes principales
+- **MLD complet** - un par base de données, avec types SQL et contraintes
+- **Diagramme d'architecture** - vue globale des services et de leurs interactions
+- **Documentation API** - export Swagger JSON ou Markdown des endpoints
 
 ### 11.2 Code source
 

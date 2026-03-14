@@ -1,5 +1,4 @@
 .historyPage {
-  padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
@@ -60,7 +59,7 @@
 .tableWrapper {
   background: var(--widget-bg);
   border: var(--border-thick);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-retro);
 }

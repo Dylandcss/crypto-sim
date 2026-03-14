@@ -36,7 +36,7 @@ export default function MarketPage() {
   );
 
   return (
-    <div style={{ paddingBlock: '2rem' }}>
+    <div className={styles.marketPage}>
       <div className={styles.marketHeader}>
         <div className={styles.searchWrapper}>
           <span className={styles.searchIcon}>

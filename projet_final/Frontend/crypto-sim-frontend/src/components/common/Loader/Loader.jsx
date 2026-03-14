@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Loader.module.css';
 
 const Loader = ({ message = 'Chargement en cours...', fullScreen = false }) => {

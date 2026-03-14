@@ -56,7 +56,7 @@ function RegisterForm() {
           required
         />
         {loading ? (
-          <Loader message="" />
+          <Loader />
         ) : (
           <button type="submit">S'inscrire</button>
         )}

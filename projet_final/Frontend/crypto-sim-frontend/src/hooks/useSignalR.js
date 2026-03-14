@@ -47,7 +47,7 @@ export default function useSignalR(onPriceUpdate) {
 
     return () => {
       isCancelled = true;
-      // .stop() peut lever une erreur si appelé pendant la négociation (StrictMode) — on l'ignore
+      // .stop() peut lever une erreur si appelé pendant la négociation (StrictMode) - on l'ignore
       connection.stop().catch(() => {});
       setIsLive(false);
     };

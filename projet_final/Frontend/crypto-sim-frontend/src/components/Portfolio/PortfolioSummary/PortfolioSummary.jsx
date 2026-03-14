@@ -1,5 +1,5 @@
 import { getPortfolioSummary } from '../../../services/portfolioService';
-import { gainLossColor } from '../../../utils/formatters';
+import { gainLossColor, formatBalance } from '../../../utils/formatters';
 import useFetch from '../../../hooks/useFetch';
 import Loader from '../../common/Loader/Loader';
 import DisplayMessage from '../../common/DisplayMessage/DisplayMessage';
@@ -13,25 +13,37 @@ function PortfolioSummary() {
 
   return (
     <div className={styles['portfolio-summary']}>
-      <h2>Résumé du portefeuille</h2>
+      <h2 className={styles['portfolio-summary__title']}>Résumé</h2>
       {summary && (
-        <div>
-          <p>Argent disponible : ${summary.cashBalance}</p>
-          <p>Total investi : ${summary.totalInvested}</p>
-          <p>Valeur actuelle : ${summary.totalCurrentValue}</p>
-          <p>
-            Total Gains/Pertes :{' '}
-            <span style={{ color: gainLossColor(summary.totalGainLoss) }}>
-              ${summary.totalGainLoss.toFixed(2)}
+        <div className={styles['portfolio-summary__rows']}>
+          <div className={styles['stat-row']}>
+            <span className={styles['stat-label']}>Solde disponible</span>
+            <span className={styles['stat-value']}>{formatBalance(summary.cashBalance)}</span>
+          </div>
+          <div className={styles['stat-row']}>
+            <span className={styles['stat-label']}>Total investi</span>
+            <span className={styles['stat-value']}>{formatBalance(summary.totalInvested)}</span>
+          </div>
+          <div className={styles['stat-row']}>
+            <span className={styles['stat-label']}>Valeur actuelle</span>
+            <span className={styles['stat-value']}>{formatBalance(summary.totalCurrentValue)}</span>
+          </div>
+          <div className={styles['stat-row']}>
+            <span className={styles['stat-label']}>Gains / Pertes</span>
+            <span className={styles['stat-value']} style={{ color: gainLossColor(summary.totalGainLoss) }}>
+              {formatBalance(summary.totalGainLoss)}
             </span>
-          </p>
-          <p>
-            Pourcentage Gain/Perte :{' '}
-            <span style={{ color: gainLossColor(summary.totalGainLoss) }}>
+          </div>
+          <div className={styles['stat-row']}>
+            <span className={styles['stat-label']}>Performance</span>
+            <span className={styles['stat-value']} style={{ color: gainLossColor(summary.totalGainLoss) }}>
               {summary.totalGainLossPercent.toFixed(2)}%
             </span>
-          </p>
-          <p>Nombre d'actifs : {summary.holdings.length}</p>
+          </div>
+          <div className={styles['stat-row']}>
+            <span className={styles['stat-label']}>Actifs détenus</span>
+            <span className={styles['stat-value']}>{summary.holdings.length}</span>
+          </div>
         </div>
       )}
     </div>

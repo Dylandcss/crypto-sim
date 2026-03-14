@@ -6,7 +6,7 @@
   height: 100vh;
   background: var(--sidebar-bg);
   border-right: 4px solid var(--border-color);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-retro);
   display: flex;
   flex-direction: column;
   padding: var(--spacing-lg) var(--spacing-md);

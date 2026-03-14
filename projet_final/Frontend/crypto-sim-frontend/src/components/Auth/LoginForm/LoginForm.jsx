@@ -59,7 +59,7 @@ function LoginForm() {
           required
         />
         {loading ? (
-          <Loader message="" />
+          <Loader />
         ) : (
           <button type="submit">Se connecter</button>
         )}

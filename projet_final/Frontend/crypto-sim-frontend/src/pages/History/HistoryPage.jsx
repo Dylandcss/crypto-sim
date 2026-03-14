@@ -20,17 +20,26 @@ const Pagination = ({ page, totalPages, onPrev, onNext }) => {
   );
 };
 
+const PaginatedTable = ({ page, totalPages, onPrev, onNext, children }) => (
+  <>
+    <div className={styles.tableWrapper}>
+      {children}
+    </div>
+    <Pagination page={page} totalPages={totalPages} onPrev={onPrev} onNext={onNext} />
+  </>
+);
+
 const HistoryPage = () => {
   const [activeTab, setActiveTab] = useState('orders');
   const [ordersRefreshKey, setOrdersRefreshKey] = useState(0);
   const [cancellingId, setCancellingId] = useState(null);
+  const [cancelError, setCancelError] = useState('');
   const [ordersPage, setOrdersPage] = useState(1);
   const [txPage, setTxPage] = useState(1);
 
   const { data: orders, loading: loadingOrders, error: errorOrders } = useFetch(getOrdersHistory, [ordersRefreshKey]);
   const { data: transactions, loading: loadingTransactions, error: errorTransactions } = useFetch(getTransactionsHistory);
 
-  // Revenir à la page 1 après une annulation
   useEffect(() => { setOrdersPage(1); }, [ordersRefreshKey]);
 
   const getStatusColor = (status) => {
@@ -45,11 +54,12 @@ const HistoryPage = () => {
 
   const handleCancel = async (orderId) => {
     setCancellingId(orderId);
+    setCancelError('');
     try {
       await cancelOrder(orderId);
       setOrdersRefreshKey(k => k + 1);
     } catch (err) {
-      alert(err.message);
+      setCancelError(err.message);
     } finally {
       setCancellingId(null);
     }
@@ -59,68 +69,65 @@ const HistoryPage = () => {
     if (loadingOrders) return <Loader message="Chargement des ordres..." />;
     if (errorOrders) return <DisplayMessage type="error" message={errorOrders} />;
 
-    const all = (orders ?? []).slice().reverse(); // plus récents en premier
+    const all = (orders ?? []).slice().reverse();
     const totalPages = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
     const page = Math.min(ordersPage, totalPages);
     const paginated = all.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
     return (
-      <>
-        <div className={styles.tableWrapper}>
-          <table className={styles.historyTable}>
-            <thead>
-              <tr>
-                <th>Crypto</th>
-                <th>Type</th>
-                <th>Quantité</th>
-                <th>Prix</th>
-                <th>Prix limite</th>
-                <th>Total</th>
-                <th>Statut</th>
-                <th>Date</th>
-                <th>Actions</th>
+      <PaginatedTable
+        page={page}
+        totalPages={totalPages}
+        onPrev={() => setOrdersPage(p => p - 1)}
+        onNext={() => setOrdersPage(p => p + 1)}
+      >
+        <table className={styles.historyTable}>
+          <thead>
+            <tr>
+              <th>Crypto</th>
+              <th>Type</th>
+              <th>Quantité</th>
+              <th>Prix</th>
+              <th>Prix limite</th>
+              <th>Total</th>
+              <th>Statut</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {paginated.map((order, i) => (
+              <tr key={order.orderId ?? `order-${i}`}>
+                <td className={styles.symbol}>{order.cryptoSymbol}</td>
+                <td className={order.type === 'Buy' ? styles.buyType : styles.sellType}>
+                  {order.type === 'Buy' ? 'Achat' : 'Vente'}
+                </td>
+                <td>{order.quantity}</td>
+                <td>{formatPrice(order.price)}</td>
+                <td>{order.limitPrice ? formatPrice(order.limitPrice) : '-'}</td>
+                <td>{formatPrice(order.total)}</td>
+                <td>
+                  <span className={`${styles.statusBadge} ${getStatusColor(order.status)}`}>
+                    {order.status}
+                  </span>
+                </td>
+                <td>{new Date(order.executedAt).toLocaleString()}</td>
+                <td>
+                  {order.status === 'Pending' && (
+                    <button
+                      className={styles.cancelButton}
+                      onClick={() => handleCancel(order.orderId)}
+                      disabled={cancellingId === order.orderId}
+                    >
+                      {cancellingId === order.orderId ? '...' : 'Annuler'}
+                    </button>
+                  )}
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {paginated.map((order, i) => (
-                <tr key={order.orderId ?? `order-${i}`}>
-                  <td className={styles.symbol}>{order.cryptoSymbol}</td>
-                  <td className={order.type === 'Buy' ? styles.buyType : styles.sellType}>
-                    {order.type === 'Buy' ? 'Achat' : 'Vente'}
-                  </td>
-                  <td>{order.quantity}</td>
-                  <td>{formatPrice(order.price)}</td>
-                  <td>{order.limitPrice ? formatPrice(order.limitPrice) : '—'}</td>
-                  <td>{formatPrice(order.total)}</td>
-                  <td>
-                    <span className={`${styles.statusBadge} ${getStatusColor(order.status)}`}>
-                      {order.status}
-                    </span>
-                  </td>
-                  <td>{new Date(order.createdAt).toLocaleString()}</td>
-                  <td>
-                    {order.status === 'Pending' && (
-                      <button
-                        className={styles.cancelButton}
-                        onClick={() => handleCancel(order.orderId)}
-                        disabled={cancellingId === order.orderId}
-                      >
-                        {cancellingId === order.orderId ? '...' : 'Annuler'}
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <Pagination
-          page={page}
-          totalPages={totalPages}
-          onPrev={() => setOrdersPage(p => p - 1)}
-          onNext={() => setOrdersPage(p => p + 1)}
-        />
-      </>
+            ))}
+          </tbody>
+        </table>
+      </PaginatedTable>
     );
   };
 
@@ -128,48 +135,45 @@ const HistoryPage = () => {
     if (loadingTransactions) return <Loader message="Chargement des transactions..." />;
     if (errorTransactions) return <DisplayMessage type="error" message={errorTransactions} />;
 
-    const all = (transactions ?? []).slice().reverse(); // plus récentes en premier
+    const all = (transactions ?? []).slice().reverse();
     const totalPages = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
     const page = Math.min(txPage, totalPages);
     const paginated = all.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
     return (
-      <>
-        <div className={styles.tableWrapper}>
-          <table className={styles.historyTable}>
-            <thead>
-              <tr>
-                <th>Crypto</th>
-                <th>Type</th>
-                <th>Quantité</th>
-                <th>Prix Exécution</th>
-                <th>Total</th>
-                <th>Date d'exécution</th>
+      <PaginatedTable
+        page={page}
+        totalPages={totalPages}
+        onPrev={() => setTxPage(p => p - 1)}
+        onNext={() => setTxPage(p => p + 1)}
+      >
+        <table className={styles.historyTable}>
+          <thead>
+            <tr>
+              <th>Crypto</th>
+              <th>Type</th>
+              <th>Quantité</th>
+              <th>Prix Exécution</th>
+              <th>Total</th>
+              <th>Date d'exécution</th>
+            </tr>
+          </thead>
+          <tbody>
+            {paginated.map((tx, i) => (
+              <tr key={tx.id ?? `tx-${i}`}>
+                <td className={styles.symbol}>{tx.cryptoSymbol}</td>
+                <td className={tx.type === 'Buy' ? styles.buyType : styles.sellType}>
+                  {tx.type === 'Buy' ? 'Achat' : 'Vente'}
+                </td>
+                <td>{tx.quantity}</td>
+                <td>{formatPrice(tx.priceAtTime)}</td>
+                <td>{formatPrice(tx.total)}</td>
+                <td>{new Date(tx.executedAt).toLocaleString()}</td>
               </tr>
-            </thead>
-            <tbody>
-              {paginated.map((tx, i) => (
-                <tr key={tx.id ?? `tx-${i}`}>
-                  <td className={styles.symbol}>{tx.cryptoSymbol}</td>
-                  <td className={tx.type === 'Buy' ? styles.buyType : styles.sellType}>
-                    {tx.type === 'Buy' ? 'Achat' : 'Vente'}
-                  </td>
-                  <td>{tx.quantity}</td>
-                  <td>{formatPrice(tx.priceAtTime)}</td>
-                  <td>{formatPrice(tx.total)}</td>
-                  <td>{new Date(tx.executedAt).toLocaleString()}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <Pagination
-          page={page}
-          totalPages={totalPages}
-          onPrev={() => setTxPage(p => p - 1)}
-          onNext={() => setTxPage(p => p + 1)}
-        />
-      </>
+            ))}
+          </tbody>
+        </table>
+      </PaginatedTable>
     );
   };
 
@@ -191,6 +195,10 @@ const HistoryPage = () => {
           </button>
         </div>
       </div>
+
+      {cancelError && (
+        <DisplayMessage type="error" message={cancelError} onClose={() => setCancelError('')} />
+      )}
 
       <div className={styles.tabContent}>
         {activeTab === 'orders' ? renderOrders() : renderTransactions()}

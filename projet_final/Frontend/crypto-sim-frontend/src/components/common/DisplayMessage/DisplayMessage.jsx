@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './DisplayMessage.module.css';
 
 const DisplayMessage = ({ type = 'info', title, message, onClose }) => {

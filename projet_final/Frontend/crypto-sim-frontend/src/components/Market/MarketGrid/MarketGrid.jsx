@@ -1,4 +1,3 @@
-import React from 'react';
 import MarketItem from '../MarketItem/MarketItem';
 import styles from './MarketGrid.module.css';
 

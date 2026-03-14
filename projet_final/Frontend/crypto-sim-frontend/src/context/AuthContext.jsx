@@ -69,7 +69,7 @@ export function AuthProvider({ children }) {
         localStorage.setItem('user', JSON.stringify(userData));
       }
     } catch {
-      // Échec silencieux — le solde affiché restera celui du localStorage
+      // Échec silencieux - le solde affiché restera celui du localStorage
     }
   };
 

@@ -1,35 +1,36 @@
 .holdings-list {
   background: var(--widget-bg);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   padding: var(--spacing-lg);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-retro);
   border: var(--border-thick);
+  overflow: hidden;
 }
 
 .holdings-table {
   width: 100%;
   border-collapse: collapse;
+  text-align: left;
 }
 
 .holdings-table th,
 .holdings-table td {
-  padding: 12px;
-  text-align: left;
-  border: var(--border-thick);
+  padding: 16px;
+  border-bottom: 2px solid var(--border-color);
 }
 
-.holdings-table-header {
-  background-color: var(--sidebar-bg);
+.holdings-table th {
+  background: var(--sidebar-bg);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.holdings-table-row:nth-child(even) {
-  background-color: var(--sidebar-bg);
+.holdings-table tr:last-child td {
+  border-bottom: none;
 }
 
-.holdings-table-row:nth-child(odd):hover {
-  background-color: var(--sidebar-active-item);
-}
-
-.holdings-table-row {
-  border-bottom: 1px solid var(--shadow-lg);
+.holdings-table-row:hover td {
+  background: rgba(255, 255, 255, 0.02);
 }

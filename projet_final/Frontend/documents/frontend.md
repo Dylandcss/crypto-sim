@@ -1,4 +1,4 @@
-# Front End — CryptoSim
+# Front End - CryptoSim
 
 ---
 
@@ -16,7 +16,7 @@ npm install react-router-dom @microsoft/signalr recharts
 
 ---
 
-## 🔌 Services (couche API) — `src/services/`
+## 🔌 Services (couche API) - `src/services/`
 
 | Fichier | Fonctions à implémenter | Endpoints Gateway |
 | --- | --- | --- |
@@ -29,7 +29,7 @@ npm install react-router-dom @microsoft/signalr recharts
 
 ## 🧩 Composants à développer
 
-### 1. Contexte & Auth — `src/context/`
+### 1. Contexte & Auth - `src/context/`
 
 | Composant | Rôle |
 | --- | --- |
@@ -37,7 +37,7 @@ npm install react-router-dom @microsoft/signalr recharts
 
 ---
 
-### 2. Layout & Navigation — `src/components/`
+### 2. Layout & Navigation - `src/components/`
 
 | Composant | Rôle |
 | --- | --- |
@@ -46,7 +46,7 @@ npm install react-router-dom @microsoft/signalr recharts
 
 ---
 
-### 3. Pages d'authentification — `src/pages/`
+### 3. Pages d'authentification - `src/pages/`
 
 | Composant | Rôle |
 | --- | --- |
@@ -55,7 +55,7 @@ npm install react-router-dom @microsoft/signalr recharts
 
 ---
 
-### 4. Page Marché — `src/pages/Marche.js` + composants
+### 4. Page Marché - `src/pages/Marche.js` + composants
 
 | Composant | Rôle |
 | --- | --- |
@@ -67,7 +67,7 @@ npm install react-router-dom @microsoft/signalr recharts
 
 ---
 
-### 5. Page Ordres — `src/pages/Ordres.js` + composants
+### 5. Page Ordres - `src/pages/Ordres.js` + composants
 
 | Composant | Rôle |
 | --- | --- |
@@ -78,7 +78,7 @@ npm install react-router-dom @microsoft/signalr recharts
 
 ---
 
-### 6. Page Portefeuille — `src/pages/Portefeuille.js` + composants
+### 6. Page Portefeuille - `src/pages/Portefeuille.js` + composants
 
 | Composant | Rôle |
 | --- | --- |
@@ -100,7 +100,7 @@ npm install react-router-dom @microsoft/signalr recharts
 
 ---
 
-### 8. Composants utilitaires — `src/components/`
+### 8. Composants utilitaires - `src/components/`
 
 | Composant | Rôle |
 | --- | --- |

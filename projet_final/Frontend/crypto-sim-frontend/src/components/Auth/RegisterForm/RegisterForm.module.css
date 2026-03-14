@@ -1,19 +1,19 @@
 .register-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--spacing-md);
 }
 
 .register-form input {
   padding: 14px;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   border: var(--border-thick);
   outline: none;
   background: var(--main-bg);
   color: var(--text-primary);
   font-size: var(--font-size-md);
   font-family: inherit;
-  transition: var(--transition-normal);
+  transition: var(--transition-fast);
 }
 
 .register-form input::placeholder {
@@ -22,27 +22,31 @@
 
 .register-form input:focus {
   border-color: var(--light-blue);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-glow);
 }
 
 .register-form button {
+  margin-block: var(--spacing-md);
   padding: 14px;
-  border: none;
-  border-radius: var(--radius-lg);
+  border: var(--border-thick);
+  border-radius: var(--radius-md);
   background: var(--light-blue);
   color: var(--main-bg);
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-md);
   font-family: inherit;
   cursor: pointer;
-  transition: var(--transition-normal);
-  margin-top: 20px;
+  box-shadow: var(--shadow-retro);
+  transition: transform var(--transition-fast);
 }
 
 .register-form button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px var(--shadow);
-  opacity: 0.9;
+}
+
+.register-form button:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .register-form h2 {
@@ -51,12 +55,12 @@
   margin-bottom: var(--spacing-sm);
 }
 
-
-
 .register-error {
   background: var(--light-red);
   color: var(--text-primary);
-  padding: 10px;
+  padding: var(--spacing-sm);
   text-align: center;
-  border-radius: 15px;
+  border-radius: var(--radius-md);
+  border: var(--border-thick);
+  font-size: var(--font-size-sm);
 }

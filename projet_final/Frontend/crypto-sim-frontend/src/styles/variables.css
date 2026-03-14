@@ -63,7 +63,7 @@
     --shadow-sm: 0 2px 4px var(--shadow-color);
     --shadow-md: 0 4px 6px var(--shadow-color);
     --shadow-lg: 0 10px 15px var(--shadow-color);
-    --shadow-retro: 6px 6px 0px var(--shadow-color);
+    --shadow-retro: 10px 10px 0px #00000064;
     --shadow-glow: 0 0 10px rgba(121, 171, 222, 0.2);
     /* Lueur light-blue */
 

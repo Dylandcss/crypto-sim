@@ -1,9 +1,11 @@
-import { getHoldings } from '../../../services/portfolioService'
 import { useMemo } from 'react'
-import styles from './PortfolioChart.module.css'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
+import { getHoldings } from '../../../services/portfolioService'
 import useFetch from '../../../hooks/useFetch'
+import Loader from '../../common/Loader/Loader'
+import DisplayMessage from '../../common/DisplayMessage/DisplayMessage'
+import styles from './PortfolioChart.module.css'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -27,10 +29,11 @@ const chartOptions = {
       position: 'right',
       labels: {
         color: '#e2e8f0',
-        font: { family: "'VCR_OSD', 'Pixelify Sans', sans-serif", size: 13, weight: '500' },
+        font: { family: "'VT323', 'Pixelify Sans', sans-serif", size: 18, weight: '500' },
         padding: 16,
         usePointStyle: true,
-        pointStyleWidth: 12,
+        pointStyle: 'rect',
+        pointStyleWidth: 14,
       },
     },
     tooltip: {
@@ -40,8 +43,8 @@ const chartOptions = {
       borderColor: '#334155',
       borderWidth: 1,
       padding: 12,
-      titleFont: { family: "'VCR_OSD', 'Pixelify Sans', sans-serif" },
-      bodyFont: { family: "'VCR_OSD', 'Pixelify Sans', sans-serif" },
+      titleFont: { family: "'VT323', 'Pixelify Sans', sans-serif", size: 16 },
+      bodyFont: { family: "'VT323', 'Pixelify Sans', sans-serif", size: 15 },
       callbacks: {
         label: (ctx) => {
           const total = ctx.dataset.data.reduce((a, b) => a + b, 0)
@@ -72,39 +75,22 @@ function PortfolioChart() {
     [holdings],
   )
 
-  if (loading) {
+  const renderContent = () => {
+    if (loading) return <Loader message="Chargement du graphique…" />
+    if (error) return <DisplayMessage type="error" message={error} />
+    if (!holdings || holdings.length === 0)
+      return <DisplayMessage type="info" message="Aucun actif à afficher." />
     return (
-      <div className={styles['portfolio-chart']}>
-        <h2 className={styles['portfolio-chart__title']}>Répartition du portfolio</h2>
-        <p className={styles['portfolio-chart__message']}>Chargement du graphique…</p>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className={styles['portfolio-chart']}>
-        <h2 className={styles['portfolio-chart__title']}>Répartition du portfolio</h2>
-        <p className={styles['portfolio-chart__error']}>Erreur: {error}</p>
-      </div>
-    )
-  }
-
-  if (!holdings || holdings.length === 0) {
-    return (
-      <div className={styles['portfolio-chart']}>
-        <h2 className={styles['portfolio-chart__title']}>Répartition du portfolio</h2>
-        <p className={styles['portfolio-chart__message']}>Aucun actif à afficher.</p>
+      <div className={styles['portfolio-chart__container']}>
+        <Doughnut data={chartData} options={chartOptions} />
       </div>
     )
   }
 
   return (
     <div className={styles['portfolio-chart']}>
-      <h2 className={styles['portfolio-chart__title']}>Répartition du portfolio</h2>
-      <div className={styles['portfolio-chart__container']}>
-        <Doughnut data={chartData} options={chartOptions} />
-      </div>
+      <h2 className={styles['portfolio-chart__title']}>Répartition</h2>
+      {renderContent()}
     </div>
   )
 }

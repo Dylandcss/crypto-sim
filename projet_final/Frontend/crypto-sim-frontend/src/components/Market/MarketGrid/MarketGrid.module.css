@@ -6,9 +6,9 @@
 }
 
 .emptyState {
-  padding: 3rem;
+  padding: var(--spacing-xl);
   text-align: center;
   color: var(--text-muted);
   background-color: var(--widget-bg);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
 }

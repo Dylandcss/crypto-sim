@@ -7,7 +7,7 @@ import styles from './PortfolioPage.module.css'
 function PortfolioPage() {
   return (
     <div className={styles['portfolio-page']}>
-      <div className={styles['portfolio-page__flex']}>
+      <div className={styles['portfolio-page__top']}>
         <PortfolioSummary />
         <PerformanceCard />
         <PortfolioChart />
