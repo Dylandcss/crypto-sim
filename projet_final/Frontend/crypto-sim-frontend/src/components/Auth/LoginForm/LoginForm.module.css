@@ -47,7 +47,11 @@
 
 .login-form h2 {
   color: var(--text-primary);
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
 }
+
+
 
 .login-error {
   background: var(--light-red);

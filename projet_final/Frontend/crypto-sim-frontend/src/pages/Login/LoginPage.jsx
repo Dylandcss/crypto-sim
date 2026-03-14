@@ -2,6 +2,7 @@ import styles from './LoginPage.module.css'
 import LoginForm from '../../components/Auth/LoginForm/LoginForm'
 import { Link, Navigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
+import logo from '../../assets/images/logo.png'
 
 function LoginPage() {
   const { isAuthenticated } = useAuth()
@@ -12,8 +13,8 @@ function LoginPage() {
 
   return (
     <div className={styles['login-page']}>
+      <img src={logo} alt="CryptoSim" className={styles['page-logo']} />
       <div className={styles['login-card']}>
-        <h1>CryptoSim</h1>
         <LoginForm />
         <Link to="/register" className={styles['register-link']}>
           Vous n'avez pas de compte? Inscrivez-vous ici.

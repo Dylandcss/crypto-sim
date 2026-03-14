@@ -12,17 +12,3 @@
   color: var(--text-primary);
   letter-spacing: -0.01em;
 }
-
-.performance-card__message {
-  color: var(--text-muted);
-  font-size: var(--font-size-sm);
-}
-
-.performance-card__gain {
-  color: var(--light-green);
-}
-
-.performance-card__loss,
-.performance-card__error {
-  color: var(--light-red);
-}

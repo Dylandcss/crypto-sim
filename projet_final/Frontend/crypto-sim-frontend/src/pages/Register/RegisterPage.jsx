@@ -1,7 +1,8 @@
 import RegisterForm from '../../components/Auth/RegisterForm/RegisterForm'
 import styles from './RegisterPage.module.css'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
+import logo from '../../assets/images/logo.png'
 
 function RegisterPage() {
   const { isAuthenticated } = useAuth()
@@ -12,9 +13,12 @@ function RegisterPage() {
 
   return (
     <div className={styles['register-page']}>
+      <img src={logo} alt="CryptoSim" className={styles['page-logo']} />
       <div className={styles['register-card']}>
-        <h1>CryptoSim</h1>
         <RegisterForm />
+        <Link to="/login" className={styles['login-link']}>
+          Déjà un compte ? Connectez-vous ici.
+        </Link>
       </div>
     </div>
   )

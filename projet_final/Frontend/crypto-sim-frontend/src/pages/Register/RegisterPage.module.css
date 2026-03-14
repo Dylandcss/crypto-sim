@@ -1,23 +1,40 @@
 .register-page {
   height: 100vh;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background: var(--main-bg);
+  gap: var(--spacing-md);
 }
 
 .register-card {
-  background: var(--widget-bg);
+  background-color: var(--sidebar-bg);
+  padding: 0.75rem 1.5rem;
   border-radius: var(--radius-lg);
-  padding: 50px;
-  width: 460px;
-  box-shadow: var(--shadow-lg);
-  text-align: center;
   border: var(--border-thick);
+  box-shadow: var(--shadow-retro);
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.register-card h1 {
-  margin-bottom: 30px;
+.page-logo {
+  width: 256px;
+  margin-bottom: var(--spacing-xl);
+}
+
+.login-link {
+  margin-top: 20px;
+  color: var(--light-gray);
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  text-align: center;
+}
+
+.login-link:hover {
   color: var(--light-blue);
-  font-size: var(--font-size-xxl);
-  font-weight: var(--font-weight-bold);
 }

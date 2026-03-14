@@ -12,7 +12,7 @@
 }
 
 .transactionTableHeader {
-  background-color: var(--shadow);
+  background-color: var(--sidebar-bg);
 }
 
 .transactionTableHeaderRow {
@@ -38,12 +38,6 @@
   color: var(--light-green);
 }
 
-.Sell,
-.error {
+.Sell {
   color: var(--light-red);
-}
-
-.loading {
-  color: var(--text-muted);
-  font-size: var(--font-size-sm);
 }

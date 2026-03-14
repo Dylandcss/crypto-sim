@@ -47,7 +47,11 @@
 
 .register-form h2 {
   color: var(--text-primary);
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
 }
+
+
 
 .register-error {
   background: var(--light-red);

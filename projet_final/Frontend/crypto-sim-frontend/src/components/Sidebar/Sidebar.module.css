@@ -19,22 +19,11 @@
   align-items: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-md) var(--spacing-sm) var(--spacing-lg);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
 }
 
 .sidebar-logo {
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-title);
-  color: var(--light-blue);
-  flex-shrink: 0;
-  line-height: 1;
-}
-
-.sidebar-title {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
-  letter-spacing: 0.5px;
+  width: 220px;
 }
 
 .sidebar-nav {

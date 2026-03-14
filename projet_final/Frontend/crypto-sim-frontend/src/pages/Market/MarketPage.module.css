@@ -12,7 +12,7 @@
 }
 
 .searchInput {
-  width: 100%;
+  width: 80%;
   padding: 16px 16px 16px 48px;
   background: var(--sidebar-bg);
   border: var(--border-thick);

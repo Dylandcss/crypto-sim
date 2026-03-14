@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
+import { formatBalance } from '../../utils/formatters'
 import styles from './Navbar.module.css'
 import moneyBagIcon from '../../assets/images/moneybag_icon.png'
 
@@ -32,10 +33,7 @@ function Navbar() {
 
         <img className={styles['navbar-moneybag-icon']} src={moneyBagIcon} alt="Moneybag" />
         <span className={styles['navbar-balance']}>
-          {Number(user?.balance ?? 0).toLocaleString('us-US', {
-            style: 'currency',
-            currency: 'USD',
-          })}
+          {formatBalance(user?.balance)}
         </span>
         <button className={styles['navbar-logout']} onClick={handleLogout}>
           Déconnexion

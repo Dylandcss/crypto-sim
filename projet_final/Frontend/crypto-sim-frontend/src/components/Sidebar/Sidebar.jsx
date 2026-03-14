@@ -1,12 +1,12 @@
 import { NavLink } from 'react-router-dom'
 import styles from './Sidebar.module.css'
+import logo from '../../assets/images/logo.png'
 
 function Sidebar() {
   return (
     <aside className={styles.sidebar}>
       <div className={styles['sidebar-header']}>
-        <div className={styles['sidebar-logo']}>C</div>
-        <span className={styles['sidebar-title']}>CryptoSim</span>
+        <img src={logo} alt="CryptoSim" className={styles['sidebar-logo']} />
       </div>
 
       <nav className={styles['sidebar-nav']}>

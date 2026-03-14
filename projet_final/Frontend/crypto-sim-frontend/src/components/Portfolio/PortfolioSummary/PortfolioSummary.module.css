@@ -6,17 +6,3 @@
   border: var(--border-thick);
   flex: 1;
 }
-
-.loss,
-.error {
-  color: var(--light-red);
-}
-
-.gain {
-  color: var(--light-green);
-}
-
-.loading {
-  color: var(--text-muted);
-  font-size: var(--font-size-sm);
-}
