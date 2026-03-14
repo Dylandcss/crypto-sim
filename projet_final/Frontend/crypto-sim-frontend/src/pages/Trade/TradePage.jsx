@@ -30,7 +30,7 @@ const TradePage = () => {
     Promise.all([getCryptoBySymbol(symbol), getCryptoPriceHistory(symbol, 100)])
       .then(([cryptoData, historyData]) => {
         setCrypto(cryptoData);
-        setHistory(historyData);
+        setHistory(historyData.map(p => ({ timestamp: p.recordedAt, price: p.price })).reverse());
         prevPriceRef.current = cryptoData.currentPrice;
       })
       .catch(() => setError('Erreur lors du chargement des données.'))
