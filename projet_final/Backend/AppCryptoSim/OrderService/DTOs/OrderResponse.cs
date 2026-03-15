@@ -12,5 +12,6 @@ public record OrderResponse(
     decimal Price,
     decimal Total,
     OrderStatus Status,
-    DateTime ExecutedAt
+    DateTime ExecutedAt,
+    decimal? LimitPrice
 );

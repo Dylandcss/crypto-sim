@@ -25,6 +25,9 @@ public static class EnvConstants
     public const string FrontendUrl = "FRONTEND_URL";
     public const string CorsPolicyName = "AllowReactApp";
 
-    // HUB 
+    // HUB
     public const string MarketHubPath = "MARKET_HUB_PATH";
+
+    // Communication inter-services
+    public const string InternalApiKey = "INTERNAL_API_KEY";
 }

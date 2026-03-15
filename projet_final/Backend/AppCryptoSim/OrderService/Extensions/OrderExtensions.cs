@@ -16,7 +16,8 @@ public static class OrderExtensions
             Price: order.Price,
             Total: order.Total,
             Status: order.Status,
-            ExecutedAt: order.ExecutedAt ?? order.CreatedAt
+            ExecutedAt: order.ExecutedAt ?? order.CreatedAt,
+            LimitPrice: order.LimitPrice
         );
     }
 

@@ -17,4 +17,6 @@ public interface IOrderRepository
 
     Task DeleteOrderAsync(int orderId);
 
+    Task<List<Order>> GetPendingLimitOrdersAsync();
+
 }

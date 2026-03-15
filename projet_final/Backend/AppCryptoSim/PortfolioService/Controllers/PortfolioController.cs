@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CryptoSim.Shared.Constants;
+using CryptoSim.Shared.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PortfolioService.Dtos;
 using PortfolioService.Models;
 using PortfolioService.Services;
-using CryptoSim.Shared.Extensions;
 
 namespace PortfolioService.Controllers;
 
@@ -13,11 +14,17 @@ namespace PortfolioService.Controllers;
 public class PortfolioController : ControllerBase
 {
         private readonly IPortfolioManagementService _portfolioService;
+        private readonly IConfiguration _config;
 
-        public PortfolioController(IPortfolioManagementService portfolioService)
+        public PortfolioController(IPortfolioManagementService portfolioService, IConfiguration config)
         {
             _portfolioService = portfolioService;
+            _config = config;
         }
+
+        private bool IsInternalRequest() =>
+            Request.Headers.TryGetValue("X-Internal-Key", out var key) &&
+            key == _config[EnvConstants.InternalApiKey];
 
         /// <summary>
         /// Récupère le résumé complet du portefeuille pour l'utilisateur connecté
@@ -89,6 +96,26 @@ public class PortfolioController : ControllerBase
             var userId = User.GetUserId();
 
             await _portfolioService.UpdatePortfolioAfterTradeAsync(userId, dto.CryptoSymbol, dto.Type, dto.Quantity, dto.PriceAtTime);
+            return Ok();
+        }
+
+        // --- Endpoints internes (appelés par OrderService via X-Internal-Key) ---
+
+        [HttpGet("internal/holdings/{symbol}/quantity/{userId:int}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetHoldingQuantityInternalAsync(string symbol, int userId)
+        {
+            if (!IsInternalRequest()) return Unauthorized();
+            var holding = await _portfolioService.GetHoldingAsync(userId, symbol, "");
+            return Ok(new { CryptoSymbol = symbol, Quantity = holding?.Quantity ?? 0 });
+        }
+
+        [HttpPost("internal/holdings")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdatePortfolioInternalAsync([FromBody] InternalUpdatePortfolioDto dto)
+        {
+            if (!IsInternalRequest()) return Unauthorized();
+            await _portfolioService.UpdatePortfolioAfterTradeAsync(dto.UserId, dto.CryptoSymbol, dto.Type, dto.Quantity, dto.PriceAtTime);
             return Ok();
         }
 }

@@ -40,5 +40,8 @@ public class Order
     [Required]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    public DateTime? ExecutedAt { get; set; } 
+    public DateTime? ExecutedAt { get; set; }
+
+    // Ordres limites
+    public decimal? LimitPrice { get; set; }
 }

@@ -21,7 +21,7 @@ public class PriceHistoryRepository : IPriceHistoryRepository
         await _context.SaveChangesAsync();
     }
 
-    public Task<List<PriceHistory>> GetPriceHistoryAsync(string symbol, int limit = 50, int skip = 0)
+    public Task<List<PriceHistory>> GetPriceHistoryAsync(string symbol, int limit = 20, int skip = 0)
     {
 
         return _context.PriceHistory

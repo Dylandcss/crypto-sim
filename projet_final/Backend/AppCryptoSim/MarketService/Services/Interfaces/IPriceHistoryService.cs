@@ -6,7 +6,7 @@ namespace MarketService.Services.Interfaces;
 public interface IPriceHistoryService
 {
     
-    Task<List<PriceHistoryResponse>> GetPriceHistoryListAsync(string symbol, int limit = 50, int skip = 0);
+    Task<List<PriceHistoryResponse>> GetPriceHistoryListAsync(string symbol, int limit = 20, int skip = 0);
     
     Task AddNewPriceHistoryAsync(string symbol, decimal price);
 

@@ -41,7 +41,16 @@ public abstract class BaseApiClient
         return result;
     }
 
-    private async Task<TResponse?> SendRequestAsync<TResponse, TRequest>(HttpMethod method, string endpoint, TRequest? bodyData, string? token)
+    protected async Task<TResponse?> GetInternalAsync<TResponse>(string endpoint, string internalKey)
+        => await SendRequestAsync<TResponse, object>(HttpMethod.Get, endpoint, null, token: null, internalKey: internalKey);
+
+    protected async Task<bool> PutInternalAsync<TRequest>(string endpoint, TRequest bodyData, string internalKey)
+        => await SendRequestAsync<bool, TRequest>(HttpMethod.Put, endpoint, bodyData, token: null, internalKey: internalKey);
+
+    protected async Task<TResponse?> PostInternalAsync<TResponse, TRequest>(string endpoint, TRequest bodyData, string internalKey)
+        => await SendRequestAsync<TResponse, TRequest>(HttpMethod.Post, endpoint, bodyData, token: null, internalKey: internalKey);
+
+    private async Task<TResponse?> SendRequestAsync<TResponse, TRequest>(HttpMethod method, string endpoint, TRequest? bodyData, string? token, string? internalKey = null)
     {
         try
         {
@@ -49,6 +58,9 @@ public abstract class BaseApiClient
 
             if (!string.IsNullOrEmpty(token))
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            if (!string.IsNullOrEmpty(internalKey))
+                request.Headers.Add("X-Internal-Key", internalKey);
 
             if (bodyData != null)
                 request.Content = JsonContent.Create(bodyData);

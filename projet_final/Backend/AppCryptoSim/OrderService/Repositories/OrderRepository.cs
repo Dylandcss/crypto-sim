@@ -44,6 +44,13 @@ public class OrderRepository : IOrderRepository
         return await _context.Orders.Where(o => o.UserId == userId).OrderBy(o => o.CreatedAt).ToListAsync();
     }
 
+    public async Task<List<Order>> GetPendingLimitOrdersAsync()
+    {
+        return await _context.Orders
+            .Where(o => o.Status == OrderStatus.Pending && o.LimitPrice.HasValue)
+            .ToListAsync();
+    }
+
     public async Task UpdateOrderStatusAsync(int orderId, OrderStatus newStatus, DateTime? executedAt = null)
     {
         await _context.Orders

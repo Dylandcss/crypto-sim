@@ -17,7 +17,8 @@ builder
 
 builder.Services
     .AddScoped<IOrderRepository, OrderRepository>()
-    .AddScoped<IOrderService, OrderManagementService>();
+    .AddScoped<IOrderService, OrderManagementService>()
+    .AddHostedService<LimitOrderExecutorService>();
 
 
 builder.Services.AddHttpClient<AuthApiClient>();
