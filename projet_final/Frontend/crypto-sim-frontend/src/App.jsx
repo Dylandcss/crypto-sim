@@ -1,4 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
+import { CRTProvider } from './context/CRTContext.jsx';
+import CRTOverlay from './components/CRTOverlay/CRTOverlay.jsx';
 import LoginPage from './pages/Login/LoginPage.jsx';
 import RegisterPage from './pages/Register/RegisterPage.jsx';
 import MarketPage from './pages/Market/MarketPage.jsx';
@@ -11,20 +13,25 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
+    <CRTProvider>
+      <CRTOverlay />
+      <div id="app-root">
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
 
-      <Route element={<ProtectedRoute />}>
-        <Route path="/market" element={<MarketPage />} />
-        <Route path="/portfolio" element={<PortfolioPage />} />
-        <Route path="/trade/:symbol" element={<TradePage />} />
-        <Route path="/portfolio/holdings/:symbol" element={<HoldingDetails />} />
-        <Route path="/history" element={<HistoryPage />} />
-        <Route path="/profil" element={<Profil />} />
-      </Route>
-    </Routes>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/market" element={<MarketPage />} />
+            <Route path="/portfolio" element={<PortfolioPage />} />
+            <Route path="/trade/:symbol" element={<TradePage />} />
+            <Route path="/portfolio/holdings/:symbol" element={<HoldingDetails />} />
+            <Route path="/history" element={<HistoryPage />} />
+            <Route path="/profil" element={<Profil />} />
+          </Route>
+        </Routes>
+      </div>
+    </CRTProvider>
   );
 }
 

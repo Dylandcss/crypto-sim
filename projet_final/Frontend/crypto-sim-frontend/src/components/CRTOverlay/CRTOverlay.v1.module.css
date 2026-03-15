@@ -1,0 +1,126 @@
+/* ── Conteneur overlay ── */
+.crt {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  overflow: hidden;
+  /* Ombre interne pour accentuer la courbure */
+  box-shadow:
+    inset 0 0 80px rgba(0, 0, 0, 0.35),
+    inset 0 0 180px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Scanlines + vignette (même technique que retro.css) ── */
+.scanlines {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.32) 50%),
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.55) 100%);
+  background-size: 100% 4px, 100% 100%;
+  pointer-events: none;
+}
+
+/* ── Lueur phosphore verte ── */
+.phosphor {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(0, 255, 60, 0.05) 0%,
+    transparent 60%
+  );
+}
+
+/* ── Barres de glitch horizontales ── */
+.glitch {
+  position: absolute;
+  inset: 0;
+  animation: glitch-bars 9s step-start infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes glitch-bars {
+  0%, 88%, 92%, 96%, 100% { opacity: 0; }
+  89%, 90% {
+    opacity: 1;
+    background:
+      linear-gradient(transparent 22%, rgba(255, 255, 255, 0.05) 22.4%, transparent 22.9%),
+      linear-gradient(transparent 57%, rgba(255, 255, 255, 0.07) 57.5%, transparent 58.1%),
+      linear-gradient(transparent 78%, rgba(255, 255, 255, 0.04) 78.3%, transparent 78.8%);
+    transform: translateX(-6px);
+  }
+  91% {
+    opacity: 1;
+    background:
+      linear-gradient(transparent 35%, rgba(255, 255, 255, 0.06) 35.5%, transparent 36%),
+      linear-gradient(transparent 68%, rgba(255, 255, 255, 0.05) 68.4%, transparent 69%);
+    transform: translateX(8px);
+  }
+  93%, 94%, 95% {
+    opacity: 1;
+    background: linear-gradient(transparent 10%, rgba(255, 255, 255, 0.09) 10.4%, transparent 10.9%);
+    transform: translateX(-4px);
+  }
+  97%, 98%, 99% {
+    opacity: 1;
+    background: linear-gradient(transparent 50%, rgba(255, 255, 255, 0.04) 50.3%, transparent 50.7%);
+    transform: translateX(5px);
+  }
+}
+
+/* ── Ligne de balayage phosphore ── */
+.sweep {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.06) 50%,
+    transparent
+  );
+  animation: sweep 10s linear infinite;
+  will-change: transform;
+}
+
+@keyframes sweep {
+  from { transform: translateY(-10px); }
+  to   { transform: translateY(100vh); }
+}
+
+/* ── Scintillement rapide (comme retro.css 0.15s) ── */
+.flicker {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.04);
+  opacity: 0;
+  animation: flicker 0.18s infinite;
+}
+
+@keyframes flicker {
+  0%   { opacity: 0.10; }
+  5%   { opacity: 0.22; }
+  10%  { opacity: 0.08; }
+  15%  { opacity: 0.30; }
+  20%  { opacity: 0.07; }
+  25%  { opacity: 0.38; }
+  30%  { opacity: 0.09; }
+  35%  { opacity: 0.18; }
+  40%  { opacity: 0.06; }
+  45%  { opacity: 0.28; }
+  50%  { opacity: 0.08; }
+  55%  { opacity: 0.15; }
+  60%  { opacity: 0.07; }
+  65%  { opacity: 0.25; }
+  70%  { opacity: 0.09; }
+  75%  { opacity: 0.20; }
+  80%  { opacity: 0.06; }
+  85%  { opacity: 0.35; }
+  90%  { opacity: 0.08; }
+  95%  { opacity: 0.18; }
+  100% { opacity: 0.10; }
+}
+

@@ -1,0 +1,18 @@
+/* Fond noir visible derrière l'écran "rétréci" */
+/* Conteneur principal : courbure + scale + aberration chromatique */
+#app-root.crt-active {
+  overflow: hidden;
+  text-shadow: 2px 0 1px rgba(255, 0, 0, 0.55), -2px 0 1px rgba(0, 255, 255, 0.55);
+  animation: crt-turn-on 0.5s ease-out;
+}
+
+@keyframes crt-turn-on {
+  0% {
+    transform: scale(1, 0.01) translate3d(0, 0, 0);
+    filter: brightness(30);
+  }
+  100% {
+    transform: scale(1, 1) translate3d(0, 0, 0);
+    filter: brightness(1);
+  }
+}

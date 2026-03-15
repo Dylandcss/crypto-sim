@@ -22,7 +22,7 @@ function HoldingsList() {
           <tr>
             <th colSpan={2}>Crypto</th>
             <th>Quantité</th>
-            <th>Prix d'achat moyen</th>
+            <th>Prix d'achat</th>
             <th>Prix actuel</th>
             <th>Valeur totale</th>
             <th>Gain/Perte</th>

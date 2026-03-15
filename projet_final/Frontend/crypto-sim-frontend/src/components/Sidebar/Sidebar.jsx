@@ -1,10 +1,11 @@
 import { NavLink } from 'react-router-dom'
-import { Store, Wallet, User, Clock } from '@nsmr/pixelart-react'
+import { Store, Wallet, User, Clock, DeviceTv } from '@nsmr/pixelart-react'
+import { useCRT } from '../../context/CRTContext'
 import styles from './Sidebar.module.css'
 import logo from '../../assets/images/logo.png'
 
 function Sidebar() {
-
+  const { enabled, toggle } = useCRT()
 
   return (
     <aside className={styles.sidebar}>
@@ -43,9 +44,19 @@ function Sidebar() {
           <span>Profil</span>
         </NavLink>
       </nav>
+
+      <div className={styles['sidebar-footer']}>
+        <button
+          className={`${styles['crt-toggle']} ${enabled ? styles['crt-active'] : ''}`}
+          onClick={toggle}
+          title={enabled ? 'Désactiver effet CRT' : 'Activer effet CRT'}
+        >
+          <DeviceTv size={20} />
+          <span>Effet CRT</span>
+        </button>
+      </div>
     </aside>
   )
 }
-
 
 export default Sidebar

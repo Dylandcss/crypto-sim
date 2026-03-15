@@ -54,4 +54,36 @@
   color: var(--text-primary);
   background: var(--sidebar-active-item);
 }
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: var(--spacing-md);
+  border-top: 2px solid var(--border-color);
+}
+
+.crt-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  padding: 12px var(--spacing-md);
+  border-radius: var(--radius-md);
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.crt-toggle:hover {
+  color: var(--text-primary);
+  background: var(--sidebar-active-item);
+}
+
+.crt-active {
+  color: var(--light-blue);
+}
 
