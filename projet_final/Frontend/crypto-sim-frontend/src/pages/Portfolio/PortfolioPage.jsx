@@ -1,0 +1,20 @@
+import HoldingsList from '../../components/Portfolio/HoldingsList/HoldingsList'
+import PortfolioChart from '../../components/Portfolio/PortfolioChart/PortfolioChart'
+import PortfolioSummary from '../../components/Portfolio/PortfolioSummary/PortfolioSummary'
+import PerformanceCard from '../../components/Portfolio/PerformanceCard/PerformanceCard'
+import styles from './PortfolioPage.module.css'
+
+function PortfolioPage() {
+  return (
+    <div className={styles['portfolio-page']}>
+      <div className={styles['portfolio-page__top']}>
+        <PortfolioSummary />
+        <PerformanceCard />
+        <PortfolioChart />
+      </div>
+      <HoldingsList />
+    </div>
+  )
+}
+
+export default PortfolioPage

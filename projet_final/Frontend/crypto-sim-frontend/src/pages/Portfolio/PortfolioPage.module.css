@@ -1,0 +1,30 @@
+.portfolio-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.portfolio-page__top {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--spacing-lg);
+  align-items: stretch;
+}
+
+@media (max-width: 1100px) {
+  .portfolio-page__top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .portfolio-page__top {
+    grid-template-columns: 1fr;
+  }
+}

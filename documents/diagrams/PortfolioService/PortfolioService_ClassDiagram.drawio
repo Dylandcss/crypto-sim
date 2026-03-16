@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1654" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- TITRE -->
+    <mxCell id="title" value="PortfolioService - Diagramme de Classes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="200" y="10" width="900" height="30" as="geometry"/>
+    </mxCell>
+
+    <!-- LEGENDE -->
+    <mxCell id="leg1" value="Controller" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="20" y="50" width="100" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg2" value="Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="130" y="50" width="100" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg3" value="Repository" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="240" y="50" width="100" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg4" value="HTTP Client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="350" y="50" width="100" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg5" value="Entity / DTO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="460" y="50" width="100" height="25" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- PortfolioController                                          -->
+    <!-- ============================================================ -->
+    <mxCell id="ctrl" value="PortfolioController" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="20" y="100" width="280" height="245" as="geometry"/>
+    </mxCell>
+    <mxCell id="ctrl_stereo" value="&lt;&lt;Controller&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="ctrl">
+      <mxGeometry x="0" y="25" width="280" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="ctrl_sep1" value="" style="line;strokeColor=#6c8ebf;" vertex="1" parent="ctrl">
+      <mxGeometry x="0" y="42" width="280" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="ctrl_attrs" value="- _portfolioService : IPortfolioService" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="ctrl">
+      <mxGeometry x="5" y="52" width="270" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="ctrl_sep2" value="" style="line;strokeColor=#6c8ebf;" vertex="1" parent="ctrl">
+      <mxGeometry x="0" y="75" width="280" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="ctrl_methods" value="+ GetPortfolioSummaryAsync() : Task&lt;IActionResult&gt;&#xa;+ GetHoldingsAsync() : Task&lt;IActionResult&gt;&#xa;+ GetHoldingBySymbolAsync(symbol) : Task&lt;IActionResult&gt;&#xa;+ GetTransactionsAsync() : Task&lt;IActionResult&gt;&#xa;+ GetPerformanceAsync() : Task&lt;IActionResult&gt;&#xa;+ UpdatePortfolioAsync(dto) : Task&lt;IActionResult&gt;&#xa;+ UpdatePortfolioInternalAsync(dto) : Task&lt;IActionResult&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="ctrl">
+      <mxGeometry x="5" y="85" width="270" height="150" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- IPortfolioService                                           -->
+    <!-- ============================================================ -->
+    <mxCell id="isvc" value="IPortfolioService" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="350" y="100" width="290" height="195" as="geometry"/>
+    </mxCell>
+    <mxCell id="isvc_stereo" value="&lt;&lt;interface&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="isvc">
+      <mxGeometry x="0" y="25" width="290" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="isvc_sep" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="isvc">
+      <mxGeometry x="0" y="42" width="290" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="isvc_methods" value="+ GetSummaryAsync(userId) : Task&lt;PortfolioSummary&gt;&#xa;+ GetHoldingsAsync(userId) : Task&lt;IEnumerable&lt;HoldingDetail&gt;&gt;&#xa;+ GetHoldingBySymbolAsync(userId, symbol) : Task&lt;HoldingDetail&gt;&#xa;+ GetTransactionsAsync(userId) : Task&lt;IEnumerable&lt;TransactionDto&gt;&gt;&#xa;+ GetPerformanceAsync(userId) : Task&lt;PortfolioPerformanceDto&gt;&#xa;+ UpdateAfterTradeAsync(dto) : Task" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="isvc">
+      <mxGeometry x="5" y="52" width="280" height="135" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- PortfolioManagementService                                   -->
+    <!-- ============================================================ -->
+    <mxCell id="svc" value="PortfolioManagementService" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="350" y="345" width="290" height="260" as="geometry"/>
+    </mxCell>
+    <mxCell id="svc_stereo" value="implements IPortfolioService" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="svc">
+      <mxGeometry x="0" y="25" width="290" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="svc_sep1" value="" style="line;strokeColor=#82b366;" vertex="1" parent="svc">
+      <mxGeometry x="0" y="42" width="290" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="svc_attrs" value="- _repo : IPortfolioRepository&#xa;- _authClient : AuthApiClient&#xa;- _marketClient : MarketApiClient" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="svc">
+      <mxGeometry x="5" y="52" width="280" height="55" as="geometry"/>
+    </mxCell>
+    <mxCell id="svc_sep2" value="" style="line;strokeColor=#82b366;" vertex="1" parent="svc">
+      <mxGeometry x="0" y="110" width="290" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="svc_methods" value="+ GetSummaryAsync(userId) : Task&lt;PortfolioSummary&gt;&#xa;+ GetHoldingsAsync(userId) : Task&lt;IEnumerable&lt;HoldingDetail&gt;&gt;&#xa;+ GetHoldingBySymbolAsync(userId, symbol) : Task&lt;HoldingDetail&gt;&#xa;+ GetTransactionsAsync(userId) : Task&lt;IEnumerable&lt;TransactionDto&gt;&gt;&#xa;+ GetPerformanceAsync(userId) : Task&lt;PortfolioPerformanceDto&gt;&#xa;+ UpdateAfterTradeAsync(dto) : Task&#xa;- CalcWeightedAvgPrice(holding, dto) : decimal" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="svc">
+      <mxGeometry x="5" y="120" width="280" height="130" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- HTTP Clients                                                 -->
+    <!-- ============================================================ -->
+    <mxCell id="auth_client" value="AuthApiClient" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="700" y="100" width="210" height="110" as="geometry"/>
+    </mxCell>
+    <mxCell id="auth_stereo" value="extends BaseApiClient" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="auth_client">
+      <mxGeometry x="0" y="25" width="210" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="auth_sep" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="auth_client">
+      <mxGeometry x="0" y="42" width="210" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="auth_methods" value="+ GetBalanceAsync(userId) : Task&lt;decimal&gt;&#xa;+ UpdateBalanceAsync(userId, amount) : Task" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="auth_client">
+      <mxGeometry x="5" y="52" width="200" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="market_client" value="MarketApiClient" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="700" y="240" width="210" height="100" as="geometry"/>
+    </mxCell>
+    <mxCell id="market_stereo" value="extends BaseApiClient" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="market_client">
+      <mxGeometry x="0" y="25" width="210" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="market_sep" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="market_client">
+      <mxGeometry x="0" y="42" width="210" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="market_methods" value="+ GetSnapshotAsync() : Task&lt;List&lt;CryptoDto&gt;&gt;&#xa;+ GetCryptoPriceAsync(symbol) : Task&lt;decimal&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="market_client">
+      <mxGeometry x="5" y="52" width="200" height="40" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- IPortfolioRepository + PortfolioRepository                  -->
+    <!-- ============================================================ -->
+    <mxCell id="irepo" value="IPortfolioRepository" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="20" y="390" width="290" height="190" as="geometry"/>
+    </mxCell>
+    <mxCell id="irepo_stereo" value="&lt;&lt;interface&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="irepo">
+      <mxGeometry x="0" y="25" width="290" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="irepo_sep" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="irepo">
+      <mxGeometry x="0" y="42" width="290" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="irepo_methods" value="+ GetHoldingAsync(userId, symbol) : Task&lt;Holding&gt;&#xa;+ GetHoldingsAsync(userId) : Task&lt;IEnumerable&lt;Holding&gt;&gt;&#xa;+ AddHoldingAsync(holding) : Task&#xa;+ UpdateHoldingAsync(holding) : Task&#xa;+ AddTransactionAsync(tx) : Task&#xa;+ GetTransactionsAsync(userId) : Task&lt;IEnumerable&lt;Transaction&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="irepo">
+      <mxGeometry x="5" y="52" width="280" height="130" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="repo" value="PortfolioRepository" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="20" y="630" width="290" height="200" as="geometry"/>
+    </mxCell>
+    <mxCell id="repo_stereo" value="implements IPortfolioRepository" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="repo">
+      <mxGeometry x="0" y="25" width="290" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="repo_sep1" value="" style="line;strokeColor=#d6b656;" vertex="1" parent="repo">
+      <mxGeometry x="0" y="42" width="290" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="repo_attrs" value="- _db : PortfolioDbContext" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="repo">
+      <mxGeometry x="5" y="52" width="280" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="repo_sep2" value="" style="line;strokeColor=#d6b656;" vertex="1" parent="repo">
+      <mxGeometry x="0" y="75" width="290" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="repo_methods" value="+ GetHoldingAsync(userId, symbol) : Task&lt;Holding&gt;&#xa;+ GetHoldingsAsync(userId) : Task&lt;IEnumerable&lt;Holding&gt;&gt;&#xa;+ AddHoldingAsync(holding) : Task&#xa;+ UpdateHoldingAsync(holding) : Task&#xa;+ AddTransactionAsync(tx) : Task&#xa;+ GetTransactionsAsync(userId) : Task&lt;IEnumerable&lt;Transaction&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="repo">
+      <mxGeometry x="5" y="85" width="280" height="105" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- ENTITIES                                                     -->
+    <!-- ============================================================ -->
+    <mxCell id="holding_entity" value="Holding" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="700" y="390" width="240" height="155" as="geometry"/>
+    </mxCell>
+    <mxCell id="hld_stereo" value="&lt;&lt;entity&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="holding_entity">
+      <mxGeometry x="0" y="25" width="240" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="hld_sep" value="" style="line;strokeColor=#666666;" vertex="1" parent="holding_entity">
+      <mxGeometry x="0" y="42" width="240" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="hld_attrs" value="+ Id : int [PK]&#xa;+ UserId : int&#xa;+ CryptoSymbol : string&#xa;+ Quantity : decimal&#xa;+ AverageBuyPrice : decimal&#xa;+ UpdatedAt : DateTime" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="holding_entity">
+      <mxGeometry x="5" y="52" width="230" height="95" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="tx_entity" value="Transaction" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="700" y="580" width="240" height="175" as="geometry"/>
+    </mxCell>
+    <mxCell id="tx_stereo" value="&lt;&lt;entity&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="tx_entity">
+      <mxGeometry x="0" y="25" width="240" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="tx_sep" value="" style="line;strokeColor=#666666;" vertex="1" parent="tx_entity">
+      <mxGeometry x="0" y="42" width="240" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="tx_attrs" value="+ Id : int [PK]&#xa;+ UserId : int&#xa;+ CryptoSymbol : string&#xa;+ Type : string (Buy/Sell)&#xa;+ Quantity : decimal&#xa;+ PriceAtTime : decimal&#xa;+ Total : decimal&#xa;+ ExecutedAt : DateTime" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="tx_entity">
+      <mxGeometry x="5" y="52" width="230" height="115" as="geometry"/>
+    </mxCell>
+
+    <!-- DTOs -->
+    <mxCell id="dto_summary" value="PortfolioSummary" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="990" y="100" width="220" height="115" as="geometry"/>
+    </mxCell>
+    <mxCell id="dto_sum_stereo" value="&lt;&lt;DTO&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="dto_summary">
+      <mxGeometry x="0" y="25" width="220" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="dto_sum_sep" value="" style="line;strokeColor=#666666;" vertex="1" parent="dto_summary">
+      <mxGeometry x="0" y="42" width="220" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="dto_sum_attrs" value="+ UserId : int&#xa;+ TotalValue : decimal&#xa;+ Balance : decimal&#xa;+ Holdings : List&lt;HoldingDetail&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="dto_summary">
+      <mxGeometry x="5" y="52" width="210" height="55" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="dto_update" value="UpdatePortfolioDto" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="990" y="245" width="220" height="115" as="geometry"/>
+    </mxCell>
+    <mxCell id="dto_upd_stereo" value="&lt;&lt;DTO&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="dto_update">
+      <mxGeometry x="0" y="25" width="220" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="dto_upd_sep" value="" style="line;strokeColor=#666666;" vertex="1" parent="dto_update">
+      <mxGeometry x="0" y="42" width="220" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="dto_upd_attrs" value="+ UserId : int&#xa;+ CryptoSymbol : string&#xa;+ Type : string (Buy/Sell)&#xa;+ Quantity : decimal&#xa;+ PriceAtTime : decimal" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="dto_update">
+      <mxGeometry x="5" y="52" width="210" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- PortfolioDbContext -->
+    <mxCell id="db" value="PortfolioDbContext" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="350" y="660" width="280" height="90" as="geometry"/>
+    </mxCell>
+    <mxCell id="db_stereo" value="extends DbContext" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="db">
+      <mxGeometry x="0" y="25" width="280" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="db_sep" value="" style="line;strokeColor=#d6b656;" vertex="1" parent="db">
+      <mxGeometry x="0" y="42" width="280" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="db_attrs" value="+ Holdings : DbSet&lt;Holding&gt;&#xa;+ Transactions : DbSet&lt;Transaction&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="db">
+      <mxGeometry x="5" y="52" width="270" height="30" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- RELATIONS                                                    -->
+    <!-- ============================================================ -->
+    <mxCell id="rel_ctrl_isvc" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="ctrl" target="isvc">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_svc_isvc" value="" style="dashed=1;endArrow=block;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="svc" target="isvc">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_svc_irepo" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="svc" target="irepo">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_svc_auth" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="svc" target="auth_client">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_svc_market" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="svc" target="market_client">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_repo_irepo" value="" style="dashed=1;endArrow=block;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="repo" target="irepo">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_repo_db" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="repo" target="db">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>

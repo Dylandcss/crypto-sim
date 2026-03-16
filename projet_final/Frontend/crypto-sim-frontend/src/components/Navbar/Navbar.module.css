@@ -1,0 +1,64 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-lg);
+    margin-top: var(--spacing-md);
+    height: 56px;
+    background: transparent;
+}
+
+.navbar-page-name {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.navbar-welcome {
+    font-size: var(--font-size-md);
+    color: var(--text-muted);
+}
+
+.navbar-welcome strong {
+    font-size: var(--font-size-md);
+    color: var(--text-primary);
+}
+
+.navbar-separator {
+    width: 1px;
+    height: 20px;
+    background: var(--widget-bg);
+}
+
+.navbar-balance {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--light-yellow);
+}
+
+.navbar-logout {
+    padding: var(--spacing-xs) var(--spacing-md);
+    border: 1px solid var(--widget-bg);
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: var(--font-size-md);
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.navbar-logout:hover {
+    border-color: var(--light-red);
+    color: var(--light-red);
+}
+
+.navbar-moneybag-icon {
+    height: 28px;
+}

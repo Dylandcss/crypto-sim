@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1654" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- TITRE -->
+    <mxCell id="title" value="CryptoSim - Carte des appels inter-services" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="200" y="10" width="1100" height="35" as="geometry"/>
+    </mxCell>
+
+    <!-- ==================== LEGENDE ==================== -->
+    <mxCell id="leg_title" value="Legende" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="20" y="55" width="100" height="18" as="geometry"/>
+    </mxCell>
+    <!-- Arrow samples in legend -->
+    <mxCell id="leg_public_line" value="" style="endArrow=block;endFill=1;html=1;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="20" y="85" as="sourcePoint"/><mxPoint x="80" y="85" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="leg_public_text" value="Appel public (JWT Bearer via Gateway)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="85" y="76" width="260" height="18" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg_internal_line" value="" style="endArrow=block;endFill=1;html=1;strokeColor=#b85450;strokeWidth=2;dashed=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="20" y="110" as="sourcePoint"/><mxPoint x="80" y="110" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="leg_internal_text" value="Appel interne service-to-service (X-Internal-Key)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="85" y="101" width="300" height="18" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg_signalr_line" value="" style="endArrow=block;endFill=1;html=1;strokeColor=#82b366;strokeWidth=2;dashed=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="20" y="135" as="sourcePoint"/><mxPoint x="80" y="135" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="leg_signalr_text" value="Broadcast SignalR (WebSocket, YARP proxy)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="85" y="126" width="270" height="18" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg_bypass" value="Appels internes SANS passer par la Gateway (HTTP direct entre conteneurs Docker)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="400" y="55" width="480" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg_key" value="X-Internal-Key = cle partagee (variable d'env INTERNAL_API_KEY). Jamais exposee a l'exterieur." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="900" y="55" width="450" height="40" as="geometry"/>
+    </mxCell>
+
+    <!-- ==================== CLIENT ==================== -->
+    <mxCell id="client" value="Client&#xa;(React Frontend)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="590" y="170" width="180" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- ==================== GATEWAY ==================== -->
+    <mxCell id="gateway" value="Gateway&#xa;YARP + JwtBearerMiddleware + CORS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="540" y="310" width="280" height="60" as="geometry"/>
+    </mxCell>
+
+    <!-- Client -> Gateway -->
+    <mxCell id="c_to_gw" value="HTTP REST&#xa;+ WS (SignalR)" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;html=1;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;verticalAlign=bottom;" edge="1" parent="1" source="client" target="gateway">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- ==================== AUTH SERVICE ==================== -->
+    <mxCell id="auth_svc" value="AuthService&#xa;:8081" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="60" y="490" width="180" height="55" as="geometry"/>
+    </mxCell>
+    <mxCell id="auth_db" value="auth_db&#xa;(MySQL)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="90" y="620" width="120" height="55" as="geometry"/>
+    </mxCell>
+    <!-- AuthService public endpoints via Gateway -->
+    <mxCell id="gw_to_auth" value="POST /auth/register&#xa;POST /auth/login&#xa;GET /auth/me  [JWT]" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;html=1;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;" edge="1" parent="1" source="gateway" target="auth_svc">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="auth_to_db" value="" style="endArrow=open;endFill=0;html=1;strokeColor=#d6b656;" edge="1" parent="1" source="auth_svc" target="auth_db">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- ==================== MARKET SERVICE ==================== -->
+    <mxCell id="market_svc" value="MarketService&#xa;:8082" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="310" y="490" width="180" height="55" as="geometry"/>
+    </mxCell>
+    <mxCell id="market_db" value="market_db&#xa;(MySQL)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="340" y="620" width="120" height="55" as="geometry"/>
+    </mxCell>
+    <mxCell id="market_sim" value="PriceSimulator&#xa;(BackgroundService)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="225" y="620" width="115" height="45" as="geometry"/>
+    </mxCell>
+    <!-- Gateway -> MarketService public -->
+    <mxCell id="gw_to_market" value="GET /market/cryptos&#xa;GET /market/history/{symbol}&#xa;GET /market/snapshot  [JWT]" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;html=1;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;" edge="1" parent="1" source="gateway" target="market_svc">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <!-- YARP SignalR -->
+    <mxCell id="gw_to_market_ws" value="/marketHub (YARP)" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;html=1;strokeColor=#82b366;strokeWidth=2;dashed=1;fontSize=10;" edge="1" parent="1" source="client" target="market_svc">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points"><mxPoint x="680" y="155"/><mxPoint x="400" y="155"/><mxPoint x="400" y="490"/></Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="market_to_db" value="" style="endArrow=open;endFill=0;html=1;strokeColor=#d6b656;" edge="1" parent="1" source="market_svc" target="market_db">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <!-- SignalR broadcast from Simulator -->
+    <mxCell id="sim_to_clients" value="ReceivePrices&#xa;(broadcast)" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;html=1;strokeColor=#82b366;strokeWidth=2;dashed=1;fontSize=10;" edge="1" parent="1" source="market_sim" target="client">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points"><mxPoint x="283" y="642"/><mxPoint x="283" y="155"/><mxPoint x="680" y="155"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ==================== ORDER SERVICE ==================== -->
+    <mxCell id="order_svc" value="OrderService&#xa;:8084" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="815" y="490" width="180" height="55" as="geometry"/>
+    </mxCell>
+    <mxCell id="order_db" value="order_db&#xa;(MySQL)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="845" y="620" width="120" height="55" as="geometry"/>
+    </mxCell>
+    <mxCell id="limit_exec" value="LimitOrderExecutor&#xa;(BackgroundService)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="1020" y="610" width="135" height="45" as="geometry"/>
+    </mxCell>
+    <!-- Gateway -> OrderService public -->
+    <mxCell id="gw_to_order" value="POST /orders/market&#xa;POST /orders/limit&#xa;GET /orders&#xa;DELETE /orders/{id}  [JWT]" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;html=1;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;" edge="1" parent="1" source="gateway" target="order_svc">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="order_to_db" value="" style="endArrow=open;endFill=0;html=1;strokeColor=#d6b656;" edge="1" parent="1" source="order_svc" target="order_db">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- ==================== PORTFOLIO SERVICE ==================== -->
+    <mxCell id="portfolio_svc" value="PortfolioService&#xa;:8083" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="1130" y="490" width="180" height="55" as="geometry"/>
+    </mxCell>
+    <mxCell id="portfolio_db" value="portfolio_db&#xa;(MySQL)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="1160" y="620" width="120" height="55" as="geometry"/>
+    </mxCell>
+    <!-- Gateway -> PortfolioService public -->
+    <mxCell id="gw_to_port" value="GET /portfolio&#xa;GET /portfolio/holdings&#xa;GET /portfolio/transactions  [JWT]" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;html=1;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;" edge="1" parent="1" source="gateway" target="portfolio_svc">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="port_to_db" value="" style="endArrow=open;endFill=0;html=1;strokeColor=#d6b656;" edge="1" parent="1" source="portfolio_svc" target="portfolio_db">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- ==================== APPELS INTERNES ==================== -->
+
+    <!-- OrderService -> AuthService: GET balance + PUT balance -->
+    <mxCell id="ord_to_auth_balance" value="GET /api/auth/internal/balance/{userId}&#xa;PUT /api/auth/internal/balance/{userId}&#xa;[X-Internal-Key]" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;html=1;strokeColor=#b85450;strokeWidth=2;dashed=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1" source="order_svc" target="auth_svc">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points"><mxPoint x="905" y="560"/><mxPoint x="905" y="750"/><mxPoint x="150" y="750"/><mxPoint x="150" y="545"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- OrderService -> MarketService: GET price -->
+    <mxCell id="ord_to_market_price" value="GET /api/market/cryptos/{symbol}&#xa;GET /api/market/snapshot&#xa;[X-Internal-Key]" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;html=1;strokeColor=#b85450;strokeWidth=2;dashed=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1" source="order_svc" target="market_svc">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points"><mxPoint x="815" y="530"/><mxPoint x="490" y="530"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- OrderService -> PortfolioService: GET holding + POST update -->
+    <mxCell id="ord_to_port" value="GET /api/portfolio/internal/holdings/{userId}/{symbol}&#xa;POST /api/portfolio/internal/holdings&#xa;[X-Internal-Key]" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;html=1;strokeColor=#b85450;strokeWidth=2;dashed=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1" source="order_svc" target="portfolio_svc">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points"><mxPoint x="995" y="515"/><mxPoint x="1130" y="515"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- LimitOrderExecutor -> MarketService -->
+    <mxCell id="exec_to_market" value="GET /api/market/cryptos/{symbol}&#xa;[X-Internal-Key] (polling 5s)" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;html=1;strokeColor=#b85450;strokeWidth=2;dashed=1;fontSize=10;" edge="1" parent="1" source="limit_exec" target="market_svc">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points"><mxPoint x="1087" y="632"/><mxPoint x="1087" y="800"/><mxPoint x="400" y="800"/><mxPoint x="400" y="545"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- PortfolioService -> AuthService: GET balance -->
+    <mxCell id="port_to_auth" value="GET /api/auth/internal/balance/{userId}&#xa;[X-Internal-Key]" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;html=1;strokeColor=#b85450;strokeWidth=2;dashed=1;fontSize=10;" edge="1" parent="1" source="portfolio_svc" target="auth_svc">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points"><mxPoint x="1220" y="545"/><mxPoint x="1220" y="860"/><mxPoint x="150" y="860"/><mxPoint x="150" y="545"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- PortfolioService -> MarketService: GET snapshot -->
+    <mxCell id="port_to_market" value="GET /api/market/snapshot&#xa;[X-Internal-Key]" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;html=1;strokeColor=#b85450;strokeWidth=2;dashed=1;fontSize=10;" edge="1" parent="1" source="portfolio_svc" target="market_svc">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points"><mxPoint x="1130" y="560"/><mxPoint x="490" y="560"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ==================== TABLEAU RECAPITULATIF ==================== -->
+    <mxCell id="table_title" value="Recapitulatif des appels internes (X-Internal-Key)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="60" y="900" width="520" height="20" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="table" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;strokeColor=#666666;fillColor=#f5f5f5;" vertex="1" parent="1">
+      <mxGeometry x="60" y="925" width="1300" height="210" as="geometry"/>
+    </mxCell>
+    <!-- Header row -->
+    <mxCell id="th_row" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#d5e8d4;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=1;strokeColor=#82b366;" vertex="1" parent="table">
+      <mxGeometry y="0" width="1300" height="35" as="geometry"/>
+    </mxCell>
+    <mxCell id="th1" value="Appelant" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;fontSize=12;overflow=hidden;" vertex="1" parent="th_row">
+      <mxGeometry width="200" height="35" as="geometry"><mxRectangle width="200" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="th2" value="Destinataire" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;fontSize=12;overflow=hidden;" vertex="1" parent="th_row">
+      <mxGeometry x="200" width="200" height="35" as="geometry"><mxRectangle width="200" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="th3" value="Endpoint" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;fontSize=12;overflow=hidden;" vertex="1" parent="th_row">
+      <mxGeometry x="400" width="420" height="35" as="geometry"><mxRectangle width="420" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="th4" value="Contexte d'appel" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;fontSize=12;overflow=hidden;" vertex="1" parent="th_row">
+      <mxGeometry x="820" width="480" height="35" as="geometry"><mxRectangle width="480" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+
+    <!-- Row 1 -->
+    <mxCell id="r1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;strokeColor=#666666;" vertex="1" parent="table">
+      <mxGeometry y="35" width="1300" height="35" as="geometry"/>
+    </mxCell>
+    <mxCell id="r1c1" value="OrderService" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r1">
+      <mxGeometry width="200" height="35" as="geometry"><mxRectangle width="200" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="r1c2" value="AuthService" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r1">
+      <mxGeometry x="200" width="200" height="35" as="geometry"><mxRectangle width="200" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="r1c3" value="GET /api/auth/internal/balance/{userId}" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r1">
+      <mxGeometry x="400" width="420" height="35" as="geometry"><mxRectangle width="420" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="r1c4" value="Avant achat: verifier solde suffisant" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r1">
+      <mxGeometry x="820" width="480" height="35" as="geometry"><mxRectangle width="480" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+
+    <!-- Row 2 -->
+    <mxCell id="r2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#f5f5f5;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;strokeColor=#666666;" vertex="1" parent="table">
+      <mxGeometry y="70" width="1300" height="35" as="geometry"/>
+    </mxCell>
+    <mxCell id="r2c1" value="OrderService" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r2">
+      <mxGeometry width="200" height="35" as="geometry"><mxRectangle width="200" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="r2c2" value="AuthService" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r2">
+      <mxGeometry x="200" width="200" height="35" as="geometry"><mxRectangle width="200" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="r2c3" value="PUT /api/auth/internal/balance/{userId}" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r2">
+      <mxGeometry x="400" width="420" height="35" as="geometry"><mxRectangle width="420" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="r2c4" value="Apres execution: debiter (achat) ou crediter (vente) le solde" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r2">
+      <mxGeometry x="820" width="480" height="35" as="geometry"><mxRectangle width="480" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+
+    <!-- Row 3 -->
+    <mxCell id="r3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;strokeColor=#666666;" vertex="1" parent="table">
+      <mxGeometry y="105" width="1300" height="35" as="geometry"/>
+    </mxCell>
+    <mxCell id="r3c1" value="OrderService" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r3">
+      <mxGeometry width="200" height="35" as="geometry"><mxRectangle width="200" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="r3c2" value="MarketService" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r3">
+      <mxGeometry x="200" width="200" height="35" as="geometry"><mxRectangle width="200" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="r3c3" value="GET /api/market/cryptos/{symbol}  |  GET /api/market/snapshot" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r3">
+      <mxGeometry x="400" width="420" height="35" as="geometry"><mxRectangle width="420" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="r3c4" value="Prix courant pour calcul du total de l'ordre + LimitOrderExecutor polling 5s" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r3">
+      <mxGeometry x="820" width="480" height="35" as="geometry"><mxRectangle width="480" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+
+    <!-- Row 4 -->
+    <mxCell id="r4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#f5f5f5;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;strokeColor=#666666;" vertex="1" parent="table">
+      <mxGeometry y="140" width="1300" height="35" as="geometry"/>
+    </mxCell>
+    <mxCell id="r4c1" value="OrderService" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r4">
+      <mxGeometry width="200" height="35" as="geometry"><mxRectangle width="200" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="r4c2" value="PortfolioService" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r4">
+      <mxGeometry x="200" width="200" height="35" as="geometry"><mxRectangle width="200" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="r4c3" value="GET /api/portfolio/internal/holdings/{userId}/{symbol}&#xa;POST /api/portfolio/internal/holdings" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=10;" vertex="1" parent="r4">
+      <mxGeometry x="400" width="420" height="35" as="geometry"><mxRectangle width="420" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="r4c4" value="Vente: verifier quantite disponible  |  Apres trade: mettre a jour position + enregistrer transaction" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r4">
+      <mxGeometry x="820" width="480" height="35" as="geometry"><mxRectangle width="480" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+
+    <!-- Row 5 -->
+    <mxCell id="r5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;strokeColor=#666666;" vertex="1" parent="table">
+      <mxGeometry y="175" width="1300" height="35" as="geometry"/>
+    </mxCell>
+    <mxCell id="r5c1" value="PortfolioService" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r5">
+      <mxGeometry width="200" height="35" as="geometry"><mxRectangle width="200" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="r5c2" value="AuthService + MarketService" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r5">
+      <mxGeometry x="200" width="200" height="35" as="geometry"><mxRectangle width="200" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="r5c3" value="GET /api/auth/internal/balance/{userId}  |  GET /api/market/snapshot" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r5">
+      <mxGeometry x="400" width="420" height="35" as="geometry"><mxRectangle width="420" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+    <mxCell id="r5c4" value="GET /portfolio: solde courant + prix actuels pour calcul valeur totale du portefeuille" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=11;" vertex="1" parent="r5">
+      <mxGeometry x="820" width="480" height="35" as="geometry"><mxRectangle width="480" height="35" as="alternateBounds"/></mxGeometry>
+    </mxCell>
+
+  </root>
+</mxGraphModel>

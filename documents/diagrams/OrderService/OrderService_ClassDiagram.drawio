@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1654" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- TITRE -->
+    <mxCell id="title" value="OrderService - Diagramme de Classes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="200" y="10" width="900" height="30" as="geometry"/>
+    </mxCell>
+
+    <!-- LEGENDE -->
+    <mxCell id="leg1" value="Controller" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="20" y="50" width="100" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg2" value="Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="130" y="50" width="100" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg3" value="Repository" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="240" y="50" width="100" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg4" value="HTTP Client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="350" y="50" width="100" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg5" value="Entity / DTO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="460" y="50" width="100" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg6" value="BackgroundSvc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="570" y="50" width="115" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg7" value="Enum" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="695" y="50" width="80" height="25" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- OrderController                                              -->
+    <!-- ============================================================ -->
+    <mxCell id="ctrl" value="OrderController" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="20" y="100" width="270" height="220" as="geometry"/>
+    </mxCell>
+    <mxCell id="ctrl_stereo" value="&lt;&lt;Controller&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="ctrl">
+      <mxGeometry x="0" y="25" width="270" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="ctrl_sep1" value="" style="line;strokeColor=#6c8ebf;" vertex="1" parent="ctrl">
+      <mxGeometry x="0" y="42" width="270" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="ctrl_attrs" value="- _orderService : IOrderService" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="ctrl">
+      <mxGeometry x="5" y="52" width="260" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="ctrl_sep2" value="" style="line;strokeColor=#6c8ebf;" vertex="1" parent="ctrl">
+      <mxGeometry x="0" y="75" width="270" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="ctrl_methods" value="+ CreateMarketOrderAsync(dto) : Task&lt;IActionResult&gt;&#xa;+ CreateLimitOrderAsync(dto) : Task&lt;IActionResult&gt;&#xa;+ GetUserOrdersAsync() : Task&lt;IActionResult&gt;&#xa;+ GetOrderByIdAsync(id) : Task&lt;IActionResult&gt;&#xa;+ CancelOrderAsync(id) : Task&lt;IActionResult&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="ctrl">
+      <mxGeometry x="5" y="85" width="260" height="125" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- IOrderService                                                -->
+    <!-- ============================================================ -->
+    <mxCell id="isvc" value="IOrderService" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="340" y="100" width="280" height="170" as="geometry"/>
+    </mxCell>
+    <mxCell id="isvc_stereo" value="&lt;&lt;interface&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="isvc">
+      <mxGeometry x="0" y="25" width="280" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="isvc_sep" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="isvc">
+      <mxGeometry x="0" y="42" width="280" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="isvc_methods" value="+ CreateMarketOrderAsync(dto, userId) : Task&lt;Order&gt;&#xa;+ CreateLimitOrderAsync(dto, userId) : Task&lt;Order&gt;&#xa;+ GetUserOrdersAsync(userId) : Task&lt;IEnumerable&lt;Order&gt;&gt;&#xa;+ GetOrderByIdAsync(id, userId) : Task&lt;Order&gt;&#xa;+ CancelOrderAsync(id, userId) : Task" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="isvc">
+      <mxGeometry x="5" y="52" width="270" height="110" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- OrderService                                                 -->
+    <!-- ============================================================ -->
+    <mxCell id="svc" value="OrderService" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="340" y="320" width="280" height="280" as="geometry"/>
+    </mxCell>
+    <mxCell id="svc_stereo" value="implements IOrderService" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="svc">
+      <mxGeometry x="0" y="25" width="280" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="svc_sep1" value="" style="line;strokeColor=#82b366;" vertex="1" parent="svc">
+      <mxGeometry x="0" y="42" width="280" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="svc_attrs" value="- _repo : IOrderRepository&#xa;- _authClient : AuthApiClient&#xa;- _marketClient : MarketApiClient&#xa;- _portfolioClient : PortfolioApiClient" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="svc">
+      <mxGeometry x="5" y="52" width="270" height="65" as="geometry"/>
+    </mxCell>
+    <mxCell id="svc_sep2" value="" style="line;strokeColor=#82b366;" vertex="1" parent="svc">
+      <mxGeometry x="0" y="120" width="280" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="svc_methods" value="+ CreateMarketOrderAsync(dto, userId) : Task&lt;Order&gt;&#xa;+ CreateLimitOrderAsync(dto, userId) : Task&lt;Order&gt;&#xa;+ GetUserOrdersAsync(userId) : Task&lt;IEnumerable&lt;Order&gt;&gt;&#xa;+ GetOrderByIdAsync(id, userId) : Task&lt;Order&gt;&#xa;+ CancelOrderAsync(id, userId) : Task&#xa;- ExecuteOrderCoreAsync(order, token) : Task&#xa;- ExecuteOrderCoreInternalAsync(order) : Task" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="svc">
+      <mxGeometry x="5" y="130" width="270" height="140" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- LimitOrderExecutorService                                    -->
+    <!-- ============================================================ -->
+    <mxCell id="executor" value="LimitOrderExecutorService" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="680" y="100" width="270" height="155" as="geometry"/>
+    </mxCell>
+    <mxCell id="exec_stereo" value="extends BackgroundService" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="executor">
+      <mxGeometry x="0" y="25" width="270" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="exec_sep1" value="" style="line;strokeColor=#b85450;" vertex="1" parent="executor">
+      <mxGeometry x="0" y="42" width="270" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="exec_attrs" value="- _orderSvc : IOrderService&#xa;- _marketClient : MarketApiClient&#xa;- _interval : 5000 ms" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="executor">
+      <mxGeometry x="5" y="52" width="260" height="55" as="geometry"/>
+    </mxCell>
+    <mxCell id="exec_sep2" value="" style="line;strokeColor=#b85450;" vertex="1" parent="executor">
+      <mxGeometry x="0" y="110" width="270" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="exec_methods" value="# ExecuteAsync(stoppingToken) : Task" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="executor">
+      <mxGeometry x="5" y="120" width="260" height="25" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- HTTP Clients                                                 -->
+    <!-- ============================================================ -->
+    <mxCell id="base_client" value="BaseApiClient" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="680" y="310" width="220" height="120" as="geometry"/>
+    </mxCell>
+    <mxCell id="base_stereo" value="&lt;&lt;abstract&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="base_client">
+      <mxGeometry x="0" y="25" width="220" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="base_sep1" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="base_client">
+      <mxGeometry x="0" y="42" width="220" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="base_attrs" value="# _client : HttpClient" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="base_client">
+      <mxGeometry x="5" y="52" width="210" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="base_sep2" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="base_client">
+      <mxGeometry x="0" y="75" width="220" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="base_methods" value="# SendAsync(request) : Task&lt;HttpResponseMessage&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;verticalAlign=top;" vertex="1" parent="base_client">
+      <mxGeometry x="5" y="85" width="210" height="25" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="auth_client" value="AuthApiClient" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="970" y="100" width="220" height="120" as="geometry"/>
+    </mxCell>
+    <mxCell id="auth_stereo" value="extends BaseApiClient" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="auth_client">
+      <mxGeometry x="0" y="25" width="220" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="auth_sep" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="auth_client">
+      <mxGeometry x="0" y="42" width="220" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="auth_methods" value="+ GetBalanceAsync(userId) : Task&lt;decimal&gt;&#xa;+ UpdateBalanceAsync(userId, amount) : Task" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="auth_client">
+      <mxGeometry x="5" y="52" width="210" height="60" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="market_client" value="MarketApiClient" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="970" y="250" width="220" height="105" as="geometry"/>
+    </mxCell>
+    <mxCell id="market_stereo" value="extends BaseApiClient" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="market_client">
+      <mxGeometry x="0" y="25" width="220" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="market_sep" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="market_client">
+      <mxGeometry x="0" y="42" width="220" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="market_methods" value="+ GetCryptoPriceAsync(symbol) : Task&lt;decimal&gt;&#xa;+ GetSnapshotAsync() : Task&lt;List&lt;CryptoDto&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="market_client">
+      <mxGeometry x="5" y="52" width="210" height="45" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="portfolio_client" value="PortfolioApiClient" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="970" y="385" width="220" height="120" as="geometry"/>
+    </mxCell>
+    <mxCell id="port_stereo" value="extends BaseApiClient" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="portfolio_client">
+      <mxGeometry x="0" y="25" width="220" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="port_sep" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="portfolio_client">
+      <mxGeometry x="0" y="42" width="220" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="port_methods" value="+ GetHoldingQuantityAsync(userId, symbol) : Task&lt;decimal&gt;&#xa;+ UpdatePortfolioAsync(dto) : Task" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="portfolio_client">
+      <mxGeometry x="5" y="52" width="210" height="60" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- IOrderRepository + OrderRepository                          -->
+    <!-- ============================================================ -->
+    <mxCell id="irepo" value="IOrderRepository" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="20" y="400" width="270" height="155" as="geometry"/>
+    </mxCell>
+    <mxCell id="irepo_stereo" value="&lt;&lt;interface&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="irepo">
+      <mxGeometry x="0" y="25" width="270" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="irepo_sep" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="irepo">
+      <mxGeometry x="0" y="42" width="270" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="irepo_methods" value="+ GetByIdAsync(id) : Task&lt;Order&gt;&#xa;+ GetByUserIdAsync(userId) : Task&lt;IEnumerable&lt;Order&gt;&gt;&#xa;+ GetPendingLimitOrdersAsync() : Task&lt;IEnumerable&lt;Order&gt;&gt;&#xa;+ AddAsync(order) : Task&lt;Order&gt;&#xa;+ UpdateAsync(order) : Task" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="irepo">
+      <mxGeometry x="5" y="52" width="260" height="95" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="repo" value="OrderRepository" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="20" y="610" width="270" height="180" as="geometry"/>
+    </mxCell>
+    <mxCell id="repo_stereo" value="implements IOrderRepository" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="repo">
+      <mxGeometry x="0" y="25" width="270" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="repo_sep1" value="" style="line;strokeColor=#d6b656;" vertex="1" parent="repo">
+      <mxGeometry x="0" y="42" width="270" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="repo_attrs" value="- _db : OrderDbContext" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="repo">
+      <mxGeometry x="5" y="52" width="260" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="repo_sep2" value="" style="line;strokeColor=#d6b656;" vertex="1" parent="repo">
+      <mxGeometry x="0" y="75" width="270" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="repo_methods" value="+ GetByIdAsync(id) : Task&lt;Order&gt;&#xa;+ GetByUserIdAsync(userId) : Task&lt;IEnumerable&lt;Order&gt;&gt;&#xa;+ GetPendingLimitOrdersAsync() : Task&lt;IEnumerable&lt;Order&gt;&gt;&#xa;+ AddAsync(order) : Task&lt;Order&gt;&#xa;+ UpdateAsync(order) : Task" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="repo">
+      <mxGeometry x="5" y="85" width="260" height="85" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- Order entity + Enums                                        -->
+    <!-- ============================================================ -->
+    <mxCell id="order_entity" value="Order" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="680" y="520" width="250" height="230" as="geometry"/>
+    </mxCell>
+    <mxCell id="ord_stereo" value="&lt;&lt;entity&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="order_entity">
+      <mxGeometry x="0" y="25" width="250" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="ord_sep" value="" style="line;strokeColor=#666666;" vertex="1" parent="order_entity">
+      <mxGeometry x="0" y="42" width="250" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="ord_attrs" value="+ Id : int [PK]&#xa;+ UserId : int&#xa;+ CryptoSymbol : string&#xa;+ Type : OrderType&#xa;+ Quantity : decimal&#xa;+ Price : decimal&#xa;+ Total : decimal&#xa;+ Status : OrderStatus&#xa;+ CreatedAt : DateTime&#xa;+ ExecutedAt : DateTime?&#xa;+ LimitPrice : decimal?" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="order_entity">
+      <mxGeometry x="5" y="52" width="240" height="170" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="enum_type" value="OrderType" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="970" y="560" width="140" height="85" as="geometry"/>
+    </mxCell>
+    <mxCell id="etype_stereo" value="&lt;&lt;enum&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="enum_type">
+      <mxGeometry x="0" y="25" width="140" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="etype_sep" value="" style="line;strokeColor=#d6b656;" vertex="1" parent="enum_type">
+      <mxGeometry x="0" y="42" width="140" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="etype_vals" value="Buy&#xa;Sell" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="enum_type">
+      <mxGeometry x="5" y="52" width="130" height="25" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="enum_status" value="OrderStatus" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="970" y="665" width="140" height="100" as="geometry"/>
+    </mxCell>
+    <mxCell id="estatus_stereo" value="&lt;&lt;enum&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="enum_status">
+      <mxGeometry x="0" y="25" width="140" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="estatus_sep" value="" style="line;strokeColor=#d6b656;" vertex="1" parent="enum_status">
+      <mxGeometry x="0" y="42" width="140" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="estatus_vals" value="Pending&#xa;Executed&#xa;Rejected&#xa;Cancelled" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="enum_status">
+      <mxGeometry x="5" y="52" width="130" height="40" as="geometry"/>
+    </mxCell>
+
+    <!-- OrderDbContext -->
+    <mxCell id="db" value="OrderDbContext" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="340" y="680" width="250" height="90" as="geometry"/>
+    </mxCell>
+    <mxCell id="db_stereo" value="extends DbContext" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="db">
+      <mxGeometry x="0" y="25" width="250" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="db_sep" value="" style="line;strokeColor=#d6b656;" vertex="1" parent="db">
+      <mxGeometry x="0" y="42" width="250" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="db_attrs" value="+ Orders : DbSet&lt;Order&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="db">
+      <mxGeometry x="5" y="52" width="240" height="30" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- RELATIONS                                                    -->
+    <!-- ============================================================ -->
+    <mxCell id="rel_ctrl_isvc" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="ctrl" target="isvc">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_svc_isvc" value="" style="dashed=1;endArrow=block;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="svc" target="isvc">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_svc_irepo" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="svc" target="irepo">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_svc_auth" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="svc" target="auth_client">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_svc_market" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="svc" target="market_client">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_svc_port" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="svc" target="portfolio_client">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_exec_isvc" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="executor" target="isvc">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_exec_market" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="executor" target="market_client">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_auth_base" value="" style="endArrow=block;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="auth_client" target="base_client">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_market_base" value="" style="endArrow=block;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="market_client" target="base_client">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_port_base" value="" style="endArrow=block;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="portfolio_client" target="base_client">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_repo_irepo" value="" style="dashed=1;endArrow=block;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="repo" target="irepo">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_repo_db" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="repo" target="db">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_ord_type" value="" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="order_entity" target="enum_type">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="rel_ord_status" value="" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="order_entity" target="enum_status">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>
