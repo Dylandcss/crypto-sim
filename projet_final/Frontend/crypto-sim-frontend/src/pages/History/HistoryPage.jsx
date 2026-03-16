@@ -70,6 +70,11 @@ const HistoryPage = () => {
     if (errorOrders) return <DisplayMessage type="error" message={errorOrders} />;
 
     const all = (orders ?? []).slice().reverse();
+
+    if (all.length === 0) {
+      return <DisplayMessage type="info" message="Aucun ordre passé pour le moment." />;
+    }
+
     const totalPages = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
     const page = Math.min(ordersPage, totalPages);
     const paginated = all.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
@@ -136,6 +141,11 @@ const HistoryPage = () => {
     if (errorTransactions) return <DisplayMessage type="error" message={errorTransactions} />;
 
     const all = (transactions ?? []).slice().reverse();
+
+    if (all.length === 0) {
+      return <DisplayMessage type="info" message="Aucune transaction exécutée pour le moment." />;
+    }
+
     const totalPages = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
     const page = Math.min(txPage, totalPages);
     const paginated = all.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);

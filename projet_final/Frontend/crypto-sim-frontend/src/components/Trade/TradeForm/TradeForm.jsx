@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { getHoldingDetails } from '../../../services/portfolioService';
-import { placeOrder } from '../../../services/orderService';
+import { makeOrder } from '../../../services/orderService';
 import { formatPrice, formatBalance } from '../../../utils/formatters';
 import Loader from '../../common/Loader/Loader';
 import DisplayMessage from '../../common/DisplayMessage/DisplayMessage';
@@ -68,7 +68,7 @@ const TradeForm = ({ symbol, currentPrice }) => {
     setMessage(null);
 
     try {
-      await placeOrder(symbol, parseFloat(quantity), type, lp);
+      await makeOrder(symbol, parseFloat(quantity), type, lp);
 
       if (orderMode === 'limit') {
         setMessage({
@@ -122,7 +122,7 @@ const TradeForm = ({ symbol, currentPrice }) => {
       </div>
 
       <div className={styles.inputGroup}>
-        <label htmlFor="quantity">Quantité à trader</label>
+        <label htmlFor="quantity">Quantité</label>
         <div className={styles.inputWrapper}>
           <input
             id="quantity"

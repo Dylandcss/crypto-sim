@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1654" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- TITRE -->
+    <mxCell id="title" value="CryptoSim - Sequence complete : Achat de crypto (Market Order Buy) - vue inter-services" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="80" y="10" width="1400" height="30" as="geometry"/>
+    </mxCell>
+    <mxCell id="note_legend" value="Fleches pleines = JWT (public)  |  Fleches tiretees rouges = X-Internal-Key (interne)  |  Chaque service a sa propre DB" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=center;" vertex="1" parent="1">
+      <mxGeometry x="400" y="45" width="700" height="30" as="geometry"/>
+    </mxCell>
+
+    <!-- PARTICIPANTS -->
+    <mxCell id="p_client" value="Client&#xa;(React)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="20" y="90" width="100" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_gw" value="Gateway" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="165" y="90" width="120" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_ord_ctrl" value="Order&#xa;Controller" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="335" y="90" width="110" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_ord_svc" value="Order&#xa;Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="495" y="90" width="110" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_market" value="Market&#xa;Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="655" y="90" width="110" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_auth" value="Auth&#xa;Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="815" y="90" width="110" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_portfolio" value="Portfolio&#xa;Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="975" y="90" width="110" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_ord_db" value="order_db" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="1135" y="88" width="90" height="44" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_auth_db" value="auth_db" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="1265" y="88" width="90" height="44" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_port_db" value="portfolio_db" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="1385" y="88" width="100" height="44" as="geometry"/>
+    </mxCell>
+
+    <!-- LIFELINES -->
+    <mxCell id="ll_c" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="70" y="130" as="sourcePoint"/><mxPoint x="70" y="1100" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_gw" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="225" y="130" as="sourcePoint"/><mxPoint x="225" y="1100" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_octrl" value="" style="endArrow=none;dashed=1;strokeColor=#b85450;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="390" y="130" as="sourcePoint"/><mxPoint x="390" y="1100" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_osvc" value="" style="endArrow=none;dashed=1;strokeColor=#b85450;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="550" y="130" as="sourcePoint"/><mxPoint x="550" y="1100" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_mkt" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="710" y="130" as="sourcePoint"/><mxPoint x="710" y="1100" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_auth" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="870" y="130" as="sourcePoint"/><mxPoint x="870" y="1100" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_port" value="" style="endArrow=none;dashed=1;strokeColor=#9673a6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1030" y="130" as="sourcePoint"/><mxPoint x="1030" y="1100" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_odb" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1180" y="130" as="sourcePoint"/><mxPoint x="1180" y="1100" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_adb" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1310" y="130" as="sourcePoint"/><mxPoint x="1310" y="1100" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_pdb" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1435" y="130" as="sourcePoint"/><mxPoint x="1435" y="1100" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- ===== PHASE 1: Requete publique via Gateway ===== -->
+    <mxCell id="ph1_label" value="[1] Requete client - chemin public (JWT)" style="text;html=1;strokeColor=none;fillColor=#dae8fc;align=left;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="60" y="143" width="340" height="18" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="m1" value="POST /orders/market  {symbol:'BTC', type:'Buy', qty:0.1}  [Bearer token]" style="edgeStyle=none;endArrow=block;endFill=1;html=1;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="70" y="172" as="sourcePoint"/><mxPoint x="225" y="172" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m1b" value="Validate JWT (HMAC-SHA256); extract userId" style="edgeStyle=none;endArrow=block;endFill=1;html=1;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="225" y="200" as="sourcePoint"/><mxPoint x="390" y="200" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m1c" value="CreateMarketOrderAsync(dto, userId=42)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;strokeColor=#b85450;strokeWidth=2;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="390" y="228" as="sourcePoint"/><mxPoint x="550" y="228" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- ===== PHASE 2: Prix du marche ===== -->
+    <mxCell id="ph2_label" value="[2] Obtenir le prix courant (interne, X-Internal-Key)" style="text;html=1;strokeColor=none;fillColor=#f8cecc;align=left;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="480" y="248" width="400" height="18" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="m2" value="GET /api/market/cryptos/BTC  [X-Internal-Key]" style="edgeStyle=none;endArrow=block;endFill=1;html=1;strokeColor=#b85450;strokeWidth=2;dashed=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="550" y="277" as="sourcePoint"/><mxPoint x="710" y="277" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m2r" value="currentPrice = 42500.50 USD" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;strokeColor=#b85450;strokeWidth=2;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="710" y="305" as="sourcePoint"/><mxPoint x="550" y="305" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- ===== PHASE 3: Verification solde ===== -->
+    <mxCell id="ph3_label" value="[3] Verification du solde (interne, X-Internal-Key)" style="text;html=1;strokeColor=none;fillColor=#f8cecc;align=left;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="480" y="325" width="400" height="18" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="m3" value="GET /api/auth/internal/balance/42  [X-Internal-Key]" style="edgeStyle=none;endArrow=block;endFill=1;html=1;strokeColor=#b85450;strokeWidth=2;dashed=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="550" y="352" as="sourcePoint"/><mxPoint x="870" y="352" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m3_db" value="SELECT balance FROM users WHERE id=42" style="edgeStyle=none;endArrow=block;endFill=1;html=1;strokeColor=#d6b656;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="870" y="378" as="sourcePoint"/><mxPoint x="1310" y="378" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m3_dbr" value="balance = 10000.00 USD" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;strokeColor=#d6b656;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1310" y="403" as="sourcePoint"/><mxPoint x="870" y="403" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m3r" value="balance = 10000.00 USD" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;strokeColor=#b85450;strokeWidth=2;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="870" y="428" as="sourcePoint"/><mxPoint x="550" y="428" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- Check balance -->
+    <mxCell id="check_self" value="total = 42500.50 * 0.1 = 4250.05 USD&#xa;balance (10000) >= total (4250.05) -> OK" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=10;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="550" y="453" as="sourcePoint"/>
+        <mxPoint x="550" y="495" as="targetPoint"/>
+        <Array as="points"><mxPoint x="635" y="453"/><mxPoint x="635" y="495"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ===== PHASE 4: Debit solde ===== -->
+    <mxCell id="ph4_label" value="[4] Debit du solde (interne, X-Internal-Key)" style="text;html=1;strokeColor=none;fillColor=#f8cecc;align=left;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="480" y="510" width="350" height="18" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="m4" value="PUT /api/auth/internal/balance/42  {amount: -4250.05}  [X-Internal-Key]" style="edgeStyle=none;endArrow=block;endFill=1;html=1;strokeColor=#b85450;strokeWidth=2;dashed=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="550" y="537" as="sourcePoint"/><mxPoint x="870" y="537" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m4_db" value="UPDATE users SET balance = balance + (-4250.05) WHERE id=42" style="edgeStyle=none;endArrow=block;endFill=1;html=1;strokeColor=#d6b656;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="870" y="563" as="sourcePoint"/><mxPoint x="1310" y="563" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m4_dbr" value="SaveChanges OK" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;strokeColor=#d6b656;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1310" y="588" as="sourcePoint"/><mxPoint x="870" y="588" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m4r" value="204 No Content" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;strokeColor=#b85450;strokeWidth=2;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="870" y="610" as="sourcePoint"/><mxPoint x="550" y="610" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- ===== PHASE 5: Mise a jour portefeuille ===== -->
+    <mxCell id="ph5_label" value="[5] Mise a jour du portefeuille (interne, X-Internal-Key)" style="text;html=1;strokeColor=none;fillColor=#f8cecc;align=left;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="480" y="628" width="430" height="18" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="m5" value="POST /api/portfolio/internal/holdings  {userId:42, symbol:'BTC', type:'Buy', qty:0.1, price:42500.50}  [X-Internal-Key]" style="edgeStyle=none;endArrow=block;endFill=1;html=1;strokeColor=#b85450;strokeWidth=2;dashed=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="550" y="655" as="sourcePoint"/><mxPoint x="1030" y="655" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- Portfolio internal logic -->
+    <mxCell id="m5_db" value="SELECT * FROM holdings WHERE userId=42 AND symbol='BTC'" style="edgeStyle=none;endArrow=block;endFill=1;html=1;strokeColor=#d6b656;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1030" y="683" as="sourcePoint"/><mxPoint x="1435" y="683" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m5_dbr" value="null (premiere position BTC pour cet user)" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;strokeColor=#d6b656;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1435" y="710" as="sourcePoint"/><mxPoint x="1030" y="710" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m5_db2" value="INSERT INTO holdings + INSERT INTO transactions; SaveChanges()" style="edgeStyle=none;endArrow=block;endFill=1;html=1;strokeColor=#d6b656;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1030" y="738" as="sourcePoint"/><mxPoint x="1435" y="738" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m5_db2r" value="SaveChanges OK" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;strokeColor=#d6b656;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1435" y="763" as="sourcePoint"/><mxPoint x="1030" y="763" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m5r" value="204 No Content" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;strokeColor=#b85450;strokeWidth=2;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1030" y="788" as="sourcePoint"/><mxPoint x="550" y="788" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- ===== PHASE 6: Sauvegarde ordre ===== -->
+    <mxCell id="ph6_label" value="[6] Sauvegarde de l'ordre en base" style="text;html=1;strokeColor=none;fillColor=#f8cecc;align=left;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="480" y="808" width="300" height="18" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="m6" value="INSERT INTO orders {userId:42, symbol:'BTC', type:'Buy', qty:0.1, price:42500.50, total:4250.05, status:'Executed'}" style="edgeStyle=none;endArrow=block;endFill=1;html=1;strokeColor=#d6b656;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="550" y="835" as="sourcePoint"/><mxPoint x="1180" y="835" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m6r" value="order.Id = 99" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;strokeColor=#d6b656;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1180" y="860" as="sourcePoint"/><mxPoint x="550" y="860" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- ===== PHASE 7: Reponse finale ===== -->
+    <mxCell id="ph7_label" value="[7] Reponse au client" style="text;html=1;strokeColor=none;fillColor=#dae8fc;align=left;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="60" y="880" width="200" height="18" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="m7" value="OrderDto {id:99, symbol:'BTC', status:'Executed', total:4250.05}" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;strokeColor=#b85450;strokeWidth=2;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="550" y="905" as="sourcePoint"/><mxPoint x="390" y="905" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m8" value="201 Created  {OrderDto}" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="390" y="930" as="sourcePoint"/><mxPoint x="225" y="930" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m9" value="201 Created  {OrderDto}" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="225" y="955" as="sourcePoint"/><mxPoint x="70" y="955" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- ROLLBACK note -->
+    <mxCell id="note_rollback" value="Strategie de rollback si echec:&#xa;- Si UpdatePortfolio (etape 5) echoue: PUT /auth/balance avec +4250.05 (remboursement)&#xa;- Si debit auth (etape 4) echoue: ordre rejete, aucune modification effectuee" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;" vertex="1" parent="1">
+      <mxGeometry x="60" y="990" width="560" height="65" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>

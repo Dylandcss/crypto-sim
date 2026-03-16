@@ -34,3 +34,54 @@
 .holdings-table-row:hover td {
   background: rgba(255, 255, 255, 0.02);
 }
+
+.listHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+}
+
+.listHeader h2 {
+  margin: 0;
+}
+
+.precisionToggle {
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  letter-spacing: 0.05em;
+}
+
+.precisionToggle:hover {
+  border-color: var(--light-blue);
+  color: var(--light-blue);
+}
+
+.precisionActive {
+  border-color: var(--light-blue);
+  color: var(--light-blue);
+  background: rgba(100, 180, 255, 0.08);
+}
+
+.btnDetails {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--light-blue);
+  border: 1px solid var(--light-blue);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btnDetails:hover {
+  background: var(--light-blue);
+  color: var(--bg-primary);
+}

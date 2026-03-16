@@ -52,7 +52,6 @@ export default function MarketPage() {
         </div>
       </div>
 
-      {/* Erreur REST = bloquante, erreur SignalR = avertissement non bloquant */}
       {error && <DisplayMessage type="error" message={error} />}
       {signalRError && <DisplayMessage type="warning" message={signalRError} />}
 

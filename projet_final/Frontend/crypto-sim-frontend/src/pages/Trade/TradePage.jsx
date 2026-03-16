@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getCryptoBySymbol, getCryptoPriceHistory } from '../../services/marketService';
 import PriceChart from '../../components/Trade/PriceChart/PriceChart';
@@ -7,7 +7,7 @@ import DisplayMessage from '../../components/common/DisplayMessage/DisplayMessag
 import useSignalR from '../../hooks/useSignalR';
 import { ChevronLeft } from '@nsmr/pixelart-react';
 import styles from './TradePage.module.css';
-import { getCoinIcon } from '../../utils/coinIcons';
+import { getCoinIconURL } from '../../utils/coinIcons';
 import TradeForm from '../../components/Trade/TradeForm/TradeForm';
 
 const TradePage = () => {
@@ -17,9 +17,7 @@ const TradePage = () => {
   const [history, setHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [priceDirection, setPriceDirection] = useState('neutral');
-  const prevPriceRef = useRef(0);
-  const coinIcon = getCoinIcon(symbol);
+  const coinIcon = getCoinIconURL(symbol);
 
   useEffect(() => {
     setIsLoading(true);
@@ -31,19 +29,16 @@ const TradePage = () => {
       .then(([cryptoData, historyData]) => {
         setCrypto(cryptoData);
         setHistory(historyData.map(p => ({ timestamp: p.recordedAt, price: p.price })).reverse());
-        prevPriceRef.current = cryptoData.currentPrice;
       })
-      .catch(() => setError('Erreur lors du chargement des données.'))
+      .catch((e) => {
+        setError(e.message);
+      })
       .finally(() => setIsLoading(false));
   }, [symbol]);
 
   const { error: signalRError } = useSignalR((updatedPrices) => {
     const update = updatedPrices.find((u) => u.symbol === symbol);
     if (!update) return;
-
-    if (update.price > prevPriceRef.current) setPriceDirection('up');
-    else if (update.price < prevPriceRef.current) setPriceDirection('down');
-    prevPriceRef.current = update.price;
 
     setCrypto((prev) => (prev ? { ...prev, currentPrice: update.price } : prev));
     setHistory((prev) => {
@@ -78,7 +73,6 @@ const TradePage = () => {
           symbol={symbol}
           data={history}
           currentPrice={crypto.currentPrice}
-          priceDirection={priceDirection}
         />
 
         <div className={styles.tradeFormWrapper}>

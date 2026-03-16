@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import styles from './LoginForm.module.css'
 import { login } from '../../../services/authService'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -15,13 +15,7 @@ function LoginForm() {
   const navigate = useNavigate()
   const message = location.state?.message || ''
   const { loginUser } = useAuth()
-
-  useEffect(() => {
-    if (sessionStorage.getItem('sessionExpired')) {
-      setError('Session expirée. Veuillez vous reconnecter.')
-      sessionStorage.removeItem('sessionExpired')
-    }
-  }, [])
+  const sessionExpiredMsg = location.state?.sessionExpired || ''
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -40,8 +34,10 @@ function LoginForm() {
 
   return (
     <>
+      {sessionExpiredMsg && <DisplayMessage type="error" message={sessionExpiredMsg} />}
       {error && <DisplayMessage type="error" message={error} onClose={() => setError('')} />}
       {message && <DisplayMessage type="success" message={message} />}
+
       <form className={styles['login-form']} onSubmit={handleSubmit}>
         <h2>Connexion</h2>
         <input
@@ -59,7 +55,7 @@ function LoginForm() {
           required
         />
         {loading ? (
-          <Loader />
+          <Loader message="Connexion..." />
         ) : (
           <button type="submit">Se connecter</button>
         )}

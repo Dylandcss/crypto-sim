@@ -51,7 +51,12 @@ const CHART_OPTIONS = {
   },
 };
 
-const PriceChart = ({ symbol, data, currentPrice, priceDirection }) => {
+const PriceChart = ({ symbol, data, currentPrice }) => {
+  const last = data.length;
+  const priceDirection =
+    last >= 2 && data[last - 1].price > data[last - 2].price ? 'up' :
+    last >= 2 && data[last - 1].price < data[last - 2].price ? 'down' :
+    'neutral';
   const chartData = {
     labels: data.map((point) =>
       new Date(point.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })

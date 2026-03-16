@@ -1,15 +1,11 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
-import Navbar from './Navbar/Navbar'
-import Sidebar from './Sidebar/Sidebar'
+import { useAuth } from '../../../context/AuthContext.jsx'
+import Navbar from '../../Navbar/Navbar.jsx'
+import Sidebar from '../../Sidebar/Sidebar.jsx'
 import styles from './ProtectedRoute.module.css'
 
 function ProtectedRoute() {
-  const { isAuthenticated, isLoading } = useAuth()
-
-  if (isLoading) {
-    return null
-  }
+  const { isAuthenticated } = useAuth()
 
   if (!isAuthenticated) {
     return <Navigate to="/" replace />

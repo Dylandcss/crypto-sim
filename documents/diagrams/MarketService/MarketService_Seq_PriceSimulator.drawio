@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1654" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- TITRE -->
+    <mxCell id="title" value="MarketService - Sequence : PriceSimulatorService (BackgroundService) - Boucle de simulation des prix" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="80" y="10" width="1200" height="30" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="note_ctx" value="Contexte : s'execute en arriere-plan au demarrage de l'application. Boucle toutes les MARKET_UPDATE_INTERVAL ms (defaut: 3000 ms)." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="80" y="45" width="600" height="35" as="geometry"/>
+    </mxCell>
+
+    <!-- PARTICIPANTS -->
+    <mxCell id="p_host" value="ASP.NET Host" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="20" y="100" width="140" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_sim" value="PriceSimulator&#xa;Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="210" y="100" width="140" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_repo" value="MarketRepository" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="400" y="100" width="165" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_db" value="MarketDbContext" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="615" y="100" width="155" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_histsvc" value="PriceHistory&#xa;Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="820" y="100" width="140" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_hub" value="IHubContext&#xa;&lt;MarketHub&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="1010" y="100" width="140" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_clients" value="SignalR Clients&#xa;(Frontend)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="1200" y="100" width="140" height="40" as="geometry"/>
+    </mxCell>
+
+    <!-- LIFELINES -->
+    <mxCell id="ll_host" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="90" y="140" as="sourcePoint"/><mxPoint x="90" y="950" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_sim" value="" style="endArrow=none;dashed=1;strokeColor=#b85450;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="280" y="140" as="sourcePoint"/><mxPoint x="280" y="950" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_repo" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="482" y="140" as="sourcePoint"/><mxPoint x="482" y="950" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_db" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="692" y="140" as="sourcePoint"/><mxPoint x="692" y="950" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_histsvc" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="890" y="140" as="sourcePoint"/><mxPoint x="890" y="950" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_hub" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1080" y="140" as="sourcePoint"/><mxPoint x="1080" y="950" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_clients" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1270" y="140" as="sourcePoint"/><mxPoint x="1270" y="950" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 1. Host starts background service -->
+    <mxCell id="m1" value="StartAsync() / ExecuteAsync(stoppingToken)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="90" y="180" as="sourcePoint"/><mxPoint x="280" y="180" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- LOOP box -->
+    <mxCell id="loop_box" value="loop [!stoppingToken.IsCancellationRequested]" style="text;html=1;strokeColor=#b85450;fillColor=#fff2cc;align=left;fontSize=11;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+      <mxGeometry x="175" y="205" width="1160" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="loop_border" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#b85450;dashed=1;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="175" y="230" width="1160" height="570" as="geometry"/>
+    </mxCell>
+
+    <!-- 2. SimulateAsync self-call -->
+    <mxCell id="m2" value="SimulateAsync()" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=11;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="280" y="255" as="sourcePoint"/>
+        <mxPoint x="280" y="295" as="targetPoint"/>
+        <Array as="points"><mxPoint x="355" y="255"/><mxPoint x="355" y="295"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- 3. GetAllCryptosAsync -->
+    <mxCell id="m3" value="GetAllCryptosAsync()" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="280" y="325" as="sourcePoint"/><mxPoint x="482" y="325" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 4. Repo -> DB -->
+    <mxCell id="m4" value="Cryptos.ToListAsync()" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="482" y="360" as="sourcePoint"/><mxPoint x="692" y="360" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 5. DB -> Repo -->
+    <mxCell id="m5" value="List&lt;Crypto&gt;" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="692" y="390" as="sourcePoint"/><mxPoint x="482" y="390" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 6. Repo -> Sim -->
+    <mxCell id="m6" value="List&lt;Crypto&gt;" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="482" y="420" as="sourcePoint"/><mxPoint x="280" y="420" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 7. foreach crypto - apply random variation -->
+    <mxCell id="m7_self" value="foreach crypto:&#xa;  variation = Random +/- 2%&#xa;  crypto.CurrentPrice *= (1 + variation)&#xa;  crypto.LastUpdated = DateTime.UtcNow" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=10;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="280" y="455" as="sourcePoint"/>
+        <mxPoint x="280" y="535" as="targetPoint"/>
+        <Array as="points"><mxPoint x="370" y="455"/><mxPoint x="370" y="535"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- 8. UpdateCryptoAsync -->
+    <mxCell id="m8" value="UpdateCryptoAsync(crypto)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="280" y="565" as="sourcePoint"/><mxPoint x="482" y="565" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 9. Repo -> DB SaveChanges -->
+    <mxCell id="m9" value="Entry(crypto).State = Modified; SaveChangesAsync()" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="482" y="600" as="sourcePoint"/><mxPoint x="692" y="600" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m9r" value="ok" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="692" y="625" as="sourcePoint"/><mxPoint x="482" y="625" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 10. AddHistoryEntryAsync -->
+    <mxCell id="m10" value="AddHistoryEntryAsync(new PriceHistory {Symbol, Price, DateTime.UtcNow})" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="280" y="660" as="sourcePoint"/><mxPoint x="890" y="660" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m10r" value="ok" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="890" y="685" as="sourcePoint"/><mxPoint x="280" y="685" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 11. SignalR broadcast -->
+    <mxCell id="m11" value="Clients.All.SendAsync('ReceivePrices', updatedDtos)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="280" y="720" as="sourcePoint"/><mxPoint x="1080" y="720" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 12. IHubContext -> SignalR Clients -->
+    <mxCell id="m12" value="broadcast 'ReceivePrices' [CryptoDto[]]" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1080" y="755" as="sourcePoint"/><mxPoint x="1270" y="755" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 13. Delay -->
+    <mxCell id="m13_self" value="Task.Delay(MARKET_UPDATE_INTERVAL, stoppingToken)" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=11;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="280" y="785" as="sourcePoint"/>
+        <mxPoint x="280" y="795" as="targetPoint"/>
+        <Array as="points"><mxPoint x="355" y="785"/><mxPoint x="355" y="795"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- NOTE -->
+    <mxCell id="note_info" value="Le frontend React s'abonne via SignalR (useMarketHub hook).&#xa;Chaque mise a jour remplace les prix en temps reel dans le store Zustand." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="180" y="830" width="500" height="50" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>

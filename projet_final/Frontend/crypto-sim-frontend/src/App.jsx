@@ -9,7 +9,8 @@ import TradePage from './pages/Trade/TradePage.jsx';
 import HoldingDetails from './pages/Portfolio/HoldingDetails/HoldingDetails.jsx';
 import HistoryPage from './pages/History/HistoryPage.jsx';
 import Profil from './components/Profil/Profil.jsx';
-import ProtectedRoute from './components/ProtectedRoute.jsx';
+import ProtectedRoute from './components/common/PrortectedRoute/ProtectedRoute.jsx';
+import NotFoundPage from './pages/NotFound/NotFoundPage.jsx';
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
             <Route path="/history" element={<HistoryPage />} />
             <Route path="/profil" element={<Profil />} />
           </Route>
+
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </CRTProvider>

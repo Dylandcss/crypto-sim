@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1654" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- TITRE -->
+    <mxCell id="title" value="AuthService — Séquence : Mise à jour solde interne (PUT /auth/internal/balance/{userId})  [X-Internal-Key]" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="80" y="10" width="1200" height="30" as="geometry"/>
+    </mxCell>
+
+    <!-- NOTE CONTEXTE -->
+    <mxCell id="note_ctx" value="Contexte : endpoint appelé uniquement par OrderService via clé interne (X-Internal-Key). Pas de JWT. Pas de Gateway." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;align=left;" vertex="1" parent="1">
+      <mxGeometry x="80" y="45" width="680" height="40" as="geometry"/>
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!--   PARTICIPANTS                             -->
+    <!--   cx: OrderSvc=100 | Ctrl=330 | Svc=570   -->
+    <!--       Repo=810 | Db=1040                  -->
+    <!-- ═══════════════════════════════════════════ -->
+
+    <mxCell id="p_order" value="OrderService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="20" y="100" width="160" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_ctrl" value="AuthController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="240" y="100" width="180" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_svc" value="AuthManagementService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="480" y="100" width="200" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_repo" value="AuthRepository" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="740" y="100" width="160" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_db" value="AuthDbContext" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="970" y="100" width="160" height="40" as="geometry"/>
+    </mxCell>
+
+    <!-- LIFELINES -->
+    <mxCell id="ll_order" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="100" y="140" as="sourcePoint"/><mxPoint x="100" y="900" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_ctrl" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="330" y="140" as="sourcePoint"/><mxPoint x="330" y="900" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_svc" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="580" y="140" as="sourcePoint"/><mxPoint x="580" y="900" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_repo" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="820" y="140" as="sourcePoint"/><mxPoint x="820" y="900" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_db" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1050" y="140" as="sourcePoint"/><mxPoint x="1050" y="900" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- ═══════════════════════════ -->
+    <!--         MESSAGES           -->
+    <!-- ═══════════════════════════ -->
+
+    <!-- 1. OrderService → AuthController -->
+    <mxCell id="m1" value="PUT /api/auth/internal/balance/{userId}  [X-Internal-Key: &lt;key&gt;]  {amount}" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="100" y="180" as="sourcePoint"/><mxPoint x="330" y="180" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 2. AuthController : self-loop validation clé interne -->
+    <mxCell id="m2_self" value="IsInternalRequest()&#xa;Headers[X-Internal-Key] == config[INTERNAL_API_KEY]" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=11;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="330" y="220" as="sourcePoint"/>
+        <mxPoint x="330" y="275" as="targetPoint"/>
+        <Array as="points"><mxPoint x="430" y="220"/><mxPoint x="430" y="275"/></Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="m2_label" value="[true → autorisé]" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;fontStyle=2;" vertex="1" parent="1">
+      <mxGeometry x="435" y="232" width="150" height="20" as="geometry"/>
+    </mxCell>
+
+    <!-- 3. AuthController → AuthManagementService -->
+    <mxCell id="m3" value="UpdateBalanceAsync(userId, amount)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="330" y="310" as="sourcePoint"/><mxPoint x="580" y="310" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 4. AuthManagementService → AuthRepository -->
+    <mxCell id="m4" value="UpdateUserBalanceAsync(userId, amount)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="580" y="355" as="sourcePoint"/><mxPoint x="820" y="355" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 5. AuthRepository → AuthDbContext : FindAsync -->
+    <mxCell id="m5" value="FindAsync(userId)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="820" y="395" as="sourcePoint"/><mxPoint x="1050" y="395" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 6. AuthDbContext → AuthRepository : user -->
+    <mxCell id="m6" value="User (entity)" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1050" y="430" as="sourcePoint"/><mxPoint x="820" y="430" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 7. AuthRepository : modifie balance + SaveChangesAsync -->
+    <mxCell id="m7_self" value="user.Balance += amount&#xa;SaveChangesAsync()" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=11;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="820" y="470" as="sourcePoint"/>
+        <mxPoint x="820" y="525" as="targetPoint"/>
+        <Array as="points"><mxPoint x="920" y="470"/><mxPoint x="920" y="525"/></Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="m7_note" value="via AuthDbContext" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontStyle=2;" vertex="1" parent="1">
+      <mxGeometry x="925" y="482" width="130" height="20" as="geometry"/>
+    </mxCell>
+
+    <!-- 8. AuthRepository → AuthManagementService : true -->
+    <mxCell id="m8" value="true  (succès)" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="820" y="560" as="sourcePoint"/><mxPoint x="580" y="560" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 9. AuthManagementService → AuthController : void -->
+    <mxCell id="m9" value="(void)" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="580" y="600" as="sourcePoint"/><mxPoint x="330" y="600" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 10. AuthController → OrderService : 204 -->
+    <mxCell id="m10" value="204 No Content" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="330" y="645" as="sourcePoint"/><mxPoint x="100" y="645" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- NOTE : cas d'erreur -->
+    <mxCell id="note_err1" value="⚠ Clé interne absente ou incorrecte&#xa;→ 401 Unauthorized (pas d'exception métier)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="50" y="710" width="310" height="55" as="geometry"/>
+    </mxCell>
+    <mxCell id="note_err2" value="⚠ User introuvable en base&#xa;→ UpdateUserBalanceAsync retourne false&#xa;   (pas d'exception, opération ignorée)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="390" y="710" width="320" height="65" as="geometry"/>
+    </mxCell>
+
+    <!-- NOTE : usage -->
+    <mxCell id="note_usage" value="📌 Cet endpoint est utilisé par OrderService pour débiter / créditer&#xa;le solde lors de l'exécution d'un ordre d'achat ou de vente." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="50" y="800" width="460" height="55" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1654" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- TITRE -->
+    <mxCell id="title" value="MarketService - Diagramme de Classes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="200" y="10" width="900" height="30" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- LEGENDE                                                      -->
+    <!-- ============================================================ -->
+    <mxCell id="legend_title" value="Legende" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="20" y="50" width="100" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg1" value="Controller" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="20" y="75" width="100" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg2" value="Service / Hub" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="130" y="75" width="100" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg3" value="Repository" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="240" y="75" width="100" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg4" value="DbContext" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="350" y="75" width="100" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg5" value="Entity / DTO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="460" y="75" width="100" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg6" value="Interface" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="570" y="75" width="100" height="25" as="geometry"/>
+    </mxCell>
+    <mxCell id="leg7" value="BackgroundSvc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="680" y="75" width="115" height="25" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- CONTROLLER                                                   -->
+    <!-- ============================================================ -->
+    <mxCell id="ctrl" value="MarketController" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="20" y="130" width="260" height="200" as="geometry"/>
+    </mxCell>
+    <mxCell id="ctrl_stereo" value="&lt;&lt;Controller&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="ctrl">
+      <mxGeometry x="0" y="25" width="260" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="ctrl_sep1" value="" style="line;strokeColor=#6c8ebf;" vertex="1" parent="ctrl">
+      <mxGeometry x="0" y="42" width="260" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="ctrl_attrs" value="- _cryptosService : ICryptosService&#xa;- _historyService : IPriceHistoryService" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="ctrl">
+      <mxGeometry x="5" y="52" width="250" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="ctrl_sep2" value="" style="line;strokeColor=#6c8ebf;" vertex="1" parent="ctrl">
+      <mxGeometry x="0" y="95" width="260" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="ctrl_methods" value="+ GetAllCryptosAsync() : Task&lt;IActionResult&gt;&#xa;+ GetCryptoBySymbolAsync(symbol) : Task&lt;IActionResult&gt;&#xa;+ GetPriceHistoryAsync(symbol) : Task&lt;IActionResult&gt;&#xa;+ GetSnapshotAsync() : Task&lt;IActionResult&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="ctrl">
+      <mxGeometry x="5" y="105" width="250" height="85" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- INTERFACE ICryptosService                                    -->
+    <!-- ============================================================ -->
+    <mxCell id="icrypto" value="ICryptosService" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="330" y="130" width="260" height="130" as="geometry"/>
+    </mxCell>
+    <mxCell id="icrypto_stereo" value="&lt;&lt;interface&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="icrypto">
+      <mxGeometry x="0" y="25" width="260" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="icrypto_sep" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="icrypto">
+      <mxGeometry x="0" y="42" width="260" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="icrypto_methods" value="+ GetAllAsync() : Task&lt;IEnumerable&lt;Crypto&gt;&gt;&#xa;+ GetBySymbolAsync(symbol) : Task&lt;Crypto&gt;&#xa;+ GetSnapshotAsync() : Task&lt;IEnumerable&lt;Crypto&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="icrypto">
+      <mxGeometry x="5" y="52" width="250" height="65" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- CryptosService                                               -->
+    <!-- ============================================================ -->
+    <mxCell id="cryptosvc" value="CryptosService" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="330" y="310" width="260" height="155" as="geometry"/>
+    </mxCell>
+    <mxCell id="cryptosvc_stereo" value="implements ICryptosService" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="cryptosvc">
+      <mxGeometry x="0" y="25" width="260" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="cryptosvc_sep1" value="" style="line;strokeColor=#82b366;" vertex="1" parent="cryptosvc">
+      <mxGeometry x="0" y="42" width="260" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="cryptosvc_attrs" value="- _repo : IMarketRepository" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="cryptosvc">
+      <mxGeometry x="5" y="52" width="250" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="cryptosvc_sep2" value="" style="line;strokeColor=#82b366;" vertex="1" parent="cryptosvc">
+      <mxGeometry x="0" y="75" width="260" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="cryptosvc_methods" value="+ GetAllAsync() : Task&lt;IEnumerable&lt;Crypto&gt;&gt;&#xa;+ GetBySymbolAsync(symbol) : Task&lt;Crypto&gt;&#xa;+ GetSnapshotAsync() : Task&lt;IEnumerable&lt;Crypto&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="cryptosvc">
+      <mxGeometry x="5" y="85" width="250" height="60" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- INTERFACE IPriceHistoryService                               -->
+    <!-- ============================================================ -->
+    <mxCell id="ihist" value="IPriceHistoryService" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="640" y="130" width="260" height="115" as="geometry"/>
+    </mxCell>
+    <mxCell id="ihist_stereo" value="&lt;&lt;interface&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="ihist">
+      <mxGeometry x="0" y="25" width="260" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="ihist_sep" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="ihist">
+      <mxGeometry x="0" y="42" width="260" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="ihist_methods" value="+ GetHistoryAsync(symbol) : Task&lt;IEnumerable&lt;PriceHistory&gt;&gt;&#xa;+ AddHistoryEntryAsync(entry) : Task" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="ihist">
+      <mxGeometry x="5" y="52" width="250" height="50" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- PriceHistoryService                                          -->
+    <!-- ============================================================ -->
+    <mxCell id="histsvc" value="PriceHistoryService" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="640" y="295" width="260" height="140" as="geometry"/>
+    </mxCell>
+    <mxCell id="histsvc_stereo" value="implements IPriceHistoryService" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="histsvc">
+      <mxGeometry x="0" y="25" width="260" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="histsvc_sep1" value="" style="line;strokeColor=#82b366;" vertex="1" parent="histsvc">
+      <mxGeometry x="0" y="42" width="260" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="histsvc_attrs" value="- _repo : IMarketRepository" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="histsvc">
+      <mxGeometry x="5" y="52" width="250" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="histsvc_sep2" value="" style="line;strokeColor=#82b366;" vertex="1" parent="histsvc">
+      <mxGeometry x="0" y="75" width="260" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="histsvc_methods" value="+ GetHistoryAsync(symbol) : Task&lt;IEnumerable&lt;PriceHistory&gt;&gt;&#xa;+ AddHistoryEntryAsync(entry) : Task" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="histsvc">
+      <mxGeometry x="5" y="85" width="250" height="45" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- PriceSimulatorService (BackgroundService)                   -->
+    <!-- ============================================================ -->
+    <mxCell id="simulator" value="PriceSimulatorService" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="950" y="130" width="270" height="185" as="geometry"/>
+    </mxCell>
+    <mxCell id="sim_stereo" value="extends BackgroundService" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="simulator">
+      <mxGeometry x="0" y="25" width="270" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="sim_sep1" value="" style="line;strokeColor=#b85450;" vertex="1" parent="simulator">
+      <mxGeometry x="0" y="42" width="270" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="sim_attrs" value="- _repo : IMarketRepository&#xa;- _histSvc : IPriceHistoryService&#xa;- _hubContext : IHubContext&lt;MarketHub&gt;&#xa;- _interval : int (MARKET_UPDATE_INTERVAL)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="simulator">
+      <mxGeometry x="5" y="52" width="260" height="65" as="geometry"/>
+    </mxCell>
+    <mxCell id="sim_sep2" value="" style="line;strokeColor=#b85450;" vertex="1" parent="simulator">
+      <mxGeometry x="0" y="120" width="270" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="sim_methods" value="# ExecuteAsync(stoppingToken) : Task&#xa;- SimulateAsync() : Task" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="simulator">
+      <mxGeometry x="5" y="130" width="260" height="45" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- MarketHub                                                    -->
+    <!-- ============================================================ -->
+    <mxCell id="hub" value="MarketHub" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="950" y="355" width="200" height="80" as="geometry"/>
+    </mxCell>
+    <mxCell id="hub_stereo" value="extends Hub" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="hub">
+      <mxGeometry x="0" y="25" width="200" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="hub_sep" value="" style="line;strokeColor=#82b366;" vertex="1" parent="hub">
+      <mxGeometry x="0" y="42" width="200" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="hub_note" value="(classe vide - diffusion via IHubContext)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontStyle=2;verticalAlign=top;" vertex="1" parent="hub">
+      <mxGeometry x="5" y="52" width="190" height="20" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- IMarketRepository                                           -->
+    <!-- ============================================================ -->
+    <mxCell id="irepo" value="IMarketRepository" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="330" y="510" width="270" height="160" as="geometry"/>
+    </mxCell>
+    <mxCell id="irepo_stereo" value="&lt;&lt;interface&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="irepo">
+      <mxGeometry x="0" y="25" width="270" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="irepo_sep" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="irepo">
+      <mxGeometry x="0" y="42" width="270" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="irepo_methods" value="+ GetAllCryptosAsync() : Task&lt;IEnumerable&lt;Crypto&gt;&gt;&#xa;+ GetCryptoBySymbolAsync(symbol) : Task&lt;Crypto&gt;&#xa;+ UpdateCryptoAsync(crypto) : Task&#xa;+ GetHistoryAsync(symbol) : Task&lt;IEnumerable&lt;PriceHistory&gt;&gt;&#xa;+ AddHistoryAsync(entry) : Task" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="irepo">
+      <mxGeometry x="5" y="52" width="260" height="100" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- MarketRepository                                             -->
+    <!-- ============================================================ -->
+    <mxCell id="repo" value="MarketRepository" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="330" y="720" width="270" height="180" as="geometry"/>
+    </mxCell>
+    <mxCell id="repo_stereo" value="implements IMarketRepository" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="repo">
+      <mxGeometry x="0" y="25" width="270" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="repo_sep1" value="" style="line;strokeColor=#d6b656;" vertex="1" parent="repo">
+      <mxGeometry x="0" y="42" width="270" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="repo_attrs" value="- _db : MarketDbContext" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="repo">
+      <mxGeometry x="5" y="52" width="260" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="repo_sep2" value="" style="line;strokeColor=#d6b656;" vertex="1" parent="repo">
+      <mxGeometry x="0" y="75" width="270" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="repo_methods" value="+ GetAllCryptosAsync() : Task&lt;IEnumerable&lt;Crypto&gt;&gt;&#xa;+ GetCryptoBySymbolAsync(symbol) : Task&lt;Crypto&gt;&#xa;+ UpdateCryptoAsync(crypto) : Task&#xa;+ GetHistoryAsync(symbol) : Task&lt;IEnumerable&lt;PriceHistory&gt;&gt;&#xa;+ AddHistoryAsync(entry) : Task" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="repo">
+      <mxGeometry x="5" y="85" width="260" height="85" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- MarketDbContext                                              -->
+    <!-- ============================================================ -->
+    <mxCell id="db" value="MarketDbContext" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="660" y="510" width="230" height="115" as="geometry"/>
+    </mxCell>
+    <mxCell id="db_stereo" value="extends DbContext" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="db">
+      <mxGeometry x="0" y="25" width="230" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="db_sep" value="" style="line;strokeColor=#d6b656;" vertex="1" parent="db">
+      <mxGeometry x="0" y="42" width="230" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="db_attrs" value="+ Cryptos : DbSet&lt;Crypto&gt;&#xa;+ PriceHistories : DbSet&lt;PriceHistory&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="db">
+      <mxGeometry x="5" y="52" width="220" height="55" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- ENTITIES                                                     -->
+    <!-- ============================================================ -->
+    <mxCell id="crypto_entity" value="Crypto" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="20" y="510" width="260" height="165" as="geometry"/>
+    </mxCell>
+    <mxCell id="crypto_stereo" value="&lt;&lt;entity&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="crypto_entity">
+      <mxGeometry x="0" y="25" width="260" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="crypto_sep" value="" style="line;strokeColor=#666666;" vertex="1" parent="crypto_entity">
+      <mxGeometry x="0" y="42" width="260" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="crypto_attrs" value="+ Id : int [PK]&#xa;+ Symbol : string&#xa;+ Name : string&#xa;+ CurrentPrice : decimal&#xa;+ LastUpdated : DateTime&#xa;+ History : ICollection&lt;PriceHistory&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="crypto_entity">
+      <mxGeometry x="5" y="52" width="250" height="105" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="history_entity" value="PriceHistory" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="20" y="720" width="260" height="140" as="geometry"/>
+    </mxCell>
+    <mxCell id="hist_stereo" value="&lt;&lt;entity&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="history_entity">
+      <mxGeometry x="0" y="25" width="260" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="hist_sep" value="" style="line;strokeColor=#666666;" vertex="1" parent="history_entity">
+      <mxGeometry x="0" y="42" width="260" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="hist_attrs" value="+ Id : int [PK]&#xa;+ CryptoSymbol : string [FK]&#xa;+ Price : decimal&#xa;+ RecordedAt : DateTime" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="history_entity">
+      <mxGeometry x="5" y="52" width="250" height="80" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- DTOs                                                         -->
+    <!-- ============================================================ -->
+    <mxCell id="dto_crypto" value="CryptoDto" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="950" y="510" width="200" height="120" as="geometry"/>
+    </mxCell>
+    <mxCell id="dto_crypto_stereo" value="&lt;&lt;DTO&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="dto_crypto">
+      <mxGeometry x="0" y="25" width="200" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="dto_crypto_sep" value="" style="line;strokeColor=#666666;" vertex="1" parent="dto_crypto">
+      <mxGeometry x="0" y="42" width="200" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="dto_crypto_attrs" value="+ Symbol : string&#xa;+ Name : string&#xa;+ CurrentPrice : decimal&#xa;+ LastUpdated : DateTime" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="dto_crypto">
+      <mxGeometry x="5" y="52" width="190" height="60" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="dto_hist" value="PriceHistoryDto" style="swimlane;fontStyle=1;align=center;startSize=25;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="950" y="660" width="200" height="100" as="geometry"/>
+    </mxCell>
+    <mxCell id="dto_hist_stereo" value="&lt;&lt;DTO&gt;&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=2;" vertex="1" parent="dto_hist">
+      <mxGeometry x="0" y="25" width="200" height="15" as="geometry"/>
+    </mxCell>
+    <mxCell id="dto_hist_sep" value="" style="line;strokeColor=#666666;" vertex="1" parent="dto_hist">
+      <mxGeometry x="0" y="42" width="200" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="dto_hist_attrs" value="+ Symbol : string&#xa;+ Price : decimal&#xa;+ RecordedAt : DateTime" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;verticalAlign=top;" vertex="1" parent="dto_hist">
+      <mxGeometry x="5" y="52" width="190" height="40" as="geometry"/>
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- RELATIONS                                                    -->
+    <!-- ============================================================ -->
+
+    <!-- Controller uses ICryptosService -->
+    <mxCell id="rel_ctrl_icrypto" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ctrl" target="icrypto">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Controller uses IPriceHistoryService -->
+    <mxCell id="rel_ctrl_ihist" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="ctrl" target="ihist">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- CryptosService implements ICryptosService -->
+    <mxCell id="rel_cryptosvc_icrypto" value="" style="dashed=1;endArrow=block;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="cryptosvc" target="icrypto">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- PriceHistoryService implements IPriceHistoryService -->
+    <mxCell id="rel_histsvc_ihist" value="" style="dashed=1;endArrow=block;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="histsvc" target="ihist">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- CryptosService uses IMarketRepository -->
+    <mxCell id="rel_cryptosvc_irepo" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="cryptosvc" target="irepo">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- PriceHistoryService uses IMarketRepository -->
+    <mxCell id="rel_histsvc_irepo" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="histsvc" target="irepo">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- PriceSimulatorService uses IMarketRepository -->
+    <mxCell id="rel_sim_irepo" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="simulator" target="irepo">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- PriceSimulatorService uses IPriceHistoryService -->
+    <mxCell id="rel_sim_ihist" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="simulator" target="ihist">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- PriceSimulatorService uses MarketHub (via IHubContext) -->
+    <mxCell id="rel_sim_hub" value="broadcasts via&#xa;IHubContext" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="simulator" target="hub">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- MarketRepository implements IMarketRepository -->
+    <mxCell id="rel_repo_irepo" value="" style="dashed=1;endArrow=block;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="repo" target="irepo">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- MarketRepository uses MarketDbContext -->
+    <mxCell id="rel_repo_db" value="uses" style="dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="repo" target="db">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Crypto 1--* PriceHistory -->
+    <mxCell id="rel_crypto_hist" value="1..*" style="endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="crypto_entity" target="history_entity">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>

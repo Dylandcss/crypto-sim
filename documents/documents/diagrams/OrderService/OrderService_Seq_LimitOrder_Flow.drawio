@@ -1,0 +1,261 @@
+<mxGraphModel dx="1400" dy="900" grid="0" gridSize="10" guides="1" tooltips="1" connect="0" arrows="0" fold="0" page="0" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- ===== PARTICIPANTS ===== -->
+    <mxCell id="p1" value="Frontend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="20" y="20" width="110" height="40" as="geometry" />
+    </mxCell>
+    <mxCell id="p2" value="OrderService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="210" y="20" width="130" height="40" as="geometry" />
+    </mxCell>
+    <mxCell id="p3" value="Order DB" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="420" y="10" width="90" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="p4" value="LimitOrderExecutor&#xa;(BackgroundService)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="590" y="20" width="170" height="40" as="geometry" />
+    </mxCell>
+    <mxCell id="p5" value="MarketService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="850" y="20" width="130" height="40" as="geometry" />
+    </mxCell>
+    <mxCell id="p6" value="AuthService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="1060" y="20" width="120" height="40" as="geometry" />
+    </mxCell>
+    <mxCell id="p7" value="PortfolioService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="1270" y="20" width="130" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- ===== LIFELINES ===== -->
+    <!-- Frontend x=75 -->
+    <mxCell id="l1" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="75" y="60" as="sourcePoint" />
+        <mxPoint x="75" y="740" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <!-- OrderService x=275 -->
+    <mxCell id="l2" style="endArrow=none;dashed=1;strokeColor=#82b366;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="275" y="60" as="sourcePoint" />
+        <mxPoint x="275" y="740" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <!-- Order DB x=465 -->
+    <mxCell id="l3" style="endArrow=none;dashed=1;strokeColor=#666666;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="465" y="65" as="sourcePoint" />
+        <mxPoint x="465" y="740" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <!-- LimitOrderExecutor x=675 -->
+    <mxCell id="l4" style="endArrow=none;dashed=1;strokeColor=#d6b656;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="675" y="60" as="sourcePoint" />
+        <mxPoint x="675" y="740" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <!-- MarketService x=915 -->
+    <mxCell id="l5" style="endArrow=none;dashed=1;strokeColor=#9673a6;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="915" y="60" as="sourcePoint" />
+        <mxPoint x="915" y="740" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <!-- AuthService x=1120 -->
+    <mxCell id="l6" style="endArrow=none;dashed=1;strokeColor=#d6b656;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1120" y="60" as="sourcePoint" />
+        <mxPoint x="1120" y="740" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <!-- PortfolioService x=1335 -->
+    <mxCell id="l7" style="endArrow=none;dashed=1;strokeColor=#b85450;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1335" y="60" as="sourcePoint" />
+        <mxPoint x="1335" y="740" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ===== PHASE 1 : CREATION ===== -->
+    <mxCell id="ph1_bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=30;" vertex="1" parent="1">
+      <mxGeometry x="10" y="75" width="545" height="135" as="geometry" />
+    </mxCell>
+    <mxCell id="ph1_label" value="PHASE 1 - Creation de l'ordre" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=10;fontColor=#82b366;" vertex="1" parent="1">
+      <mxGeometry x="16" y="78" width="260" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- M1: Frontend -> OrderService: POST /api/orders {symbol, quantity, type, limitPrice} -->
+    <mxCell id="m1" value="POST /api/orders&#xa;{ symbol, quantity, type, limitPrice: 45000 }" style="endArrow=open;endFill=1;endSize=8;strokeColor=#6c8ebf;fontSize=10;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="75" y="110" as="sourcePoint" />
+        <mxPoint x="275" y="110" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M2: OrderService -> OrderDB: INSERT Order (Pending, LimitPrice set) -->
+    <mxCell id="m2" value="INSERT Order { Status=Pending, LimitPrice=45000 }" style="endArrow=open;endFill=1;endSize=8;strokeColor=#666666;fontSize=10;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="275" y="140" as="sourcePoint" />
+        <mxPoint x="465" y="140" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M3: OrderDB -> OrderService: order.Id -->
+    <mxCell id="m3" value="order.Id" style="endArrow=open;endFill=0;endSize=8;strokeColor=#666666;dashed=1;fontSize=10;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="465" y="162" as="sourcePoint" />
+        <mxPoint x="275" y="162" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M4: OrderService -> Frontend: 200 OK - ordre en attente -->
+    <mxCell id="m4" value="200 OK - ordre enregistre (Pending)" style="endArrow=open;endFill=0;endSize=8;strokeColor=#6c8ebf;dashed=1;fontSize=10;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="275" y="185" as="sourcePoint" />
+        <mxPoint x="75" y="185" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ===== PHASE 2 : BACKGROUND SERVICE ===== -->
+    <mxCell id="ph2_bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;opacity=30;" vertex="1" parent="1">
+      <mxGeometry x="10" y="225" width="1400" height="500" as="geometry" />
+    </mxCell>
+    <mxCell id="ph2_label" value="PHASE 2 - Execution par LimitOrderExecutorService (boucle toutes les 5s)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=10;fontColor=#d6b656;" vertex="1" parent="1">
+      <mxGeometry x="16" y="228" width="500" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- Loop note on LimitOrderExecutor -->
+    <mxCell id="loop_note" value="[loop] Task.Delay(5000)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fontSize=10;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+      <mxGeometry x="600" y="250" width="150" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- M5: LimitOrderExecutor -> OrderService: ExecuteLimitOrdersAsync() -->
+    <mxCell id="m5" value="ExecuteLimitOrdersAsync()" style="endArrow=open;endFill=1;endSize=8;strokeColor=#d6b656;fontSize=10;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="675" y="295" as="sourcePoint" />
+        <mxPoint x="275" y="295" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M6: OrderService -> OrderDB: GetPendingLimitOrders -->
+    <mxCell id="m6" value="GetPendingLimitOrders()" style="endArrow=open;endFill=1;endSize=8;strokeColor=#666666;fontSize=10;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="275" y="322" as="sourcePoint" />
+        <mxPoint x="465" y="322" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M7: OrderDB -> OrderService: pendingOrders[] -->
+    <mxCell id="m7" value="pendingOrders[]" style="endArrow=open;endFill=0;endSize=8;strokeColor=#666666;dashed=1;fontSize=10;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="465" y="344" as="sourcePoint" />
+        <mxPoint x="275" y="344" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- foreach note -->
+    <mxCell id="foreach_note" value="[foreach order in pendingOrders]" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontStyle=2;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="285" y="358" width="250" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- M8: OrderService -> MarketService: GET /market/cryptos/{symbol} -->
+    <mxCell id="m8" value="GET /market/cryptos/{symbol}" style="endArrow=open;endFill=1;endSize=8;strokeColor=#9673a6;fontSize=10;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="275" y="385" as="sourcePoint" />
+        <mxPoint x="915" y="385" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M9: MarketService -> OrderService: currentPrice -->
+    <mxCell id="m9" value="currentPrice" style="endArrow=open;endFill=0;endSize=8;strokeColor=#9673a6;dashed=1;fontSize=10;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="915" y="407" as="sourcePoint" />
+        <mxPoint x="275" y="407" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Condition note -->
+    <mxCell id="cond_note" value="[alt] Buy: currentPrice &lt;= limitPrice&#xa;      Sell: currentPrice &gt;= limitPrice" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fontSize=10;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="285" y="418" width="280" height="35" as="geometry" />
+    </mxCell>
+
+    <!-- M10: OrderService -> AuthService: GET /internal/balance/{userId} (X-Internal-Key) -->
+    <mxCell id="m10" value="GET /auth/internal/balance/{userId}&#xa;[X-Internal-Key]" style="endArrow=open;endFill=1;endSize=8;strokeColor=#d6b656;fontSize=10;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="275" y="468" as="sourcePoint" />
+        <mxPoint x="1120" y="468" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M11: AuthService -> OrderService: balance -->
+    <mxCell id="m11" value="balance" style="endArrow=open;endFill=0;endSize=8;strokeColor=#d6b656;dashed=1;fontSize=10;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1120" y="490" as="sourcePoint" />
+        <mxPoint x="275" y="490" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M12: OrderService -> PortfolioService: POST /portfolio/internal/holdings (X-Internal-Key) -->
+    <mxCell id="m12" value="POST /portfolio/internal/holdings&#xa;[X-Internal-Key]" style="endArrow=open;endFill=1;endSize=8;strokeColor=#b85450;fontSize=10;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="275" y="518" as="sourcePoint" />
+        <mxPoint x="1335" y="518" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M13: PortfolioService -> OrderService: 200 OK -->
+    <mxCell id="m13" value="200 OK" style="endArrow=open;endFill=0;endSize=8;strokeColor=#b85450;dashed=1;fontSize=10;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1335" y="540" as="sourcePoint" />
+        <mxPoint x="275" y="540" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M14: OrderService -> AuthService: PUT /internal/balance (debit) (X-Internal-Key) -->
+    <mxCell id="m14" value="PUT /auth/internal/balance { delta: -total }&#xa;[X-Internal-Key]" style="endArrow=open;endFill=1;endSize=8;strokeColor=#d6b656;fontSize=10;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="275" y="565" as="sourcePoint" />
+        <mxPoint x="1120" y="565" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M15: AuthService -> OrderService: 200 OK -->
+    <mxCell id="m15" value="200 OK" style="endArrow=open;endFill=0;endSize=8;strokeColor=#d6b656;dashed=1;fontSize=10;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1120" y="585" as="sourcePoint" />
+        <mxPoint x="275" y="585" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M16: OrderService -> OrderDB: UPDATE Status=Executed, ExecutedAt=now -->
+    <mxCell id="m16" value="UPDATE Order SET Status=Executed, ExecutedAt=now" style="endArrow=open;endFill=1;endSize=8;strokeColor=#666666;fontSize=10;align=center;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="275" y="613" as="sourcePoint" />
+        <mxPoint x="465" y="613" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- M17: LimitOrderExecutor self: await Task.Delay(5000) -->
+    <mxCell id="m17" value="await Task.Delay(5000)" style="endArrow=open;endFill=1;endSize=8;strokeColor=#d6b656;fontSize=10;align=right;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="675" y="650" as="sourcePoint" />
+        <mxPoint x="675" y="650" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="740" y="650" />
+          <mxPoint x="740" y="668" />
+          <mxPoint x="675" y="668" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ===== FRONTEND POLLING NOTE ===== -->
+    <mxCell id="poll_bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;opacity=30;" vertex="1" parent="1">
+      <mxGeometry x="10" y="700" width="545" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="poll_note" value="NOTE : TradeForm rafraichit solde + holdings toutes les 15s (setInterval)&#xa;pour reflechir l'execution eventuelle d'un ordre limite cote serveur." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="16" y="703" width="535" height="40" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

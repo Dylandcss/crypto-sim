@@ -1,4 +1,4 @@
-/* ── Conteneur overlay ── */
+/*  Conteneur overlay  */
 .crt {
   position: fixed;
   inset: 0;
@@ -11,7 +11,7 @@
     inset 0 0 180px rgba(0, 0, 0, 0.12);
 }
 
-/* ── Scanlines + vignette (même technique que retro.css) ── */
+/*  Scanlines + vignette (même technique que retro.css)  */
 .scanlines {
   position: absolute;
   inset: 0;
@@ -22,7 +22,7 @@
   pointer-events: none;
 }
 
-/* ── Lueur phosphore verte ── */
+/*  Lueur phosphore verte  */
 .phosphor {
   position: absolute;
   inset: 0;
@@ -33,7 +33,7 @@
   );
 }
 
-/* ── Barres de glitch horizontales ── */
+/*  Barres de glitch horizontales  */
 .glitch {
   position: absolute;
   inset: 0;
@@ -70,7 +70,7 @@
   }
 }
 
-/* ── Ligne de balayage phosphore ── */
+/*  Ligne de balayage phosphore  */
 .sweep {
   position: absolute;
   left: 0;
@@ -91,7 +91,7 @@
   to   { transform: translateY(100vh); }
 }
 
-/* ── Scintillement rapide (comme retro.css 0.15s) ── */
+/*  Scintillement rapide (comme retro.css 0.15s)  */
 .flicker {
   position: absolute;
   inset: 0;
