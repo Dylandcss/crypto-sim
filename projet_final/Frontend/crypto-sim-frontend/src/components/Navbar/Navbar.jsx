@@ -1,11 +1,11 @@
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../context/AuthContext'
-import { formatBalance } from '../../utils/formatters'
+import {useLocation, useNavigate} from 'react-router-dom'
+import {useAuth} from '../../context/AuthContext'
+import {formatBalance} from '../../utils/formatters'
 import styles from './Navbar.module.css'
 import moneyBagIcon from '../../assets/images/moneybag_icon.png'
 
 const PAGE_NAMES = {
-  '/market': 'Market',
+  '/market': 'Marché',
   '/portfolio': 'Portefeuille',
   '/history': 'Historique',
   '/profil': 'Profil',
@@ -18,10 +18,11 @@ function Navbar() {
 
   const tradeMatch = location.pathname.match(/^\/trade\/(.+)$/)
   const holdingMatch = location.pathname.match(/^\/portfolio\/holdings\/(.+)$/)
-  const pageName = PAGE_NAMES[location.pathname]
-    || (tradeMatch ? `Trade - ${tradeMatch[1]}` : null)
-    || (holdingMatch ? `Détails - ${holdingMatch[1]}` : null)
-    || 'CryptoSim'
+  const pageName =
+    PAGE_NAMES[location.pathname] ||
+    (tradeMatch ? `Trade - ${tradeMatch[1]}` : null) ||
+    (holdingMatch ? `Détails - ${holdingMatch[1]}` : null) ||
+    'CryptoSim'
 
   const handleLogout = () => {
     logoutUser()
@@ -39,9 +40,7 @@ function Navbar() {
         <span className={styles['navbar-separator']} />
 
         <img className={styles['navbar-moneybag-icon']} src={moneyBagIcon} alt="Moneybag" />
-        <span className={styles['navbar-balance']}>
-          {formatBalance(user?.balance)}
-        </span>
+        <span className={styles['navbar-balance']}>{formatBalance(user?.balance)}</span>
         <button className={styles['navbar-logout']} onClick={handleLogout}>
           Déconnexion
         </button>
