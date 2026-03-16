@@ -1,4 +1,4 @@
-# Document des Use Cases - CryptoSim
+# Document des Use Cases — CryptoSim
 
 ## 1. Introduction
 
@@ -46,7 +46,7 @@ L’acteur principal du système est :
 
 ---
 
-# UC1 - Créer un compte
+# UC1 — Créer un compte
 
 ### Acteur
 
@@ -79,7 +79,7 @@ Le compte utilisateur est créé et prêt à être utilisé.
 
 ---
 
-# UC2 - Se connecter
+# UC2 — Se connecter
 
 ### Acteur
 
@@ -108,7 +108,7 @@ L’utilisateur est authentifié et peut accéder aux services sécurisés.
 
 ---
 
-# UC3 - Consulter son profil
+# UC3 — Consulter son profil
 
 ### Acteur
 
@@ -127,7 +127,7 @@ Permet à l’utilisateur de consulter les informations de son compte.
 
 ---
 
-# UC4 - Consulter son solde
+# UC4 — Consulter son solde
 
 ### Acteur
 
@@ -143,7 +143,7 @@ Permet à l’utilisateur de consulter le montant de liquidités disponibles pou
 
 ---
 
-# UC5 - Consulter la liste des cryptomonnaies
+# UC5 — Consulter la liste des cryptomonnaies
 
 ### Acteur
 
@@ -162,7 +162,7 @@ Permet à l’utilisateur de voir toutes les cryptomonnaies disponibles sur la p
 
 ---
 
-# UC6 - Voir les détails d’une cryptomonnaie
+# UC6 — Voir les détails d’une cryptomonnaie
 
 ### Acteur
 
@@ -181,7 +181,7 @@ Permet d’obtenir les informations détaillées d’une cryptomonnaie.
 
 ---
 
-# UC7 - Consulter l’historique des prix
+# UC7 — Consulter l’historique des prix
 
 ### Acteur
 
@@ -199,7 +199,7 @@ Permet de consulter l’historique des variations de prix d’une cryptomonnaie.
 
 ---
 
-# UC8 - Voir les prix en temps réel
+# UC8 — Voir les prix en temps réel
 
 ### Acteur
 
@@ -216,7 +216,7 @@ Permet de recevoir les mises à jour de prix des cryptomonnaies en temps réel.
 
 ---
 
-# UC9 - Passer un ordre d’achat
+# UC9 — Passer un ordre d’achat
 
 ### Acteur
 
@@ -247,7 +247,7 @@ Permet à l’utilisateur d’acheter une cryptomonnaie.
 
 ---
 
-# UC10 - Passer un ordre de vente
+# UC10 — Passer un ordre de vente
 
 ### Acteur
 
@@ -275,7 +275,7 @@ Permet à un utilisateur de vendre une cryptomonnaie.
 
 ---
 
-# UC11 - Consulter l’historique des ordres
+# UC11 — Consulter l’historique des ordres
 
 ### Acteur
 
@@ -296,7 +296,7 @@ Permet de consulter tous les ordres passés.
 
 ---
 
-# UC12 - Consulter les détails d’un ordre
+# UC12 — Consulter les détails d’un ordre
 
 ### Acteur
 
@@ -308,7 +308,7 @@ Permet de voir les informations complètes d’un ordre spécifique.
 
 ---
 
-# UC13 - Annuler un ordre en attente
+# UC13 — Annuler un ordre en attente
 
 ### Acteur
 
@@ -324,7 +324,7 @@ Permet d’annuler un ordre qui n’a pas encore été exécuté.
 
 ---
 
-# UC14 - Consulter son portefeuille
+# UC14 — Consulter son portefeuille
 
 ### Acteur
 
@@ -342,7 +342,7 @@ Affiche une vue globale du portefeuille.
 
 ---
 
-# UC15 - Voir les actifs détenus
+# UC15 — Voir les actifs détenus
 
 ### Acteur
 
@@ -362,7 +362,7 @@ Permet de voir toutes les cryptomonnaies détenues.
 
 ---
 
-# UC16 - Consulter l’historique des transactions
+# UC16 — Consulter l’historique des transactions
 
 ### Acteur
 
@@ -382,7 +382,7 @@ Permet de consulter toutes les transactions effectuées.
 
 ---
 
-# UC17 - Consulter la performance globale
+# UC17 — Consulter la performance globale
 
 ### Acteur
 
