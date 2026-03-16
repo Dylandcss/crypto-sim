@@ -1,96 +1,97 @@
-import { useState, useEffect } from 'react';
-import { useAuth } from '../../../context/AuthContext';
-import { getHoldingDetails } from '../../../services/portfolioService';
-import { makeOrder } from '../../../services/orderService';
-import { formatPrice, formatBalance } from '../../../utils/formatters';
-import Loader from '../../common/Loader/Loader';
-import DisplayMessage from '../../common/DisplayMessage/DisplayMessage';
-import styles from './TradeForm.module.css';
+import { useEffect, useState } from 'react'
+import { useAuth } from '../../../context/AuthContext'
+import { getHoldingDetails } from '../../../services/portfolioService'
+import { makeOrder } from '../../../services/orderService'
+import { formatBalance, formatPrice } from '../../../utils/formatters'
+import DisplayMessage from '../../common/DisplayMessage/DisplayMessage'
+import styles from './TradeForm.module.css'
 
 const TradeForm = ({ symbol, currentPrice }) => {
-  const { user, refreshUser } = useAuth();
-  const [orderMode, setOrderMode] = useState('market'); // 'market' | 'limit'
-  const [quantity, setQuantity] = useState('');
-  const [limitPrice, setLimitPrice] = useState('');
-  const [holding, setHolding] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [message, setMessage] = useState(null);
+  const { user, refreshUser } = useAuth()
+  const [orderMode, setOrderMode] = useState('market') // 'market' | 'limit'
+  const [quantity, setQuantity] = useState('')
+  const [limitPrice, setLimitPrice] = useState('')
+  const [holding, setHolding] = useState(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
-    fetchHolding();
-  }, [symbol]);
+    fetchHolding()
+  }, [symbol])
 
-  // Rafraîchit le solde et les cryptos détenus toutes les 15s
-  // pour refléter l'exécution éventuelle d'un ordre limite côté serveur
+  // Refresh du solde pour les ordres limites
   useEffect(() => {
     const interval = setInterval(() => {
-      refreshUser();
-      fetchHolding();
-    }, 15000);
-    return () => clearInterval(interval);
-  }, [symbol]);
+      refreshUser()
+      fetchHolding()
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [symbol])
 
   const fetchHolding = async () => {
     try {
-      const data = await getHoldingDetails(symbol);
-      setHolding(data);
+      const data = await getHoldingDetails(symbol)
+      setHolding(data)
     } catch (err) {
-      setHolding({ quantity: 0 });
+      setHolding({ quantity: 0 })
     }
-  };
+  }
 
   const handleTrade = async (type) => {
     if (!quantity || isNaN(quantity) || quantity <= 0) {
-      setMessage({ type: 'error', text: 'Veuillez saisir une quantité valide.' });
-      return;
+      setMessage({ type: 'error', text: 'Veuillez saisir une quantité valide.' })
+      return
     }
 
-    const lp = orderMode === 'limit' ? parseFloat(limitPrice) : null;
+    const lp = orderMode === 'limit' ? parseFloat(limitPrice) : null
 
     if (orderMode === 'limit') {
       if (!limitPrice || isNaN(limitPrice) || lp <= 0) {
-        setMessage({ type: 'error', text: 'Veuillez saisir un prix limite valide.' });
-        return;
+        setMessage({ type: 'error', text: 'Veuillez saisir un prix limite valide.' })
+        return
       }
     } else {
-      const totalCost = quantity * currentPrice;
+      const totalCost = quantity * currentPrice
       if (type === 'Buy' && totalCost > user.balance) {
-        setMessage({ type: 'error', text: 'Solde insuffisant.' });
-        return;
+        setMessage({ type: 'error', text: 'Solde insuffisant.' })
+        return
       }
       if (type === 'Sell' && (!holding || quantity > holding.quantity)) {
-        setMessage({ type: 'error', text: 'Quantité insuffisante dans votre portefeuille.' });
-        return;
+        setMessage({ type: 'error', text: 'Quantité insuffisante dans votre portefeuille.' })
+        return
       }
     }
 
-    setIsSubmitting(true);
-    setMessage(null);
+    setIsSubmitting(true)
+    setMessage(null)
 
     try {
-      await makeOrder(symbol, parseFloat(quantity), type, lp);
+      await makeOrder(symbol, parseFloat(quantity), type, lp)
 
       if (orderMode === 'limit') {
         setMessage({
           type: 'success',
           text: `Ordre limite enregistré. Il s'exécutera quand le prix atteindra ${formatPrice(lp)}.`,
-        });
+        })
       } else {
-        setMessage({ type: 'success', text: `Ordre de ${type === 'Buy' ? 'achat' : 'vente'} réussi !` });
-        await Promise.all([refreshUser(), fetchHolding()]);
+        setMessage({
+          type: 'success',
+          text: `Ordre de ${type === 'Buy' ? 'achat' : 'vente'} réussi !`,
+        })
+        await Promise.all([refreshUser(), fetchHolding()])
       }
 
-      setQuantity('');
-      setLimitPrice('');
+      setQuantity('')
+      setLimitPrice('')
     } catch (err) {
-      setMessage({ type: 'error', text: err.message });
+      setMessage({ type: 'error', text: err.message })
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
-  const effectivePrice = orderMode === 'limit' && limitPrice ? parseFloat(limitPrice) : currentPrice;
-  const total = quantity ? parseFloat(quantity) * effectivePrice : 0;
+  const effectivePrice = orderMode === 'limit' && limitPrice ? parseFloat(limitPrice) : currentPrice
+  const total = quantity ? parseFloat(quantity) * effectivePrice : 0
 
   return (
     <div className={styles.tradeForm}>
@@ -117,7 +118,9 @@ const TradeForm = ({ symbol, currentPrice }) => {
         </div>
         <div className={styles.infoLine}>
           <span className={styles.label}>Détenu:</span>
-          <span className={styles.value}>{holding?.quantity ?? 0} {symbol}</span>
+          <span className={styles.value}>
+            {holding?.quantity ?? 0} {symbol}
+          </span>
         </div>
       </div>
 
@@ -176,7 +179,11 @@ const TradeForm = ({ symbol, currentPrice }) => {
         <button
           className={`${styles.tradeButton} ${styles.sellButton}`}
           onClick={() => handleTrade('Sell')}
-          disabled={isSubmitting || !quantity || (orderMode === 'market' && (!holding || (holding.quantity ?? 0) <= 0))}
+          disabled={
+            isSubmitting ||
+            !quantity ||
+            (orderMode === 'market' && (!holding || (holding.quantity ?? 0) <= 0))
+          }
         >
           {isSubmitting ? '...' : 'Vendre'}
         </button>
@@ -189,7 +196,7 @@ const TradeForm = ({ symbol, currentPrice }) => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TradeForm;
+export default TradeForm
