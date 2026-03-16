@@ -1,0 +1,41 @@
+.chartContainer {
+  background: var(--widget-bg);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-retro);
+  width: 100%;
+  min-height: 400px;
+  position: relative;
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.currentPrice {
+  font-family: inherit;
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+}
+
+.up {
+  color: var(--light-green);
+}
+
+.down {
+  color: var(--light-red);
+}
+
+.neutral {
+  color: var(--text-primary);
+}

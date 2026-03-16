@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1654" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- TITRE -->
+    <mxCell id="title" value="PortfolioService - Sequence : POST /portfolio/holdings (mise a jour apres trade) [X-Internal-Key]" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="80" y="10" width="1200" height="30" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="note_ctx" value="Contexte : endpoint interne appele par OrderService apres execution d'un ordre (market ou limit). Pas de JWT. X-Internal-Key requis." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="80" y="45" width="650" height="35" as="geometry"/>
+    </mxCell>
+
+    <!-- PARTICIPANTS -->
+    <mxCell id="p_order" value="OrderService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="20" y="100" width="130" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_ctrl" value="PortfolioController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="200" y="100" width="165" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_svc" value="PortfolioMgmt&#xa;Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="415" y="100" width="135" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_repo" value="PortfolioRepository" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="600" y="100" width="155" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_db" value="PortfolioDbContext" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="810" y="100" width="155" height="40" as="geometry"/>
+    </mxCell>
+
+    <!-- LIFELINES -->
+    <mxCell id="ll_ord" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="85" y="140" as="sourcePoint"/><mxPoint x="85" y="1000" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_ctrl" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="282" y="140" as="sourcePoint"/><mxPoint x="282" y="1000" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_svc" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="482" y="140" as="sourcePoint"/><mxPoint x="482" y="1000" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_repo" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="677" y="140" as="sourcePoint"/><mxPoint x="677" y="1000" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_db" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="887" y="140" as="sourcePoint"/><mxPoint x="887" y="1000" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 1 -->
+    <mxCell id="m1" value="POST /api/portfolio/holdings  [X-Internal-Key]  {userId, symbol, type, qty, price}" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="85" y="175" as="sourcePoint"/><mxPoint x="282" y="175" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- Check internal key -->
+    <mxCell id="m2_self" value="IsInternalRequest() - X-Internal-Key valide" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=10;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="282" y="205" as="sourcePoint"/>
+        <mxPoint x="282" y="235" as="targetPoint"/>
+        <Array as="points"><mxPoint x="360" y="205"/><mxPoint x="360" y="235"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="m3" value="UpdateAfterTradeAsync(dto)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="282" y="260" as="sourcePoint"/><mxPoint x="482" y="260" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- Get existing holding -->
+    <mxCell id="m4" value="GetHoldingAsync(userId, symbol)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="482" y="290" as="sourcePoint"/><mxPoint x="677" y="290" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m4r" value="Holding (ou null si premiere fois)" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="677" y="315" as="sourcePoint"/><mxPoint x="482" y="315" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- ALT Buy -->
+    <mxCell id="alt_buy" value="[Type = Buy]" style="text;html=1;strokeColor=none;fillColor=#d5e8d4;align=left;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="400" y="330" width="150" height="18" as="geometry"/>
+    </mxCell>
+    <mxCell id="m5_self_buy" value="if holding == null:&#xa;  new Holding {qty=dto.Qty, avgBuyPrice=dto.Price}&#xa;  -> AddHoldingAsync(holding)&#xa;else:&#xa;  avgPrice = (h.Qty*h.avgBuyPrice + dto.Qty*dto.Price) / (h.Qty+dto.Qty)&#xa;  holding.Quantity += dto.Qty&#xa;  holding.AverageBuyPrice = avgPrice&#xa;  -> UpdateHoldingAsync(holding)" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=10;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="482" y="355" as="sourcePoint"/>
+        <mxPoint x="482" y="490" as="targetPoint"/>
+        <Array as="points"><mxPoint x="590" y="355"/><mxPoint x="590" y="490"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Add/Update Holding in DB -->
+    <mxCell id="m6" value="AddHoldingAsync(holding) OU UpdateHoldingAsync(holding)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="482" y="515" as="sourcePoint"/><mxPoint x="677" y="515" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m6b" value="Add/Update + SaveChangesAsync()" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="677" y="545" as="sourcePoint"/><mxPoint x="887" y="545" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m6br" value="ok" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="887" y="570" as="sourcePoint"/><mxPoint x="677" y="570" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m6r" value="ok" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="677" y="595" as="sourcePoint"/><mxPoint x="482" y="595" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- ALT Sell note -->
+    <mxCell id="alt_sell" value="[Type = Sell] -> holding.Quantity -= dto.Qty; if Quantity==0 -> supprimer le holding; UpdateHoldingAsync()" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;align=left;" vertex="1" parent="1">
+      <mxGeometry x="400" y="615" width="490" height="40" as="geometry"/>
+    </mxCell>
+
+    <!-- Add transaction -->
+    <mxCell id="m7" value="AddTransactionAsync(new Transaction {userId, symbol, type, qty, price, total, DateTime.UtcNow})" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="482" y="665" as="sourcePoint"/><mxPoint x="677" y="665" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m7b" value="Add(tx) + SaveChangesAsync()" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="677" y="695" as="sourcePoint"/><mxPoint x="887" y="695" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m7br" value="ok" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="887" y="720" as="sourcePoint"/><mxPoint x="677" y="720" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m7r" value="ok" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="677" y="745" as="sourcePoint"/><mxPoint x="482" y="745" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- Return void -->
+    <mxCell id="m8" value="(void)" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="482" y="775" as="sourcePoint"/><mxPoint x="282" y="775" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m9" value="204 No Content" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="282" y="800" as="sourcePoint"/><mxPoint x="85" y="800" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <mxCell id="note_err" value="Erreur: cle interne manquante/invalide -> 401. Holding introuvable (Sell) -> 400 InsufficientQuantityException" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;align=left;" vertex="1" parent="1">
+      <mxGeometry x="80" y="835" width="550" height="40" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>

@@ -1,0 +1,105 @@
+.profileCard {
+  background: var(--widget-bg);
+  border: var(--border-thick);
+  border-radius: var(--radius-md);
+  max-width: 600px;
+  box-shadow: var(--shadow-retro);
+  animation: fadeIn 0.5s ease-out;
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.headerSection {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding-bottom: var(--spacing-xs);
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  background: var(--sidebar-bg);
+  border: var(--border-thick);
+  border-radius: var(--radius-md);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--light-blue);
+  box-shadow: var(--shadow-retro);
+  flex-shrink: 0;
+}
+
+.userSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  text-align: left;
+}
+
+.username {
+  font-size: 1.8rem;
+  margin: 0;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.metaGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.metaItem strong {
+  color: var(--light-blue);
+}
+
+.divider {
+  height: 2px;
+  border-bottom: 2px dashed var(--border-color);
+  margin-block: var(--spacing-xs);
+}
+
+.balanceArea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+  padding-left: var(--spacing-xs);
+}
+
+.balanceHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--text-muted);
+}
+
+.balanceLabel {
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.balanceValue {
+  font-size: 2rem;
+  margin: 0;
+  color: var(--light-blue);
+  line-height: 1;
+  font-weight: var(--font-weight-bold);
+}

@@ -1,0 +1,14 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+.emptyState {
+  padding: var(--spacing-xl);
+  text-align: center;
+  color: var(--text-muted);
+  background-color: var(--widget-bg);
+  border-radius: var(--radius-md);
+}

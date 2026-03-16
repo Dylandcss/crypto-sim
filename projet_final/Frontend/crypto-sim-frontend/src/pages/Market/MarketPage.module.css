@@ -1,0 +1,51 @@
+.marketPage {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.marketHeader {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: var(--spacing-xl);
+  width: 100%;
+}
+
+.searchWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+}
+
+.searchInput {
+  width: 80%;
+  padding: 16px 16px 16px 48px;
+  background: var(--sidebar-bg);
+  border: var(--border-thick);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-lg);
+  outline: none;
+  box-shadow: var(--shadow-retro);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.searchInput:focus {
+  border-color: var(--light-blue);
+  box-shadow: var(--shadow-glow);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}

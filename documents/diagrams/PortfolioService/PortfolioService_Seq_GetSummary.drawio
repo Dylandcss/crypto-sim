@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1654" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- TITRE -->
+    <mxCell id="title" value="PortfolioService - Sequence : GET /portfolio (resume complet) [JWT requis]" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="80" y="10" width="1100" height="30" as="geometry"/>
+    </mxCell>
+
+    <!-- PARTICIPANTS -->
+    <mxCell id="p_client" value="Client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="15" y="60" width="100" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_gw" value="Gateway" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="160" y="60" width="110" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_ctrl" value="PortfolioController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="315" y="60" width="165" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_svc" value="PortfolioMgmt&#xa;Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="530" y="60" width="135" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_repo" value="PortfolioRepo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="715" y="60" width="130" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_auth" value="AuthApiClient" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="895" y="60" width="130" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_market" value="MarketApiClient" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="1075" y="60" width="130" height="40" as="geometry"/>
+    </mxCell>
+
+    <!-- LIFELINES -->
+    <mxCell id="ll_c" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="65" y="100" as="sourcePoint"/><mxPoint x="65" y="950" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_gw" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="215" y="100" as="sourcePoint"/><mxPoint x="215" y="950" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_ctrl" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="397" y="100" as="sourcePoint"/><mxPoint x="397" y="950" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_svc" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="597" y="100" as="sourcePoint"/><mxPoint x="597" y="950" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_repo" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="780" y="100" as="sourcePoint"/><mxPoint x="780" y="950" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_auth" value="" style="endArrow=none;dashed=1;strokeColor=#9673a6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="960" y="100" as="sourcePoint"/><mxPoint x="960" y="950" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_market" value="" style="endArrow=none;dashed=1;strokeColor=#9673a6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1140" y="100" as="sourcePoint"/><mxPoint x="1140" y="950" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 1 -->
+    <mxCell id="m1" value="GET /portfolio  [Bearer token]" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="65" y="145" as="sourcePoint"/><mxPoint x="215" y="145" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m2" value="GET /api/portfolio  [Bearer token]" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="215" y="175" as="sourcePoint"/><mxPoint x="397" y="175" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m3_self" value="JWT valide; extract userId" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=10;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="397" y="200" as="sourcePoint"/>
+        <mxPoint x="397" y="230" as="targetPoint"/>
+        <Array as="points"><mxPoint x="470" y="200"/><mxPoint x="470" y="230"/></Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="m4" value="GetSummaryAsync(userId)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="397" y="255" as="sourcePoint"/><mxPoint x="597" y="255" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- Get holdings -->
+    <mxCell id="m5" value="GetHoldingsAsync(userId)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="597" y="285" as="sourcePoint"/><mxPoint x="780" y="285" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m5r" value="IEnumerable&lt;Holding&gt;" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="780" y="310" as="sourcePoint"/><mxPoint x="597" y="310" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- Get balance from AuthService -->
+    <mxCell id="m6" value="GetBalanceAsync(userId)  [X-Internal-Key]" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="597" y="345" as="sourcePoint"/><mxPoint x="960" y="345" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m6r" value="balance (decimal)" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="960" y="370" as="sourcePoint"/><mxPoint x="597" y="370" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- Get market snapshot for current prices -->
+    <mxCell id="m7" value="GetSnapshotAsync()" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="597" y="405" as="sourcePoint"/><mxPoint x="1140" y="405" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m7r" value="List&lt;CryptoDto&gt; (prix actuels)" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1140" y="430" as="sourcePoint"/><mxPoint x="597" y="430" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- Calculate total value -->
+    <mxCell id="m8_self" value="foreach holding:&#xa;  currentPrice = snapshot.Find(h.Symbol).Price&#xa;  currentValue = h.Quantity * currentPrice&#xa;  totalValue += currentValue&#xa;  holdingDetail = {symbol, qty, avgBuyPrice, currentPrice, pnl}" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=10;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="597" y="465" as="sourcePoint"/>
+        <mxPoint x="597" y="560" as="targetPoint"/>
+        <Array as="points"><mxPoint x="690" y="465"/><mxPoint x="690" y="560"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Build PortfolioSummary -->
+    <mxCell id="m9_self" value="return new PortfolioSummary {UserId, TotalValue=totalValue+balance, Balance, Holdings}" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=10;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="597" y="580" as="sourcePoint"/>
+        <mxPoint x="597" y="615" as="targetPoint"/>
+        <Array as="points"><mxPoint x="690" y="580"/><mxPoint x="690" y="615"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="m10" value="PortfolioSummary" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="597" y="645" as="sourcePoint"/><mxPoint x="397" y="645" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m11" value="200 OK  {PortfolioSummary}" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="397" y="675" as="sourcePoint"/><mxPoint x="215" y="675" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="m12" value="200 OK  {PortfolioSummary}" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="215" y="705" as="sourcePoint"/><mxPoint x="65" y="705" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+  </root>
+</mxGraphModel>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1654" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- TITRE -->
+    <mxCell id="title" value="Gateway - Sequence : Routage des requetes HTTP et SignalR vers les microservices" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="80" y="10" width="1200" height="30" as="geometry"/>
+    </mxCell>
+
+    <!-- ====== PARTIE 1 : Requete HTTP classique ====== -->
+    <mxCell id="sec1" value="Partie 1 : Requete HTTP classique (ex: GET /portfolio)" style="text;html=1;strokeColor=none;fillColor=#dae8fc;align=left;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="20" y="50" width="450" height="20" as="geometry"/>
+    </mxCell>
+
+    <!-- PARTICIPANTS HTTP -->
+    <mxCell id="p_client" value="Client&#xa;(Frontend)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="20" y="82" width="110" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_gw" value="Gateway&#xa;(GatewayController)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="175" y="82" width="160" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_jwt" value="JwtBearer&#xa;Middleware" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="385" y="82" width="130" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_portSvc" value="PortfolioService&#xa;(via HttpClient)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="565" y="82" width="155" height="40" as="geometry"/>
+    </mxCell>
+
+    <!-- LIFELINES HTTP -->
+    <mxCell id="ll_c" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="75" y="122" as="sourcePoint"/><mxPoint x="75" y="560" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_gw" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="255" y="122" as="sourcePoint"/><mxPoint x="255" y="560" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_jwt" value="" style="endArrow=none;dashed=1;strokeColor=#9673a6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="450" y="122" as="sourcePoint"/><mxPoint x="450" y="560" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_port" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="642" y="122" as="sourcePoint"/><mxPoint x="642" y="560" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- Messages HTTP -->
+    <mxCell id="h1" value="GET /portfolio  [Authorization: Bearer token]" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="75" y="157" as="sourcePoint"/><mxPoint x="255" y="157" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- CORS check -->
+    <mxCell id="h2_self" value="CORS: Access-Control headers check" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=10;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="255" y="185" as="sourcePoint"/>
+        <mxPoint x="255" y="213" as="targetPoint"/>
+        <Array as="points"><mxPoint x="325" y="185"/><mxPoint x="325" y="213"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- JWT validation -->
+    <mxCell id="h3" value="Validate Bearer token" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="255" y="235" as="sourcePoint"/><mxPoint x="450" y="235" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="h3_self" value="HMAC-SHA256, expiry, issuer, audience" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=10;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="450" y="260" as="sourcePoint"/>
+        <mxPoint x="450" y="290" as="targetPoint"/>
+        <Array as="points"><mxPoint x="520" y="260"/><mxPoint x="520" y="290"/></Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="h3r" value="[token valide] ClaimsPrincipal injecte" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="450" y="310" as="sourcePoint"/><mxPoint x="255" y="310" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- Route matching -->
+    <mxCell id="h4_self" value="Route match: /portfolio/** -> ForwardToPortfolio()&#xa;HttpClient 'PortfolioClient'&#xa;CopyHeaders: Authorization, Content-Type, etc." style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=10;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="255" y="335" as="sourcePoint"/>
+        <mxPoint x="255" y="380" as="targetPoint"/>
+        <Array as="points"><mxPoint x="350" y="335"/><mxPoint x="350" y="380"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Forward to service -->
+    <mxCell id="h5" value="GET http://portfolio-service/api/portfolio  [Bearer token]" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="255" y="405" as="sourcePoint"/><mxPoint x="642" y="405" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="h5r" value="200 OK  {response body}" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="642" y="440" as="sourcePoint"/><mxPoint x="255" y="440" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- Build IActionResult -->
+    <mxCell id="h6_self" value="ContentResult {StatusCode, ContentType, body}" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=10;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="255" y="465" as="sourcePoint"/>
+        <mxPoint x="255" y="495" as="targetPoint"/>
+        <Array as="points"><mxPoint x="350" y="465"/><mxPoint x="350" y="495"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="h7" value="200 OK  {response body}" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="255" y="520" as="sourcePoint"/><mxPoint x="75" y="520" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- ====== PARTIE 2 : SignalR / YARP ====== -->
+    <mxCell id="sec2" value="Partie 2 : SignalR WebSocket (/marketHub) - via YARP ReverseProxy" style="text;html=1;strokeColor=none;fillColor=#f8cecc;align=left;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="20" y="580" width="560" height="20" as="geometry"/>
+    </mxCell>
+
+    <!-- PARTICIPANTS SignalR -->
+    <mxCell id="p_client2" value="Client&#xa;(Frontend)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="20" y="612" width="110" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_yarp" value="YARP&#xa;ReverseProxy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="175" y="612" width="140" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_markethub" value="MarketService&#xa;MarketHub (SignalR)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="365" y="612" width="170" height="40" as="geometry"/>
+    </mxCell>
+
+    <!-- LIFELINES SignalR -->
+    <mxCell id="ll_c2" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="75" y="652" as="sourcePoint"/><mxPoint x="75" y="990" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_yarp" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="245" y="652" as="sourcePoint"/><mxPoint x="245" y="990" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_hub" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="450" y="652" as="sourcePoint"/><mxPoint x="450" y="990" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- SignalR messages -->
+    <mxCell id="s1" value="WebSocket Upgrade: GET /marketHub  [negotiate + connect]" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="75" y="687" as="sourcePoint"/><mxPoint x="245" y="687" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <mxCell id="s2_self" value="Route match: /marketHub -> YARP route 'marketHub'&#xa;Destination: MarketService SignalR endpoint&#xa;Transparent proxy: conserve Upgrade header (WebSocket)" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=10;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="245" y="715" as="sourcePoint"/>
+        <mxPoint x="245" y="760" as="targetPoint"/>
+        <Array as="points"><mxPoint x="340" y="715"/><mxPoint x="340" y="760"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="s3" value="WebSocket Upgrade: ws://market-service/marketHub" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="245" y="790" as="sourcePoint"/><mxPoint x="450" y="790" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="s3r" value="101 Switching Protocols (WebSocket established)" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="450" y="820" as="sourcePoint"/><mxPoint x="245" y="820" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="s4r" value="101 Switching Protocols" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=10;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="245" y="850" as="sourcePoint"/><mxPoint x="75" y="850" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- Bidirectional -->
+    <mxCell id="s5" value="SignalR messages: ReceivePrices (push) &lt;->" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=10;verticalAlign=bottom;dashed=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="75" y="885" as="sourcePoint"/><mxPoint x="450" y="885" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- Notes -->
+    <mxCell id="note1" value="Note: le login (POST /auth/login) utilise addAuthToken=false&#xa;car le token n'existe pas encore au moment de la connexion" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;align=left;" vertex="1" parent="1">
+      <mxGeometry x="730" y="100" width="400" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="note2" value="Note YARP: necessite Yarp.ReverseProxy NuGet.&#xa;Seule route proxifiee via YARP = /marketHub (SignalR/WebSocket).&#xa;Toutes les autres routes HTTP passent par GatewayController + IHttpClientFactory." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;" vertex="1" parent="1">
+      <mxGeometry x="730" y="180" width="400" height="65" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="note3" value="Erreurs gateway:&#xa;- 401 Unauthorized: token absent/invalide/expire (JWT Middleware)&#xa;- 502 Bad Gateway: service interne inaccessible&#xa;- Erreurs metier (4xx/5xx) transmises telles quelles au client" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;align=left;" vertex="1" parent="1">
+      <mxGeometry x="730" y="275" width="400" height="75" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>

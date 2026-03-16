@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1654" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- TITRE -->
+    <mxCell id="title" value="AuthService — Séquence : Inscription (POST /auth/register)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="200" y="10" width="900" height="30" as="geometry"/>
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!--   PARTICIPANTS (boîtes en haut)             -->
+    <!--   cx : Client=75 | Gateway=255 | Ctrl=460  -->
+    <!--        Svc=700 | Repo=960 | Db=1185         -->
+    <!--        Pwd=1430                             -->
+    <!-- ═══════════════════════════════════════════ -->
+
+    <mxCell id="p_client" value="Client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="15" y="55" width="120" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_gw" value="Gateway" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="185" y="55" width="140" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_ctrl" value="AuthController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="375" y="55" width="170" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_svc" value="AuthManagementService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="595" y="55" width="210" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_repo" value="AuthRepository" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="880" y="55" width="160" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_db" value="AuthDbContext" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="1110" y="55" width="150" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_pwd" value="PasswordService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="1350" y="55" width="160" height="40" as="geometry"/>
+    </mxCell>
+
+    <!-- ═══════════════════════════ -->
+    <!--         LIFELINES          -->
+    <!-- ═══════════════════════════ -->
+    <mxCell id="ll_client" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="75" y="95" as="sourcePoint"/><mxPoint x="75" y="970" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_gw" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="255" y="95" as="sourcePoint"/><mxPoint x="255" y="970" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_ctrl" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="460" y="95" as="sourcePoint"/><mxPoint x="460" y="970" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_svc" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="700" y="95" as="sourcePoint"/><mxPoint x="700" y="970" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_repo" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="960" y="95" as="sourcePoint"/><mxPoint x="960" y="970" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_db" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1185" y="95" as="sourcePoint"/><mxPoint x="1185" y="970" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_pwd" value="" style="endArrow=none;dashed=1;strokeColor=#9673a6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1430" y="95" as="sourcePoint"/><mxPoint x="1430" y="970" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--              MESSAGES                   -->
+    <!-- ═══════════════════════════════════════ -->
+
+    <!-- 1. Client → Gateway -->
+    <mxCell id="m1" value="POST /auth/register  {RegisterRequest}" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="75" y="135" as="sourcePoint"/><mxPoint x="255" y="135" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 2. Gateway → AuthController -->
+    <mxCell id="m2" value="POST /api/auth/register" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="255" y="175" as="sourcePoint"/><mxPoint x="460" y="175" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 3. AuthController → AuthManagementService -->
+    <mxCell id="m3" value="RegisterAsync(request)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="460" y="215" as="sourcePoint"/><mxPoint x="700" y="215" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 4. AuthManagementService → AuthRepository : check email -->
+    <mxCell id="m4" value="GetUserByEmailAsync(email)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="700" y="260" as="sourcePoint"/><mxPoint x="960" y="260" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 5. AuthRepository → AuthDbContext -->
+    <mxCell id="m5" value="FirstOrDefaultAsync(email)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="960" y="295" as="sourcePoint"/><mxPoint x="1185" y="295" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 6. AuthDbContext → AuthRepository : null -->
+    <mxCell id="m6" value="null  (email disponible)" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1185" y="325" as="sourcePoint"/><mxPoint x="960" y="325" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 7. AuthRepository → AuthManagementService : null -->
+    <mxCell id="m7" value="null" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="960" y="355" as="sourcePoint"/><mxPoint x="700" y="355" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 8. AuthManagementService → AuthRepository : check username -->
+    <mxCell id="m8" value="GetUserByUsernameAsync(username)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="700" y="395" as="sourcePoint"/><mxPoint x="960" y="395" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 9. AuthRepository → AuthDbContext -->
+    <mxCell id="m9" value="FirstOrDefaultAsync(username)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="960" y="430" as="sourcePoint"/><mxPoint x="1185" y="430" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 10. AuthDbContext → AuthRepository : null -->
+    <mxCell id="m10" value="null  (username disponible)" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1185" y="460" as="sourcePoint"/><mxPoint x="960" y="460" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 11. AuthRepository → AuthManagementService : null -->
+    <mxCell id="m11" value="null" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="960" y="490" as="sourcePoint"/><mxPoint x="700" y="490" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 12. AuthManagementService → PasswordService : hash -->
+    <mxCell id="m12" value="HashPassword(password)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="700" y="535" as="sourcePoint"/><mxPoint x="1430" y="535" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 13. PasswordService → AuthManagementService : hash -->
+    <mxCell id="m13" value="passwordHash (BCrypt)" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1430" y="565" as="sourcePoint"/><mxPoint x="700" y="565" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 14. AuthManagementService → AuthRepository : add user -->
+    <mxCell id="m14" value="AddUserAsync(newUser)" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="700" y="610" as="sourcePoint"/><mxPoint x="960" y="610" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 15. AuthRepository → AuthDbContext -->
+    <mxCell id="m15" value="AddAsync(user) + SaveChangesAsync()" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="960" y="650" as="sourcePoint"/><mxPoint x="1185" y="650" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 16. AuthDbContext → AuthRepository : user -->
+    <mxCell id="m16" value="user (entity persistée)" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1185" y="685" as="sourcePoint"/><mxPoint x="960" y="685" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 17. AuthRepository → AuthManagementService -->
+    <mxCell id="m17" value="user" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="960" y="720" as="sourcePoint"/><mxPoint x="700" y="720" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 18. AuthManagementService → AuthController -->
+    <mxCell id="m18" value="user" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="700" y="755" as="sourcePoint"/><mxPoint x="460" y="755" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 19. AuthController → Gateway -->
+    <mxCell id="m19" value="201 Created  {message: &quot;Utilisateur enregistré&quot;}" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="460" y="790" as="sourcePoint"/><mxPoint x="255" y="790" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 20. Gateway → Client -->
+    <mxCell id="m20" value="201 Created" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="255" y="825" as="sourcePoint"/><mxPoint x="75" y="825" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- NOTE : cas d'erreur -->
+    <mxCell id="note_err" value="⚠ Cas d'erreur : si email ou username déjà pris&#xa;→ UserAlreadyExistsException (400 Bad Request)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="550" y="870" width="320" height="60" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>

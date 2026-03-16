@@ -1,0 +1,191 @@
+.historyPage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.historyHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.pageTitle {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.tabGroup {
+  display: flex;
+  gap: var(--spacing-sm);
+  background: var(--sidebar-bg);
+  padding: 6px;
+  border-radius: var(--radius-md);
+  border: var(--border-thick);
+  width: fit-content;
+}
+
+.tabButton {
+  padding: 10px 24px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.tabButton:hover {
+  color: var(--text-primary);
+}
+
+.activeTab {
+  background: var(--light-blue);
+  color: #0d1117 !important;
+  box-shadow: var(--shadow-retro);
+}
+
+.tableWrapper {
+  background: var(--widget-bg);
+  border: var(--border-thick);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-retro);
+}
+
+.historyTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.historyTable th,
+.historyTable td {
+  padding: 16px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.historyTable th {
+  background: var(--sidebar-bg);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.historyTable tr:last-child td {
+  border-bottom: none;
+}
+
+.historyTable tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.symbol {
+  font-weight: var(--font-weight-bold);
+  color: var(--light-blue);
+}
+
+.buyType {
+  color: var(--light-green);
+  font-weight: var(--font-weight-bold);
+}
+
+.sellType {
+  color: var(--light-red);
+  font-weight: var(--font-weight-bold);
+}
+
+.statusBadge {
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+}
+
+.statusExecuted { color: var(--light-green); background: rgba(0, 255, 136, 0.1); }
+.statusPending { color: var(--light-blue); background: rgba(56, 189, 248, 0.1); }
+.statusCancelled { color: var(--text-muted); background: rgba(148, 163, 184, 0.1); }
+.statusRejected { color: var(--light-red); background: rgba(255, 68, 68, 0.1); }
+
+.cancelButton {
+  padding: 4px 12px;
+  border: 2px solid var(--light-red);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--light-red);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.cancelButton:hover:not(:disabled) {
+  background: var(--light-red);
+  color: #3b0d0d;
+}
+
+.cancelButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+}
+
+.pageButton {
+  padding: 6px 14px;
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  background: var(--widget-bg);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-retro);
+}
+
+.pageButton:hover:not(:disabled) {
+  background: var(--light-blue);
+  color: #0d1117;
+}
+
+.pageButton:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.pageInfo {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  min-width: 100px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .historyTable {
+    display: block;
+    overflow-x: auto;
+  }
+}

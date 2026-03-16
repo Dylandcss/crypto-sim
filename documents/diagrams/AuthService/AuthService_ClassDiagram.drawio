@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1654" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="2339" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- TITRE -->
+    <mxCell id="title" value="AuthService - Diagramme de Classes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="380" y="10" width="560" height="35" as="geometry" />
+    </mxCell>
+
+    <!-- LEGENDE -->
+    <mxCell id="leg_bg" value="" style="rounded=0;fillColor=#f9f9f9;strokeColor=#999999;" vertex="1" parent="1">
+      <mxGeometry x="1250" y="860" width="155" height="205" as="geometry" />
+    </mxCell>
+    <mxCell id="leg_title" value="Legende" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="1250" y="865" width="155" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="leg1" value="Controller" style="rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="1260" y="890" width="135" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="leg2" value="Service / Interface" style="rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="1260" y="917" width="135" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="leg3" value="Repository / DbContext" style="rounded=0;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="1260" y="944" width="135" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="leg4" value="Entite / DTO" style="rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="1260" y="971" width="135" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="leg5" value="Exception" style="rounded=0;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="1260" y="998" width="135" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="leg6" value="Utilitaire / Enum" style="rounded=0;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="1260" y="1025" width="135" height="22" as="geometry" />
+    </mxCell>
+
+    <!-- ============================ -->
+    <!-- CONTROLLER                   -->
+    <!-- ============================ -->
+    <mxCell id="ctrl" value="AuthController" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="490" y="50" width="300" height="235" as="geometry" />
+    </mxCell>
+    <mxCell id="ctrl_a" value="- _authService: IAuthManagementService&#xa;- _config: IConfiguration" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="ctrl">
+      <mxGeometry y="30" width="300" height="45" as="geometry" />
+    </mxCell>
+    <mxCell id="ctrl_l" value="" style="line;strokeColor=inherit;" vertex="1" parent="ctrl">
+      <mxGeometry y="75" width="300" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="ctrl_m" value="+ LoginAsync(req: LoginRequest): IActionResult&#xa;+ RegisterAsync(req: RegisterRequest): IActionResult&#xa;+ GetCurrentUser(): IActionResult&#xa;+ GetBalanceAsync(): IActionResult&#xa;+ UpdateBalanceAsync(req): IActionResult&#xa;+ GetBalanceInternalAsync(userId): IActionResult&#xa;+ UpdateBalanceInternalAsync(userId, req): IActionResult" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=11;" vertex="1" parent="ctrl">
+      <mxGeometry y="83" width="300" height="152" as="geometry" />
+    </mxCell>
+
+    <!-- ============================ -->
+    <!-- IAuthManagementService       -->
+    <!-- ============================ -->
+    <mxCell id="isvc" value="&lt;&lt;interface&gt;&gt;&#xa;IAuthManagementService" style="swimlane;fontStyle=2;align=center;startSize=45;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="100" y="390" width="290" height="175" as="geometry" />
+    </mxCell>
+    <mxCell id="isvc_m" value="+ RegisterAsync(req): Task&lt;User&gt;&#xa;+ LoginAsync(req): Task&lt;AuthResponse&gt;&#xa;+ GetCurrentUserAsync(id): Task&lt;ProfilResponse&gt;&#xa;+ GetBalanceAsync(id): Task&lt;decimal&gt;&#xa;+ UpdateBalanceAsync(id, amount): Task" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="isvc">
+      <mxGeometry y="45" width="290" height="130" as="geometry" />
+    </mxCell>
+
+    <!-- ============================ -->
+    <!-- AuthManagementService        -->
+    <!-- ============================ -->
+    <mxCell id="svc" value="AuthManagementService" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="490" y="390" width="300" height="225" as="geometry" />
+    </mxCell>
+    <mxCell id="svc_a" value="- _authRepository: IAuthRepository&#xa;- _jwtTokenService: JwtTokenService" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="svc">
+      <mxGeometry y="30" width="300" height="45" as="geometry" />
+    </mxCell>
+    <mxCell id="svc_l" value="" style="line;strokeColor=inherit;" vertex="1" parent="svc">
+      <mxGeometry y="75" width="300" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="svc_m" value="+ RegisterAsync(req): Task&lt;User&gt;&#xa;+ LoginAsync(req): Task&lt;AuthResponse&gt;&#xa;+ GetCurrentUserAsync(id): Task&lt;ProfilResponse&gt;&#xa;+ GetBalanceAsync(id): Task&lt;decimal&gt;&#xa;+ UpdateBalanceAsync(id, amount): Task" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="svc">
+      <mxGeometry y="83" width="300" height="142" as="geometry" />
+    </mxCell>
+
+    <!-- ============================ -->
+    <!-- JwtTokenService              -->
+    <!-- ============================ -->
+    <mxCell id="jwt" value="JwtTokenService" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="890" y="390" width="260" height="140" as="geometry" />
+    </mxCell>
+    <mxCell id="jwt_a" value="- _config: IConfiguration" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="jwt">
+      <mxGeometry y="30" width="260" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="jwt_l" value="" style="line;strokeColor=inherit;" vertex="1" parent="jwt">
+      <mxGeometry y="60" width="260" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="jwt_m" value="+ GenerateToken(user): (string token, int minutes)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="jwt">
+      <mxGeometry y="68" width="260" height="72" as="geometry" />
+    </mxCell>
+
+    <!-- ============================ -->
+    <!-- PasswordService (static)     -->
+    <!-- ============================ -->
+    <mxCell id="pwd" value="&lt;&lt;static&gt;&gt;&#xa;PasswordService" style="swimlane;fontStyle=2;align=center;startSize=45;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="890" y="610" width="260" height="110" as="geometry" />
+    </mxCell>
+    <mxCell id="pwd_m" value="+ HashPassword(pwd: string): string&#xa;+ VerifyPassword(pwd, hash): bool" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="pwd">
+      <mxGeometry y="45" width="260" height="65" as="geometry" />
+    </mxCell>
+
+    <!-- ============================ -->
+    <!-- IAuthRepository              -->
+    <!-- ============================ -->
+    <mxCell id="irepo" value="&lt;&lt;interface&gt;&gt;&#xa;IAuthRepository" style="swimlane;fontStyle=2;align=center;startSize=45;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="100" y="720" width="290" height="175" as="geometry" />
+    </mxCell>
+    <mxCell id="irepo_m" value="+ AddUserAsync(user): Task&lt;User&gt;&#xa;+ GetUserByIdAsync(id): Task&lt;User?&gt;&#xa;+ GetUserByEmailAsync(email): Task&lt;User?&gt;&#xa;+ GetUserByUsernameAsync(name): Task&lt;User?&gt;&#xa;+ GetUserBalanceAsync(id): Task&lt;decimal&gt;&#xa;+ UpdateUserBalanceAsync(id, amount): Task&lt;bool&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="irepo">
+      <mxGeometry y="45" width="290" height="130" as="geometry" />
+    </mxCell>
+
+    <!-- ============================ -->
+    <!-- AuthRepository               -->
+    <!-- ============================ -->
+    <mxCell id="repo" value="AuthRepository" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="490" y="720" width="300" height="205" as="geometry" />
+    </mxCell>
+    <mxCell id="repo_a" value="- _context: AuthDbContext" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="repo">
+      <mxGeometry y="30" width="300" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="repo_l" value="" style="line;strokeColor=inherit;" vertex="1" parent="repo">
+      <mxGeometry y="60" width="300" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="repo_m" value="+ AddUserAsync(user): Task&lt;User&gt;&#xa;+ GetUserByIdAsync(id): Task&lt;User?&gt;&#xa;+ GetUserByEmailAsync(email): Task&lt;User?&gt;&#xa;+ GetUserByUsernameAsync(name): Task&lt;User?&gt;&#xa;+ GetUserBalanceAsync(id): Task&lt;decimal&gt;&#xa;+ UpdateUserBalanceAsync(id, amount): Task&lt;bool&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="repo">
+      <mxGeometry y="68" width="300" height="137" as="geometry" />
+    </mxCell>
+
+    <!-- ============================ -->
+    <!-- AuthDbContext                -->
+    <!-- ============================ -->
+    <mxCell id="db" value="AuthDbContext" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="490" y="1010" width="260" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="db_a" value="+ Users: DbSet&lt;User&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="db">
+      <mxGeometry y="30" width="260" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- ============================ -->
+    <!-- User (entity)                -->
+    <!-- ============================ -->
+    <mxCell id="user" value="User" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="840" y="860" width="250" height="225" as="geometry" />
+    </mxCell>
+    <mxCell id="user_a" value="+ Id: int&#xa;+ Username: string&#xa;+ PasswordHash: string&#xa;+ Email: string&#xa;+ Role: Role&#xa;+ Balance: decimal = 10 000 m&#xa;+ CreatedAt: DateTime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="user">
+      <mxGeometry y="30" width="250" height="195" as="geometry" />
+    </mxCell>
+
+    <!-- ============================ -->
+    <!-- DTOs                         -->
+    <!-- ============================ -->
+    <mxCell id="dto_login" value="LoginRequest" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="1210" y="50" width="220" height="90" as="geometry" />
+    </mxCell>
+    <mxCell id="dto_login_a" value="+ Username: string&#xa;+ Password: string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="dto_login">
+      <mxGeometry y="30" width="220" height="60" as="geometry" />
+    </mxCell>
+
+    <mxCell id="dto_reg" value="RegisterRequest" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="1210" y="200" width="220" height="100" as="geometry" />
+    </mxCell>
+    <mxCell id="dto_reg_a" value="+ Username: string&#xa;+ Password: string&#xa;+ Email: string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="dto_reg">
+      <mxGeometry y="30" width="220" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="dto_auth" value="AuthResponse" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="1210" y="360" width="220" height="130" as="geometry" />
+    </mxCell>
+    <mxCell id="dto_auth_a" value="+ Token: string&#xa;+ Username: string&#xa;+ Role: string&#xa;+ Balance: decimal&#xa;+ ExpiresIn: long" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="dto_auth">
+      <mxGeometry y="30" width="220" height="100" as="geometry" />
+    </mxCell>
+
+    <mxCell id="dto_profil" value="ProfilResponse" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="1210" y="550" width="220" height="130" as="geometry" />
+    </mxCell>
+    <mxCell id="dto_profil_a" value="+ Username: string&#xa;+ Email: string&#xa;+ Role: string&#xa;+ Balance: decimal&#xa;+ CreatedAt: DateTime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="dto_profil">
+      <mxGeometry y="30" width="220" height="100" as="geometry" />
+    </mxCell>
+
+    <mxCell id="dto_bal" value="UpdateBalanceRequest" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="1210" y="740" width="220" height="75" as="geometry" />
+    </mxCell>
+    <mxCell id="dto_bal_a" value="+ Amount: decimal" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="dto_bal">
+      <mxGeometry y="30" width="220" height="45" as="geometry" />
+    </mxCell>
+
+    <!-- ============================ -->
+    <!-- EXCEPTIONS                   -->
+    <!-- ============================ -->
+    <mxCell id="exc_base" value="ExceptionBase (Shared)" style="swimlane;fontStyle=3;align=center;startSize=45;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="100" y="1010" width="260" height="110" as="geometry" />
+    </mxCell>
+    <mxCell id="exc_base_a" value="+ StatusCode: int&#xa;+ Message: string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="exc_base">
+      <mxGeometry y="45" width="260" height="65" as="geometry" />
+    </mxCell>
+
+    <mxCell id="exc_bad" value="BadRequestException (Shared)" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="50" y="1210" width="230" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="exc_bad_a" value="StatusCode = 400" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="exc_bad">
+      <mxGeometry y="30" width="230" height="40" as="geometry" />
+    </mxCell>
+
+    <mxCell id="exc_nf" value="NotFoundException (Shared)" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="310" y="1210" width="230" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="exc_nf_a" value="StatusCode = 404" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=12;" vertex="1" parent="exc_nf">
+      <mxGeometry y="30" width="230" height="40" as="geometry" />
+    </mxCell>
+
+    <mxCell id="exc_ue" value="UserAlreadyExistsException" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="50" y="1380" width="250" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="exc_ue_a" value="UserAlreadyExistsException(identifier)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=11;" vertex="1" parent="exc_ue">
+      <mxGeometry y="30" width="250" height="40" as="geometry" />
+    </mxCell>
+
+    <mxCell id="exc_unf" value="UserNotFoundException" style="swimlane;fontStyle=1;align=center;startSize=30;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="320" y="1380" width="240" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="exc_unf_a" value="UserNotFoundException(userId)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontSize=11;" vertex="1" parent="exc_unf">
+      <mxGeometry y="30" width="240" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- ============================ -->
+    <!-- ENUM Role                    -->
+    <!-- ============================ -->
+    <mxCell id="enum_role" value="&lt;&lt;enumeration&gt;&gt;&#xa;Role" style="swimlane;fontStyle=2;align=center;startSize=45;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;" vertex="1" parent="1">
+      <mxGeometry x="830" y="1120" width="160" height="90" as="geometry" />
+    </mxCell>
+    <mxCell id="enum_role_v" value="User&#xa;Admin" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=12;" vertex="1" parent="enum_role">
+      <mxGeometry y="45" width="160" height="45" as="geometry" />
+    </mxCell>
+
+    <!-- ============================ -->
+    <!-- RELATIONS                    -->
+    <!-- ============================ -->
+
+    <!-- AuthController uses IAuthManagementService -->
+    <mxCell id="r1" value="&lt;&lt;uses&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;endFill=0;strokeColor=#6c8ebf;" edge="1" source="ctrl" target="isvc" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- AuthManagementService implements IAuthManagementService -->
+    <mxCell id="r2" value="&lt;&lt;implements&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=block;endFill=0;strokeColor=#82b366;" edge="1" source="svc" target="isvc" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- AuthManagementService uses IAuthRepository -->
+    <mxCell id="r3" value="&lt;&lt;uses&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;endFill=0;strokeColor=#d6b656;" edge="1" source="svc" target="irepo" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- AuthManagementService uses JwtTokenService -->
+    <mxCell id="r4" value="&lt;&lt;uses&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;endFill=0;strokeColor=#9673a6;" edge="1" source="svc" target="jwt" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- AuthManagementService calls PasswordService -->
+    <mxCell id="r5" value="&lt;&lt;call&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;endFill=0;strokeColor=#9673a6;" edge="1" source="svc" target="pwd" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- AuthRepository implements IAuthRepository -->
+    <mxCell id="r6" value="&lt;&lt;implements&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=block;endFill=0;strokeColor=#d6b656;" edge="1" source="repo" target="irepo" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- AuthRepository uses AuthDbContext -->
+    <mxCell id="r7" value="&lt;&lt;uses&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;endFill=0;strokeColor=#d6b656;" edge="1" source="repo" target="db" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- AuthDbContext has User -->
+    <mxCell id="r8" value="DbSet&lt;User&gt;" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#d6b656;" edge="1" source="db" target="user" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- User uses Role -->
+    <mxCell id="r9" value="" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=open;endFill=0;strokeColor=#9673a6;" edge="1" source="user" target="enum_role" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ExceptionBase parent of BadRequestException -->
+    <mxCell id="r10" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#b85450;" edge="1" source="exc_bad" target="exc_base" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ExceptionBase parent of NotFoundException -->
+    <mxCell id="r11" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#b85450;" edge="1" source="exc_nf" target="exc_base" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- BadRequestException parent of UserAlreadyExistsException -->
+    <mxCell id="r12" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#b85450;" edge="1" source="exc_ue" target="exc_bad" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- NotFoundException parent of UserNotFoundException -->
+    <mxCell id="r13" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#b85450;" edge="1" source="exc_unf" target="exc_nf" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

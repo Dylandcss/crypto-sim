@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1654" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- TITRE -->
+    <mxCell id="title" value="MarketService - Sequence : GET /market/cryptos (liste) et GET /market/cryptos/{symbol} [JWT requis]" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="80" y="10" width="1200" height="30" as="geometry"/>
+    </mxCell>
+
+    <!-- PARTICIPANTS -->
+    <mxCell id="p_client" value="Client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="20" y="60" width="120" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_gw" value="Gateway" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="190" y="60" width="130" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_ctrl" value="MarketController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="370" y="60" width="170" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_svc" value="CryptosService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="590" y="60" width="160" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_repo" value="MarketRepository" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="800" y="60" width="170" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="p_db" value="MarketDbContext" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="1020" y="60" width="160" height="40" as="geometry"/>
+    </mxCell>
+
+    <!-- LIFELINES -->
+    <mxCell id="ll_c" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="80" y="100" as="sourcePoint"/><mxPoint x="80" y="820" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_gw" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="255" y="100" as="sourcePoint"/><mxPoint x="255" y="820" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_ctrl" value="" style="endArrow=none;dashed=1;strokeColor=#6c8ebf;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="455" y="100" as="sourcePoint"/><mxPoint x="455" y="820" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_svc" value="" style="endArrow=none;dashed=1;strokeColor=#82b366;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="670" y="100" as="sourcePoint"/><mxPoint x="670" y="820" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_repo" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="885" y="100" as="sourcePoint"/><mxPoint x="885" y="820" as="targetPoint"/></mxGeometry>
+    </mxCell>
+    <mxCell id="ll_db" value="" style="endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1100" y="100" as="sourcePoint"/><mxPoint x="1100" y="820" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- NOTE: ALT GetAll vs GetBySymbol -->
+    <mxCell id="note_alt" value="[GET /cryptos] GetAllAsync()  OU  [GET /cryptos/{symbol}] GetBySymbolAsync(symbol)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="350" y="110" width="450" height="35" as="geometry"/>
+    </mxCell>
+
+    <!-- 1. Client -> Gateway -->
+    <mxCell id="m1" value="GET /market/cryptos  [Authorization: Bearer token]" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="80" y="165" as="sourcePoint"/><mxPoint x="255" y="165" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 2. Gateway -> MarketController -->
+    <mxCell id="m2" value="GET /api/market/cryptos  [Bearer token]" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="255" y="200" as="sourcePoint"/><mxPoint x="455" y="200" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 3. JWT validation (self-loop Gateway/Middleware) -->
+    <mxCell id="m3_self" value="[Authorize] - JwtBearerMiddleware valide token" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=11;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="455" y="235" as="sourcePoint"/>
+        <mxPoint x="455" y="275" as="targetPoint"/>
+        <Array as="points"><mxPoint x="530" y="235"/><mxPoint x="530" y="275"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- 4. Controller -> CryptosService -->
+    <mxCell id="m4" value="GetAllAsync()" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="455" y="305" as="sourcePoint"/><mxPoint x="670" y="305" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 5. CryptosService -> MarketRepository -->
+    <mxCell id="m5" value="GetAllCryptosAsync()" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="670" y="345" as="sourcePoint"/><mxPoint x="885" y="345" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 6. MarketRepository -> MarketDbContext -->
+    <mxCell id="m6" value="Cryptos.ToListAsync()" style="edgeStyle=none;endArrow=block;endFill=1;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="885" y="380" as="sourcePoint"/><mxPoint x="1100" y="380" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 7. DbContext -> Repository : list -->
+    <mxCell id="m7" value="List&lt;Crypto&gt;" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="1100" y="415" as="sourcePoint"/><mxPoint x="885" y="415" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 8. Repository -> Service -->
+    <mxCell id="m8" value="IEnumerable&lt;Crypto&gt;" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="885" y="450" as="sourcePoint"/><mxPoint x="670" y="450" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 9. Service : map to DTO (self-loop) -->
+    <mxCell id="m9_self" value="map Crypto -> CryptoDto" style="edgeStyle=elbowEdgeStyle;elbow=orthogonal;html=1;endArrow=open;endFill=0;fontSize=11;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="670" y="485" as="sourcePoint"/>
+        <mxPoint x="670" y="525" as="targetPoint"/>
+        <Array as="points"><mxPoint x="745" y="485"/><mxPoint x="745" y="525"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- 10. Service -> Controller -->
+    <mxCell id="m10" value="IEnumerable&lt;CryptoDto&gt;" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="670" y="555" as="sourcePoint"/><mxPoint x="455" y="555" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 11. Controller -> Gateway : 200 -->
+    <mxCell id="m11" value="200 OK  [CryptoDto[]]" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="455" y="595" as="sourcePoint"/><mxPoint x="255" y="595" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- 12. Gateway -> Client -->
+    <mxCell id="m12" value="200 OK  [CryptoDto[]]" style="edgeStyle=none;dashed=1;endArrow=open;endFill=0;html=1;fontSize=11;verticalAlign=bottom;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="255" y="630" as="sourcePoint"/><mxPoint x="80" y="630" as="targetPoint"/></mxGeometry>
+    </mxCell>
+
+    <!-- NOTES erreurs -->
+    <mxCell id="note_err1" value="Symbol introuvable -> 404 Not Found (CryptoNotFoundException)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="350" y="700" width="370" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="note_err2" value="Token absent/invalide -> 401 Unauthorized" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="350" y="750" width="320" height="40" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>
