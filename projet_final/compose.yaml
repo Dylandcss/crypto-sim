@@ -13,20 +13,20 @@
 
   efmigrator:
     build:
-      context: .
-      dockerfile: Backend/AppCryptoSim/Dockerfile.migrator
+      context: ./Backend/AppCryptoSim
+      dockerfile: Dockerfile.migrator
     env_file:
-      - .env.docker
+      - Backend/AppCryptoSim/.env.docker
     depends_on:
       mysql:
         condition: service_healthy
 
   authservice:
     build:
-      context: .
-      dockerfile: Backend/AppCryptoSim/AuthService/Dockerfile
+      context: ./Backend/AppCryptoSim
+      dockerfile: AuthService/Dockerfile
     env_file:
-      - .env.docker
+      - Backend/AppCryptoSim/.env.docker
     environment:
       ASPNETCORE_URLS: http://0.0.0.0:5001
     expose:
@@ -39,10 +39,10 @@
 
   marketservice:
     build:
-      context: .
-      dockerfile: Backend/AppCryptoSim/MarketService/Dockerfile
+      context: ./Backend/AppCryptoSim
+      dockerfile: MarketService/Dockerfile
     env_file:
-      - .env.docker
+      - Backend/AppCryptoSim/.env.docker
     environment:
       ASPNETCORE_URLS: http://0.0.0.0:5002
     expose:
@@ -55,10 +55,10 @@
 
   portfolioservice:
     build:
-      context: .
-      dockerfile: Backend/AppCryptoSim/PortfolioService/Dockerfile
+      context: ./Backend/AppCryptoSim
+      dockerfile: PortfolioService/Dockerfile
     env_file:
-      - .env.docker
+      - Backend/AppCryptoSim/.env.docker
     environment:
       ASPNETCORE_URLS: http://0.0.0.0:5003
     expose:
@@ -71,10 +71,10 @@
 
   orderservice:
     build:
-      context: .
-      dockerfile: Backend/AppCryptoSim/OrderService/Dockerfile
+      context: ./Backend/AppCryptoSim
+      dockerfile: OrderService/Dockerfile
     env_file:
-      - .env.docker
+      - Backend/AppCryptoSim/.env.docker
     environment:
       ASPNETCORE_URLS: http://0.0.0.0:5004
     expose:
@@ -87,10 +87,10 @@
 
   gateway:
     build:
-      context: .
-      dockerfile: Backend/AppCryptoSim/Gateway/Dockerfile
+      context: ./Backend/AppCryptoSim
+      dockerfile: Gateway/Dockerfile
     env_file:
-      - .env.docker
+      - Backend/AppCryptoSim/.env.docker
     environment:
       ASPNETCORE_URLS: http://0.0.0.0:5000
     ports:
@@ -107,8 +107,8 @@
 
   frontend:
     build:
-      context: .
-      dockerfile: Frontend/crypto-sim-frontend/Dockerfile
+      context: ./Frontend/crypto-sim-frontend
+      dockerfile: Dockerfile
     ports:
       - "80:80"
     depends_on:

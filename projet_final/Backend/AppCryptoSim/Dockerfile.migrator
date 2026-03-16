@@ -11,8 +11,8 @@ WORKDIR /src
 # On copie les fichiers de projet pour pouvoir compiler les migrations
 COPY . .
 
-# On rend le script de démarrage exécutable (on va le créer juste après)
+# On rend le script de démarrage exécutable
 COPY migrate.sh /migrate.sh
-RUN chmod +x /migrate.sh
+RUN sed -i 's/\r$//' /migrate.sh && chmod +x /migrate.sh
 
 ENTRYPOINT ["/bin/bash", "/migrate.sh"]
